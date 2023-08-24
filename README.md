@@ -47,7 +47,7 @@ Launch on port 3000: `yarn start`
 
 Back-End is now running on port 3000 `http://localhost:3000`. API calls ends here.
 
-Clone the repository of SportSee Front-End:
+Open another window and clone the repository of SportSee Front-End:
 
 - [![git-clone](https://img.shields.io/badge/Git%20clone-Project%20SportSee-red?style&logo=github)](https://github.com/TangiLC/P12-SportSee.git)
 
