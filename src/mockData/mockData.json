@@ -1,0 +1,78 @@
+{
+	"data": {
+		"user": {
+			"id": 9,
+			"firstName": "Thomas",
+			"lastName": "Dovineau",
+			"age": 31,
+			"todayScore": 0.12,
+			"keyData": {
+				"calorieCount": 1930,
+				"proteinCount": 155,
+				"carbohydrateCount": 290,
+				"lipidCount": 50
+			},
+			"sessions": [
+				{
+					"weekday": 1,
+					"date": "2020-07-01",
+					"kilogram": 80,
+					"calories": 240,
+					"sessionLength": 30
+				},
+				{
+					"weekday": 2,
+					"date": "2020-07-02",
+					"kilogram": 80,
+					"calories": 220,
+					"sessionLength": 23
+				},
+				{
+					"weekday": 3,
+					"date": "2020-07-03",
+					"kilogram": 81,
+					"calories": 280,
+					"sessionLength": 45
+				},
+				{
+					"weekday": 4,
+					"date": "2020-07-04",
+					"kilogram": 81,
+					"calories": 290,
+					"sessionLength": 50
+				},
+				{
+					"weekday": 5,
+					"date": "2020-07-05",
+					"kilogram": 80,
+					"calories": 160,
+					"sessionLength": 0
+				},
+				{
+					"weekday": 6,
+					"date": "2020-07-06",
+					"kilogram": 78,
+					"calories": 162,
+					"sessionLength": 0
+				},
+				{
+					"weekday": 7,
+					"date": "2020-07-07",
+					"kilogram": 76,
+					"calories": 390,
+					"sessionLength": 60
+				}
+			],
+			"performance": [
+				{
+					"cardio": 80,
+					"energy": 120,
+					"endurance": 140,
+					"strength": 50,
+					"speed": 200,
+					"intensity": 90
+				}
+			]
+		}
+	}
+}
