@@ -1,0 +1,13 @@
+@use "../../sass/variables";
+.background {
+	background-image: radial-gradient(variables.$prim-red, variables.$prim-black);
+}
+
+.capitalize {
+	text-transform: capitalize;
+}
+
+form > div {
+	margin-top: 10px;
+}
+

@@ -1,0 +1,14 @@
+.sportsee {
+  display: flex;
+  flex-direction: row;
+  color: #ff0101;
+  background: #020203;
+  justify-content: center;
+}
+
+.logo {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,12 @@
+.background {
+  background-image: radial-gradient(#ff0101, #020203);
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+form > div {
+  margin-top: 10px;
+}
+/*# sourceMappingURL=style.css.map */

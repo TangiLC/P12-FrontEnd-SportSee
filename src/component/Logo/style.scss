@@ -1,0 +1,15 @@
+@use "../../sass/variables";
+
+.sportsee {
+	display: flex;
+	flex-direction: row;
+	color: variables.$prim-red;
+	background: variables.$prim-black;
+	justify-content: center;
+}
+
+.logo {
+	display: inline-block;
+	width: 3rem;
+	height: 3rem;
+}
