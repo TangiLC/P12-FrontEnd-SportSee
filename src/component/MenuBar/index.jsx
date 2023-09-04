@@ -21,7 +21,7 @@ function MenuBar(props) {
 			</div><div className={`item ${horizontalMode ? "col" : "row"}`}></div>
 
 			{props.items.map((item, index) => (
-				<div className={`item ${horizontalMode ? "col" : "row"}`}>
+				<div className={`item ${horizontalMode ? "col" : "row"}`} key={`icon-${index}`}>
 					<div className="icon-box">
 						<img className="list-icon" src={item.icon} alt={item.text} />
 					</div>

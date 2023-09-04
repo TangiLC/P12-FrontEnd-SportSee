@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import calories from "../assets/calories.png";
-import proteins from "../assets/proteins.png";
-import carbohydrates from "../assets/carbohydrates.png";
-import lipids from "../assets/lipids.png";
+
 
 export async function FetchAPI(id, path, group) {
 	try {
@@ -38,31 +35,3 @@ export async function FetchAPI(id, path, group) {
 	}
 }
 
-export function normalizeCount(data) {
-	let countArray = {};
-	countArray.cal = {
-		name: "Calories",
-		src: { calories },
-		unit: "KCal",
-		count: data.calorieCount,
-	};
-	countArray.prot = {
-		name: "Protéines",
-		src: { proteins },
-		unit: "g",
-		count: data.proteinCount,
-	};
-	countArray.carb = {
-		name: "Glucides",
-		src: { carbohydrates },
-		unit: "g",
-		count: data.carbohydrateCount,
-	};
-	countArray.fat = {
-		name: "Lipides",
-		src: { lipids },
-		unit: "g",
-		count: data.lipidCount,
-	};
-	return countArray;
-}

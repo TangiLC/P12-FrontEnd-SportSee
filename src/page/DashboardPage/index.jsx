@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { FetchAPI } from "../../utils/utils";
-import { normalizeCount } from "../../utils/utils";
 
 import Logo from "../../component/Logo";
 import { UserContext } from "../../App";
@@ -25,7 +24,7 @@ function DashboardPage() {
 		? console.log("connexion safe") //the security number is the id provided by login
 		: console.log("null");
 
-	const [countData, setCountData] = useState({});
+	const [countData, setCountData] = useState([]);
 
 	const [data, setData] = useState([]);
 	const [userId, setUserId] = useState(user.id);
@@ -51,12 +50,6 @@ function DashboardPage() {
 		}
 	}, []);
 
-	console.log("keydata:", data.keyData);
-	useEffect(() => {
-		if (data?.keyData !== undefined) {
-			setCountData(normalizeCount(data.keyData));
-		}
-	}, [data.keyData]);
 
 	return (
 		<>
@@ -86,7 +79,7 @@ function DashboardPage() {
 										<div className="col-md-4">Score</div>
 									</div>
 								</div>
-								<div className="col-md-3"><Counter items={countData}/></div>
+								<div className="col-md-3"><Counter items={data.keyData}/></div>
 							</div>
 						</div>
 					</div>
