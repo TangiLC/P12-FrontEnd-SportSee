@@ -9,4 +9,8 @@
 form > div {
   margin-top: 10px;
 }
+
+.loginMessage {
+  color: red;
+}
 /*# sourceMappingURL=style.css.map */

@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import matchingId from "../../component/loginSecurity";
 import Logo from "../../component/Logo";
 import "./style.css";
 
+import { UserContext } from '../../App';
+
 
 function Login() {
 	const navigate = useNavigate();
+	const { setSecurity } = useContext(UserContext);
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [noMatch, setNoMatch] = useState("");
@@ -17,11 +20,10 @@ function Login() {
 		console.log("Nom:", lastName, "Prénom:", firstName);
 		const id = matchingId(firstName, lastName);
 		if (id != null) {
-			console.log("navigate id", id);
-			setNoMatch("Utilisateur enregistré");
-			//navigate(`/dashboard:${id}`);
+			setSecurity(id)
+			navigate(`/Dashboard/${id}`);
 		} else {
-			setNoMatch("Vous n'êtes pas un utilisateur enregistré");
+			setNoMatch("Vous n'êtes pas un utilisateur enregistré...");
 		}
 	};
 
@@ -32,7 +34,7 @@ function Login() {
 		>
 			<div className="col-4 card my-auto mx-auto text-center">
 				<Logo />
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} autoComplete="off">
 					<div>
 						<label htmlFor="firstName">Prénom:&nbsp;</label>
 						<input
@@ -67,7 +69,7 @@ function Login() {
 						Connexion
 					</button>
 				</form>
-				{noMatch}
+				<div className="loginMessage">{noMatch}</div>
 			</div>
 		</div>
 	);

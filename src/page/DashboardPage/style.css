@@ -1,0 +1,20 @@
+body{
+    max-width:1600px;
+    margin:auto;
+}
+
+.square{
+    width:25vw;
+    height:25vh;
+}
+
+.content{
+    max-width:1600px;
+    margin:auto;
+}
+
+@media (max-width: 768px) and (orientation: portrait) {
+    .content {
+      display: none; 
+    }
+  }

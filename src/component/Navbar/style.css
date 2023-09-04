@@ -1,0 +1,29 @@
+
+.sportsee {
+	height: 80px;
+	width: auto;
+}
+.site-name {
+	display: flex;
+	flex-direction: row;
+}
+
+.site-name h2 {
+	color: red;
+	align-self: center;
+}
+.navigate {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: auto;
+	color: white;
+	font-size: 1.9rem;
+}
+.navigate div {
+	align-self: center;
+}
+
+.nav-item{
+    padding-right:20px;
+}
