@@ -1,6 +1,32 @@
-.count-icon{
-    width:50px;
-    height:auto;
-    z-index:5;
-    background-color:transparent;
+.count-icon {
+	width: 50px;
+	height: auto;
+	margin: auto;
+	padding: 8px 2px 5px 2px;
+	background-color: transparent;
+}
+
+.counter-group {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 40vh;
+	margin-bottom: 5vh;
+}
+
+.counter-item {
+	padding: 20px 0px 20px 15px;
+	margin-bottom: 1rem;
+	background-color: #fbfbfb;
+}
+
+.counter-digit {
+	font-size: 1.8rem;
+	font-weight: 600;
+}
+
+.box {
+	border-radius: 6px;
+	width: 70px;
+	height: 70px;
 }

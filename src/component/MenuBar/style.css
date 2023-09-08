@@ -70,3 +70,13 @@
   writing-mode:sideways-lr;
   margin-bottom:1rem;
 }
+
+.copyright-horizontal{
+	white-space : nowrap;
+}
+
+@media (max-width: 860px){
+	.copyright-horizontal{
+		white-space : normal;
+	}
+}
