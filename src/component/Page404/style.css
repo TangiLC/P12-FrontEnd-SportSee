@@ -1,33 +1,4 @@
-body {
-    margin: 0;
-    overflow: hidden;
-    background-color: #f0f0f0;
-  }
-  
-  .bike {
-    position: absolute;
-    top: 50%;
-    left: -100px;
-    transform: translateY(-50%);
-    animation: moveBike 8s linear infinite;
-  }
-  
-  .wheel {
-    width: 50px;
-    height: 100px;
-    background-color: #333;
-    border-radius: 50%;
-    display: inline-block;
-  }
-  
-  .frame {
-    width: 100px;
-    height: 60px;
-    background-color: #777;
-    position: relative;
-    display: inline-block;
-  }
-  
+
   .handlebar {
     width: 40px;
     height: 10px;

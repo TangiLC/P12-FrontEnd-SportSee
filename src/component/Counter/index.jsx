@@ -11,22 +11,21 @@ let countData=[]
 
 	
 	return (
-		<div className="col-md-12">
+		<div className="col-md-11 counter-group">
 			{countData.length=== 0
 				? null
 				: countData.map((item,index) => {
 						return (
-							<div className="row counter-item">
-								<div className="col-md-3 box" style={{backgroundColor:item.bgcol}}>
+							<div className="row counter-item" key={index}>
+								<div className="col-md-4 box" style={{backgroundColor:`rgba(${item.color},.3)`}}>
 									<img src={item.icon} className="count-icon" alt={item.name}/>
 								</div>
-								<div className="col-md-9">
+								<div className="col-md-8">
 									<div className="row">
-										<div className="col-md-6">{item.count}</div>
-										<div className="col-md-6">{item.unit}</div>
+										<div className="col counter-digit">{item.count}{item.unit}</div>
 									</div>
 									<div className="row">
-										<div className="col-md-12">{item.name}</div>
+										<div className="col">{item.name}</div>
 									</div>
 								</div>
 							</div>

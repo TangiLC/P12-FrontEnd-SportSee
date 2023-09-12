@@ -11,6 +11,15 @@ body{
 .content{
     max-width:1600px;
     margin:auto;
+    background-color:white;
+}
+
+.dailyActivity{
+    height: 16rem;
+    background-color: #fbfbfb;
+    margin-left: 10px;
+    border: 1px solid black;
+    width: 96%;
 }
 
 @media (max-width: 768px) and (orientation: portrait) {

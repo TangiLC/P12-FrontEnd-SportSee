@@ -20,40 +20,48 @@
 .vertical {
 	display: inline-flex;
 	flex-direction: column;
-  justify-content: space-between;
+	justify-content: space-between;
 	width: 120px;
 	min-height: 80vh;
-  height:100%;
-  margin: auto;
+	height: 100%;
 	padding: 0 2rem 0 2rem;
 }
 
 .toggle-box {
 	cursor: pointer;
-  width: 60px;
-	height:60px;
+	width: 60px;
+	height: 60px;
 	background-color: beige;
 	border-radius: 30%;
 	margin: 10px;
-
 }
-.rotate90{
-  transform:  scale(-1.1, 1.7) rotate(90deg);
-  z-index:99;
+.rotate90 {
+	transform: scale(-1.1, 1.7) rotate(90deg);
+	z-index: 99;
 }
 .icon-box {
 	width: 70px;
-	height:70px;
+	height: 70px;
 	background-color: azure;
 	border-radius: 10%;
 	margin: 2px;
-	
 }
+.row .icon-box {
+	padding: 0;
+	width: auto;
+	min-width: auto;
+}
+.col .icon-box {
+	padding: 0;
+	width: auto;
+	min-width: auto;
+}
+
 .list-icon {
 	width: 88%;
 	height: 88%;
-  padding:2px;
-  box-sizing:unset;
+	padding: 4px 2px 4px 4px;
+	box-sizing: unset;
 }
 
 .list-text {
@@ -66,7 +74,17 @@
 	visibility: collapse;
 }
 
-.copyright-vertical{
-  writing-mode:sideways-lr;
-  margin-bottom:1rem;
+.copyright-vertical {
+	writing-mode: sideways-lr;
+	margin-bottom: 1rem;
+}
+
+.copyright-horizontal {
+	white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+	.copyright-horizontal {
+		white-space: normal;
+	}
 }
