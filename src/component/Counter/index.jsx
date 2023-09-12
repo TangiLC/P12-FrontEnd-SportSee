@@ -16,7 +16,7 @@ let countData=[]
 				? null
 				: countData.map((item,index) => {
 						return (
-							<div className="row counter-item">
+							<div className="row counter-item" key={index}>
 								<div className="col-md-4 box" style={{backgroundColor:`rgba(${item.color},.3)`}}>
 									<img src={item.icon} className="count-icon" alt={item.name}/>
 								</div>

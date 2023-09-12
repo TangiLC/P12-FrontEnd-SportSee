@@ -11,6 +11,7 @@ import Navbar from "../../component/Navbar";
 import MenuBar from "../../component/MenuBar";
 import Bonjour from "../../component/Bonjour";
 import Counter from "../../component/Counter";
+import DailyActivity from "../../component/DailyActivity";
 import "./style.css";
 
 import { menubar } from "../../utils/const";
@@ -27,6 +28,7 @@ function DashboardPage() {
 	const [countData, setCountData] = useState([]);
 
 	const [data, setData] = useState([]);
+	const [dailyActivities, setDailyActivities] = useState([])
 	const [userId, setUserId] = useState(user.id);
 	const { REACT_APP_API_URL } = process.env;
 
@@ -71,7 +73,7 @@ function DashboardPage() {
 							<div className="row">
 								<div className="col-md-9">
 									<div className="row">
-										<div className="col-md-12">Activité</div>
+										<div className="col-md-12 dailyActivity"><DailyActivity /></div>
 									</div>
 									<div className="row">
 										<div className="col-md-4">Durée moyenne</div>
