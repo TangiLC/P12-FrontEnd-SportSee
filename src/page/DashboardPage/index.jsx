@@ -5,7 +5,7 @@ import { FetchAPI } from "../../utils/utils";
 
 import Logo from "../../component/Logo";
 import { UserContext } from "../../App";
-import Page404 from "../../component/Page404";
+
 import HorizontalWarning from "../../component/HorizontalWarning";
 import Navbar from "../../component/Navbar";
 import MenuBar from "../../component/MenuBar";
@@ -25,33 +25,54 @@ function DashboardPage() {
 		? console.log("connexion safe") //the security number is the id provided by login
 		: console.log("null");
 
+	const [datas, setDatas] = useState([]);
 	const [countData, setCountData] = useState([]);
-
-	const [data, setData] = useState([]);
-	const [dailyActivities, setDailyActivities] = useState([])
+	const [userData, setUserData] = useState([]);
+	const [dailyActivities, setDailyActivities] = useState([]);
+	const [averageSessions, setAverageSessions] = useState([]);
+	const [performance, setPerformance] = useState([]);
 	const [userId, setUserId] = useState(user.id);
 	const { REACT_APP_API_URL } = process.env;
 
 	useEffect(() => {
-		const fetchAPIData = async (id, path, group) => {
+		const fetchAPIData = async (setVar, id, path, group) => {
 			try {
 				const fetchedData = await FetchAPI(id, path, group);
-				setData(fetchedData);
-				console.log("userid", id, "data", data);
+				setVar(fetchedData);
 			} catch (error) {
 				console.log("erreur de fetch", error);
 			}
 		};
 
 		if (userId < 15) {
-			let path = `/mock/mock.json`;
-			fetchAPIData(userId, path, "main");
+			fetchAPIData(setUserData, userId, `/mock/mock.json`, "main");
+			fetchAPIData(setDailyActivities, userId, `/mock/mock.json`, "activity");
+			fetchAPIData(
+				setAverageSessions,
+				userId,
+				`/mock/mock.json`,
+				"average-sessions"
+			);
+			fetchAPIData(setPerformance, userId, `/mock/mock.json`, "performance");
 		} else {
-			let path = `${REACT_APP_API_URL}/${userId}`;
-			fetchAPIData(userId, path);
+			fetchAPIData(setUserData, userId, `${REACT_APP_API_URL}/${userId}`);
+			fetchAPIData(
+				setDailyActivities,
+				userId,
+				`${REACT_APP_API_URL}/${userId}/activity`
+			);
+			fetchAPIData(
+				setAverageSessions,
+				userId,
+				`${REACT_APP_API_URL}/${userId}/average-sessions`
+			);
+			fetchAPIData(
+				setPerformance,
+				userId,
+				`${REACT_APP_API_URL}/${userId}/performance`
+			);
 		}
 	}, []);
-
 
 	return (
 		<>
@@ -65,7 +86,7 @@ function DashboardPage() {
 							<div className="row">
 								<div className="col-md-12">
 									<Bonjour
-										firstName={data?.userInfos?.firstName}
+										firstName={userData?.userInfos?.firstName}
 										yesterdayObjective={110}
 									/>
 								</div>
@@ -73,15 +94,19 @@ function DashboardPage() {
 							<div className="row">
 								<div className="col-md-9">
 									<div className="row">
-										<div className="col-md-12 dailyActivity"><DailyActivity /></div>
+										<div className="col-md-12 dailyActivity">
+											<DailyActivity datas={dailyActivities} />
+										</div>
 									</div>
 									<div className="row">
-										<div className="col-md-4">Durée moyenne</div>
-										<div className="col-md-4">Performance</div>
-										<div className="col-md-4">Score</div>
+										<div className="col-md-4">Durée moyenne </div>
+										<div className="col-md-4">Performance </div>
+										<div className="col-md-4">Score {userData?.todayScore}</div>
 									</div>
 								</div>
-								<div className="col-md-3"><Counter items={data.keyData}/></div>
+								<div className="col-md-3">
+									<Counter items={userData.keyData} />
+								</div>
 							</div>
 						</div>
 					</div>

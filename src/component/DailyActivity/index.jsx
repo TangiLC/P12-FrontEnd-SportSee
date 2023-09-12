@@ -1,5 +1,7 @@
 import "./style.css";
 import React from "react";
+import { CustomTooltipActivity } from '../Custom'
+
 import {
 	BarChart,
 	Bar,
@@ -11,71 +13,76 @@ import {
 	ResponsiveContainer,
 } from "recharts";
 
-const data = [
-	{
-		name: "Page A",
-		uv: 4000,
-		pv: 2400,
-		amt: 2400,
-	},
-	{
-		name: "Page B",
-		uv: 3000,
-		pv: 1398,
-		amt: 2210,
-	},
-	{
-		name: "Page C",
-		uv: 2000,
-		pv: 9800,
-		amt: 2290,
-	},
-	{
-		name: "Page D",
-		uv: 2780,
-		pv: 3908,
-		amt: 2000,
-	},
-	{
-		name: "Page E",
-		uv: 1890,
-		pv: 4800,
-		amt: 2181,
-	},
-	{
-		name: "Page F",
-		uv: 2390,
-		pv: 3800,
-		amt: 2500,
-	},
-	{
-		name: "Page G",
-		uv: 3490,
-		pv: 4300,
-		amt: 2100,
-	},
-];
+function addCount(array) {
+	const newArray = array.map((item,index) => {
+		const newItem = { ...item };
+		newItem.count = index + 1;
+		return newItem;
+	  });
+	  return newArray;
+  }
+
 
 export default function DailyActivity(props) {
+	console.log("DAILY ACTIVITY", props.datas.sessions);
+	const myArray=(props?.datas.sessions?.length>0?addCount(props.datas.sessions):[])
+	
+
 	return (
-		<ResponsiveContainer>
+		<ResponsiveContainer width='100%' height='100%'>
 			<BarChart
-				data={data}
+			width='100%' height='100%'
+				data={myArray}
+
 				margin={{
 					top: 20,
-					right: 10,
+					right: -5,
 					left: -30,
 					bottom: 5,
 				}}
+				barGap={12}
 			>
 				<CartesianGrid vertical={false} strokeDasharray="1 2" />
-				<XAxis dataKey="name" />
+				<XAxis dataKey="count" tickLine={false} />
 				<YAxis yAxisId="left" orientation="left" stroke="transparent" />
-				<YAxis yAxisId="right" orientation="right" stroke="#82ca9d" />
-				<Tooltip />
-
-				<Bar yAxisId="left" dataKey="pv" fill="#282d30" radius={[20,20,0,0]} barSize={20}/>
-				<Bar yAxisId="right" dataKey="uv" fill="#e60000"radius={[20,20,0,0]} barSize={20}/>
+				<YAxis
+					yAxisId="right"
+					orientation="right"
+					tickLine={false}
+					stroke="grey"
+					domain={["dataMin - 4", "dataMax + 1"]}
+					
+				/>
+				<Tooltip content={<CustomTooltipActivity />} />
+				<Legend
+					iconType="circle"
+					iconSize={8}
+					height={25}
+					verticalAlign="top"
+					align="right"
+					wrapperStyle={{ marginTop: "-20px" }}
+					formatter={(value, entry, index) => (
+						<span className="text-color">{value}</span>
+					)}
+				/>
+				<Bar
+					name="Poids (kg)"
+					yAxisId="right"
+					dataKey="kilogram"
+					fill="#e60000"
+					radius={[20, 20, 0, 0]}
+					barSize={8}
+					
+				/>
+				<Bar
+					name="Calories brûlées (kCal)"
+					yAxisId="left"
+					dataKey="calories"
+					fill="#282d30"
+					radius={[20, 20, 0, 0]}
+					barSize={8}
+					
+				/>
 			</BarChart>
 		</ResponsiveContainer>
 	);

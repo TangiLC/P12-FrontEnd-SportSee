@@ -2,7 +2,7 @@
 	"mock": {
 		"USER_MAIN_DATA": [
 			{
-				"id": 9,
+				"userId": 9,
 				"userInfos": {
 					"firstName": "Thomas",
 					"lastName": "Mockdata",
@@ -17,7 +17,7 @@
 				}
 			},
 			{
-				"id": 12,
+				"userId": 12,
 				"userInfos": {
 					"firstName": "Karl",
 					"lastName": "Dovineau",
@@ -32,7 +32,7 @@
 				}
 			},
 			{
-				"id": 18,
+				"userId": 18,
 				"userInfos": {
 					"firstName": "Cecilia",
 					"lastName": "Ratorez",

@@ -19,7 +19,7 @@ body{
     background-color: #fbfbfb;
     margin-left: 10px;
     border: 1px solid black;
-    width: 96%;
+    width: 97%;
 }
 
 @media (max-width: 768px) and (orientation: portrait) {

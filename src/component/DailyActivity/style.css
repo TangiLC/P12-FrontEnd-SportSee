@@ -7,3 +7,10 @@
     height: 400px;
     background-color: #fff;
   }
+
+  .custom-tooltip-activity{
+    background-color: rgba(230, 0, 0, .6);
+    color:white;
+    padding:5px;
+    margin-left:auto;
+  }

@@ -5,6 +5,7 @@
 	color: white;
 	padding: 10px;
 	transition: all 0.3s ease;
+	
 }
 
 .horizontal {
@@ -21,10 +22,11 @@
 	display: inline-flex;
 	flex-direction: column;
 	justify-content: space-between;
-	width: 120px;
+	width: 110px;
 	min-height: 80vh;
 	height: 100%;
-	padding: 0 2rem 0 2rem;
+	padding: 5px 10px 0px 10px;
+	
 }
 
 .toggle-box {
@@ -36,7 +38,7 @@
 	margin: 10px;
 }
 .rotate90 {
-	transform: scale(-1.1, 1.7) rotate(90deg);
+	transform: scale(-1, 1.2) rotate(90deg);
 	z-index: 99;
 }
 .icon-box {
@@ -47,14 +49,14 @@
 	margin: 2px;
 }
 .row .icon-box {
-	padding: 0;
-	width: auto;
-	min-width: auto;
+	padding: 0px;
+	margin-left:10px;
+	
 }
-.col .icon-box {
+.row .toggle-box {
 	padding: 0;
-	width: auto;
-	min-width: auto;
+	width: 60px;
+	min-width: 60px;
 }
 
 .list-icon {
@@ -64,9 +66,11 @@
 	box-sizing: unset;
 }
 
+
 .list-text {
 	width: 100px;
 	height: 40px;
+	margin-left:10px;
 }
 
 .invisible-text {
@@ -77,6 +81,7 @@
 .copyright-vertical {
 	writing-mode: sideways-lr;
 	margin-bottom: 1rem;
+	margin-left:10px;
 }
 
 .copyright-horizontal {
