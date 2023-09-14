@@ -27,7 +27,15 @@ const CustomTooltipSessions = ({ active, payload }) => {
 
 export default function AverageSessions(props) {
 	const myArray =
-		props?.datas.sessions?.length > 0 ? addDayOfWeek(props.datas.sessions) : [];
+		props?.datas.sessions?.length > 0
+			? addDayOfWeek(props.datas.sessions)
+			: [{ dayOfWeek: "L", sessionLength: 10 },
+			{ dayOfWeek: "M", sessionLength: 15 },
+			{ dayOfWeek: "M", sessionLength: 10 },
+			{ dayOfWeek: "J", sessionLength: 15 },
+			{ dayOfWeek: "V", sessionLength: 10 },
+			{ dayOfWeek: "S", sessionLength: 15 },
+			{ dayOfWeek: "D", sessionLength: 10 }];
 
 	return (
 		<ResponsiveContainer>

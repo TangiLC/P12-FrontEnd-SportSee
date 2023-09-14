@@ -1,3 +1,8 @@
 .recharts-text {
     font-size:.9dvw;
 }
+
+.recharts-polygon{
+    transform-origin: center;
+    transform: rotate(120deg);
+}

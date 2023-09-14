@@ -15,7 +15,7 @@ export default function Performance(props) {
 	const dataKind = props.data.kind || {};
 	const dataValue = props.data.data || [];
 	const myArray = fusionArray(dataValue, dataKind);
-
+	console.log("ARRAY PERF", myArray);
 	return (
 		<>
 			<ResponsiveContainer width="100%" height="100%">
@@ -26,8 +26,8 @@ export default function Performance(props) {
 					width="100%"
 					height="100%"
 					data={myArray}
-					startAngle={-150}
-					endAngle={210}
+					startAngle="-150"
+					endAngle="210"
 				>
 					<PolarGrid radialLines={false} />
 					<PolarAngleAxis
@@ -37,13 +37,20 @@ export default function Performance(props) {
 						tickLine={false}
 						axisLine={false}
 					/>
-					<PolarRadiusAxis tick={false} axisLine={false} tickCount={6} />
+					<PolarRadiusAxis
+						tick={false}
+						axisLine={false}
+						tickCount={6}
+						
+						
+					/>
 					<Radar
 						name="Performance"
 						dataKey="value"
 						stroke="none"
 						fill="#e60000"
 						fillOpacity={0.6}
+						
 					/>
 				</RadarChart>
 			</ResponsiveContainer>
