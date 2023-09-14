@@ -11,7 +11,7 @@ export default function NotYet() {
 		<>
 			<HorizontalWarning />
 			<div className="col container-not-yet">
-				<div className="row">
+				<div className="row g-0">
 					<div className="col-4"></div>
 					<div className="col-4">
 						<Logo />
@@ -31,10 +31,10 @@ export default function NotYet() {
 							height="auto"
 						/>
 					</div>
-					<div className="row under-construction">
+					<div className="row g-0 under-construction">
 						<div className="col-4">&nbsp;</div>
 						<div className="col-4">
-							<h1>PAGE EN CONSTRUCTION</h1>
+							<h3>PAGE EN CONSTRUCTION</h3>
 
 							<button className="center btn btn-danger" onClick={() => { navigate(-1) }}>
 								RETOUR

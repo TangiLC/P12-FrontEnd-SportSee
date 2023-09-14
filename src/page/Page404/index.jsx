@@ -11,7 +11,7 @@ export default function NotYet() {
 		<>
 			<HorizontalWarning />
 			<div className="col container-page404">
-				<div className="row">
+				<div className="row g-0">
 					<div className="col-3"></div>
 					<div className="col-6">
 						<Logo />
@@ -31,7 +31,7 @@ export default function NotYet() {
 							height="auto"
 						/>
 					</div>
-					<div className="row page404">
+					<div className="row g-0 page404">
 						<div className="col-3">&nbsp;</div>
 						<div className="col-6">
 							<h1>PAGE INTROUVABLE<br/>E R R E U R&emsp;4 0 4</h1>

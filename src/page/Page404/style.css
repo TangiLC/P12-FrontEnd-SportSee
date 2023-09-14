@@ -1,20 +1,18 @@
-.container-page404 {
-	background-color: #a87f6e;
+.container-page404,
+.page404,
+.filler404 {
+	background-color: #ffc7a7;
 	text-align: center;
-    width:100vw;
+	width: 70dvw;
+	max-width: 1400px;
+	margin: auto;
 }
 .search404 {
-	filter: hue-rotate(-30deg) brightness(70%) contrast(80%);
-}
-
-.page404, .filler404 {
-    background-color: #a87f6e;
-	max-width: 1800px;
-	margin: auto;
+	filter: hue-rotate(-30deg) brightness(110%) contrast(100%);
 }
 
 .page404 div h1 {
-	color: #754c3b;
+	color: #753d1d;
 	font-weight: 600;
 }
 .filler404 {
