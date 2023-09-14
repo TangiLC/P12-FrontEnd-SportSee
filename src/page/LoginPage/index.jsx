@@ -1,3 +1,5 @@
+//Login page to get user id
+//A more secured version is to be CODED ON PHASE 2
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -5,8 +7,7 @@ import matchingId from "../../component/loginSecurity";
 import Logo from "../../component/Logo";
 import "./style.css";
 
-import { UserContext } from '../../App';
-
+import { UserContext } from "../../App";
 
 function Login() {
 	const navigate = useNavigate();
@@ -17,10 +18,9 @@ function Login() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("Nom:", lastName, "Prénom:", firstName);
 		const id = matchingId(firstName, lastName);
 		if (id != null) {
-			setSecurity(id)
+			setSecurity(id);
 			navigate(`/Dashboard/${id}`);
 		} else {
 			setNoMatch("Vous n'êtes pas un utilisateur enregistré...");

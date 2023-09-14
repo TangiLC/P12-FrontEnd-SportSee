@@ -9,6 +9,8 @@ import proteins from "../assets/proteins.png"
 import lipids from "../assets/lipids.png"
 import carbohydrates from "../assets/carbohydrates.png"
 
+
+//List of icons to be displayed in MenuBar
 export const menubar = {};
 menubar.toggle = toggle;
 menubar.items = [
@@ -18,6 +20,7 @@ menubar.items = [
 	{ icon: barbell96, text: "Altérophilie" },
 ];
 
+//function to return normalized datas for the Counter component
 export const normalizeCount = (data) => {
 	let array = [];
 	array.push({

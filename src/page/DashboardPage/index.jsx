@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { FetchAPI } from "../../utils/utils";
 
-import Logo from "../../component/Logo";
 import { UserContext } from "../../App";
 
 import HorizontalWarning from "../../component/HorizontalWarning";
@@ -13,22 +11,25 @@ import Bonjour from "../../component/Bonjour";
 import Counter from "../../component/Counter";
 import DailyActivity from "../../component/DailyActivity";
 import AverageSessions from "../../component/AverageSessions";
+import Performance from "../../component/Performance/performance";
 import TodayScore from "../../component/TodayScore";
 import "./style.css";
 
+//This object is the list of icons to be displayed in MenuBar.
+//TO BE CODED PHASE 2 : store the list using Redux, change in page Settings
 import { menubar } from "../../utils/const";
 
 function DashboardPage() {
 	const navigate = useNavigate();
 	const user = useParams();
 	const { security } = useContext(UserContext);
-
-	Number(user.id) === Number(security) //this is to prevent user from typing any 'id' in address bar
-		? console.log("connexion safe") //the security number is the id provided by login
+//this is to prevent user from typing any 'id' in address bar
+//the security number is the id provided by login. This is not
+//true security, encrypted token prevails: TO BE CODED PHASE 2
+	Number(user.id) === Number(security) 
+		? console.log("connexion safe") 
 		: console.log("null");
 
-	const [datas, setDatas] = useState([]);
-	const [countData, setCountData] = useState([]);
 	const [userData, setUserData] = useState([]);
 	const [dailyActivities, setDailyActivities] = useState([]);
 	const [averageSessions, setAverageSessions] = useState([]);
@@ -110,7 +111,7 @@ function DashboardPage() {
 											</div>
 											<div className="week-end-shadow"></div>
 										</div>
-										<div className="col-md-4">Performance </div>
+										<div className="col-md-4 performance"><Performance data={performance}/> </div>
 										<div className="col-md-4 todayScore">
 											<TodayScore score={userData?.todayScore} />
 											<div className="todayScore-title" >

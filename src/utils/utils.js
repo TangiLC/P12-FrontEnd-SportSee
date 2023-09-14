@@ -1,41 +1,44 @@
-import React, { useState, useEffect } from "react";
+//this file exports utility fonctions
 import axios from "axios";
 const { REACT_APP_API_URL } = process.env;
 
 export async function FetchAPI(id, path, group) {
 	try {
 		const response = await axios.get(path);
-		//console.log("response", response.data, "case", group);
 
 		let datas = {};
-		switch (group) {
+		switch (group) { //fetching part of mocked data to simulate API call
 			case "main":
 				datas = response.data.mock.USER_MAIN_DATA;
-				
 				break;
 			case "activity":
 				datas = response.data.mock.USER_ACTIVITY;
-				
 				break;
 			case "average-sessions":
 				datas = response.data.mock.USER_AVERAGE_SESSIONS;
-				
 				break;
 			case "performance":
 				datas = response.data.mock.USER_PERFORMANCE;
-				
 				break;
-			default: //using API not mock
+			default: //fetching data from genuine API call
 				return response.data.data;
 		}
 		const filteredData = datas.find((item) => item.userId === Number(id));
-		console.log(group,filteredData)
-		return filteredData;
+		return filteredData;  //return datas for user only
 	} catch (error) {
 		console.error("Error fetching data:", error);
 	}
 }
 
+
+export function addCount(array) {
+	const newArray = array.map((item, index) => {
+		const newItem = { ...item };
+		newItem.count = index + 1;
+		return newItem;
+	});
+	return newArray;
+}
 
 export function addDayOfWeek(array) {
 	const weekday = ["L", "M", "M", "J", "V", "S", "D"];
@@ -46,5 +49,23 @@ export function addDayOfWeek(array) {
 			return newItem;
 		}
 	});
+	return newArray;
+}
+
+export function fusionArray(tab1, tab2) {
+	const traduct = {
+		cardio: "Cardio",
+		energy: "Énergie",
+		endurance: "Endurance",
+		strength: "Force",
+		speed: "Vitesse",
+		intensity: "Intensité",
+	};
+
+	const newArray = tab1.map((item) => {
+		const str = tab2[item.kind.toString()] || "null";
+		return { kind: traduct[str] || "null", value: item.value };
+	});
+	console.log("NewArray", newArray);
 	return newArray;
 }

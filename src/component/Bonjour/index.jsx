@@ -1,3 +1,5 @@
+//React component getting firstName and dailyObjective as props and returning subsequent greetings
+//yesterdayObjective is not yet in user's database, TO BE CODED PHASE 2
 import "./style.css";
 
 const mark = (nb) => {
@@ -13,8 +15,6 @@ const mark = (nb) => {
 };
 
 function Bonjour(props) {
-	console.log("yesturday", props.yesterdayObjective);
-	console.log("firstname", props.firstName);
 
 	return (
 		<>

@@ -1,3 +1,4 @@
+//React component to display the sites's logo and name
 import "./style.css";
 import sportSee from "../../assets/sportsee.png";
 

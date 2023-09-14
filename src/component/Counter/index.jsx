@@ -1,5 +1,6 @@
+//React bootstrap component getting Calories,proteins,carbohydrates and lipids from props and
+//displaying data according to model 
 import "./style.css";
-
 import { normalizeCount } from "../../utils/const";
 
 function Counter(props) {

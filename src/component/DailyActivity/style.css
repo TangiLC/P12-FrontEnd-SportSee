@@ -1,15 +1,15 @@
 #container {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 10px;
-    width: 100%;
-    background-color: #fff;
-  }
+  box-sizing: border-box;
+  padding: 10px;
+  width: 100%;
+  background-color: #ffffff;
+}
 
-  .custom-tooltip-activity{
-    background-color: rgba(230, 0, 0, .6);
-    color:white;
-    padding:5px;
-    margin-left:auto;
-  }
+.custom-tooltip-activity {
+  background-color: #e60000;
+  opacity: 0.6;
+  color: #ffffff;
+  padding: 5px;
+  margin-left: auto;
+}
+/*# sourceMappingURL=style.css.map */

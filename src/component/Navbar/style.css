@@ -1,42 +1,47 @@
 .sportsee {
-	height: 8dvh;
-	min-height: 40px;
-	max-height: 70px;
-	width: auto;
+  height: 8dvh;
+  min-height: 40px;
+  max-height: 70px;
+  width: auto;
 }
+
 .site-name {
-	display: flex;
-	flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .site-name h2 {
-	color: red;
-	align-self: center;
+  color: #e60000;
+  align-self: center;
 }
+
 .navigate {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	margin: auto;
-	color: white;
-	font-size: 1.9rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto;
+  color: #ffffff;
+  font-size: 1.9rem;
 }
+
 .navigate div {
-	align-self: center;
+  align-self: center;
 }
 
 .nav-item {
-	color: white;
-	padding-right: 20px;
+  color: #ffffff;
+  padding-right: 20px;
 }
 
 .nav-item a,
 .nav-item a:visited {
-	color: white;
-	text-decoration: none;
+  color: #ffffff;
+  text-decoration: none;
 }
+
 .nav-item a:hover {
-	color: beige;
-	text-decoration: none;
-	font-weight: 500;
+  color: #fbfbfb;
+  text-decoration: none;
+  font-weight: 500;
 }
+/*# sourceMappingURL=style.css.map */

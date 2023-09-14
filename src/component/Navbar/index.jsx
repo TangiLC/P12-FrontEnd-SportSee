@@ -1,10 +1,10 @@
-import {useNavigate,Link} from "react-router-dom"
+//React bootstrap component navigation header
+//TO BE CODED PHASE 2 : the links are dead should lead to some pages
+import {Link} from "react-router-dom"
 import sportsee from "../../assets/sportsee.png";
-import NotYet from "../../page/NotYet";
 import "./style.css";
 
 function Navbar() {
-	const navigate=useNavigate()
 	return (
 		<div className="row g-0 container-flex bg-black">
 			<div className="col navigate">

@@ -1,4 +1,4 @@
-//Page under construction *****placeholder
+//Page error404  *****page not found*****
 import { useNavigate } from "react-router-dom";
 import Logo from "../../component/Logo";
 import HorizontalWarning from "../../component/HorizontalWarning";

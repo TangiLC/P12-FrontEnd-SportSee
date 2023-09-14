@@ -5,6 +5,7 @@
   @media (max-width: 768px) and (orientation: portrait) {
     .orientation-alert {
       display: block; 
+      text-align: center;
     }
   }
   

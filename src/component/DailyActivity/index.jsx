@@ -1,6 +1,7 @@
+//React component using Recharts 'BarCharts' to display user's weekly weight and calories lost
 import "./style.css";
 import React from "react";
-import { CustomTooltipActivity } from '../Custom'
+import { addCount } from "../../utils/utils"; 
 
 import {
 	BarChart,
@@ -13,18 +14,21 @@ import {
 	ResponsiveContainer,
 } from "recharts";
 
-function addCount(array) {
-	const newArray = array.map((item,index) => {
-		const newItem = { ...item };
-		newItem.count = index + 1;
-		return newItem;
-	  });
-	  return newArray;
+//Tooltip for customized label on hover
+const CustomTooltipActivity = ({ active, payload }) => {
+	if (active && payload && payload.length) {
+	  return (
+		<div className='custom-tooltip-activity'>
+		  <p> {`${payload[0].value}kg`}</p>
+		  <p> {`${payload[1].value}kCal`}</p>
+		</div>
+	  )
+	}
+	return null
   }
 
 
 export default function DailyActivity(props) {
-	console.log("DAILY ACTIVITY", props.datas.sessions);
 	const myArray=(props?.datas.sessions?.length>0?addCount(props.datas.sessions):[])
 	
 

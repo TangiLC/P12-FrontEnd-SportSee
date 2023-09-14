@@ -1,8 +1,9 @@
+//React component using Recharts 'Piechart' to display user's daily objective achievement (%)
 import "./style.css";
 import React from "react";
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
-const COLORS = ["#E60000", "#fbfbfb"];
+const COLORS = ["#E60000", "transparent"];
 
 export default function TodayScore(props) {
 	const data = [
@@ -12,7 +13,7 @@ export default function TodayScore(props) {
 	return (
 		<ResponsiveContainer width="100%" height="100%">
 			<PieChart width={100} height={100}>
-				<Pie
+				<Pie stroke="none"
 					data={data}
 					cx="50%"
 					cy="50%"
@@ -20,7 +21,7 @@ export default function TodayScore(props) {
 					outerRadius="95%"
                     startAngle={88}
                     endAngle={600}
-					fill="#8884d8"
+					fill="transparent"
 					paddingAngle={5}
 					dataKey="value"
                     cornerRadius="30"
