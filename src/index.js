@@ -5,8 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import App from "./App";
 
-//import Header from './components/Header/Header';
-//import Footer from './components/Footer/Footer';
+
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);

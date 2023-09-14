@@ -30,7 +30,7 @@ export async function FetchAPI(id, path, group) {
 	}
 }
 
-
+//Normalizing function to add key "count" in the datas used in DailyActivity
 export function addCount(array) {
 	const newArray = array.map((item, index) => {
 		const newItem = { ...item };
@@ -40,6 +40,7 @@ export function addCount(array) {
 	return newArray;
 }
 
+//Normalizing function to add key "dayOfWeek" in datas used in AverageSessions
 export function addDayOfWeek(array) {
 	const weekday = ["L", "M", "M", "J", "V", "S", "D"];
 	const newArray = array.map((item, index) => {
@@ -52,6 +53,7 @@ export function addDayOfWeek(array) {
 	return newArray;
 }
 
+//Normalizing function to create array used as datas in Performance
 export function fusionArray(tab1, tab2) {
 	const traduct = {
 		cardio: "Cardio",
@@ -66,6 +68,5 @@ export function fusionArray(tab1, tab2) {
 		const str = tab2[item.kind.toString()] || "null";
 		return { kind: traduct[str] || "null", value: item.value };
 	});
-	console.log("NewArray", newArray);
 	return newArray;
 }
