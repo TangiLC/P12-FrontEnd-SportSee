@@ -29,7 +29,7 @@ export default function DailyActivity(props) {
 	
 
 	return (
-		<ResponsiveContainer width='100%' height='100%'>
+		<ResponsiveContainer width='96%' height='100%'>
 			<BarChart
 			width='100%' height='100%'
 				data={myArray}
@@ -71,7 +71,7 @@ export default function DailyActivity(props) {
 					dataKey="kilogram"
 					fill="#e60000"
 					radius={[20, 20, 0, 0]}
-					barSize={8}
+					barSize={12}
 					
 				/>
 				<Bar
@@ -80,7 +80,7 @@ export default function DailyActivity(props) {
 					dataKey="calories"
 					fill="#282d30"
 					radius={[20, 20, 0, 0]}
-					barSize={8}
+					barSize={12}
 					
 				/>
 			</BarChart>

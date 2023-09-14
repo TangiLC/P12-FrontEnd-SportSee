@@ -12,6 +12,8 @@ import MenuBar from "../../component/MenuBar";
 import Bonjour from "../../component/Bonjour";
 import Counter from "../../component/Counter";
 import DailyActivity from "../../component/DailyActivity";
+import AverageSessions from "../../component/AverageSessions";
+import TodayScore from "../../component/TodayScore";
 import "./style.css";
 
 import { menubar } from "../../utils/const";
@@ -45,6 +47,7 @@ function DashboardPage() {
 		};
 
 		if (userId < 15) {
+			//get from mock
 			fetchAPIData(setUserData, userId, `/mock/mock.json`, "main");
 			fetchAPIData(setDailyActivities, userId, `/mock/mock.json`, "activity");
 			fetchAPIData(
@@ -55,6 +58,7 @@ function DashboardPage() {
 			);
 			fetchAPIData(setPerformance, userId, `/mock/mock.json`, "performance");
 		} else {
+			//get from API
 			fetchAPIData(setUserData, userId, `${REACT_APP_API_URL}/${userId}`);
 			fetchAPIData(
 				setDailyActivities,
@@ -91,20 +95,31 @@ function DashboardPage() {
 									/>
 								</div>
 							</div>
-							<div className="row">
-								<div className="col-md-9">
-									<div className="row">
+							<div className="row structure">
+								<div className="col-sm-12 col-lg-9">
+									<div className="row ">
 										<div className="col-md-12 dailyActivity">
 											<DailyActivity datas={dailyActivities} />
 										</div>
 									</div>
-									<div className="row">
-										<div className="col-md-4">Durée moyenne </div>
+									<div className="row user-figures">
+										<div className="col-md-4 averageSession">
+											<AverageSessions datas={averageSessions} />
+											<div className="averageSession-title">
+												Durée moyenne des sessions
+											</div>
+											<div className="week-end-shadow"></div>
+										</div>
 										<div className="col-md-4">Performance </div>
-										<div className="col-md-4">Score {userData?.todayScore}</div>
+										<div className="col-md-4 todayScore">
+											<TodayScore score={userData?.todayScore} />
+											<div className="todayScore-title" >
+												<h2>{userData?.todayScore*100}%</h2> de votre objectif
+											</div>
+										</div>
 									</div>
 								</div>
-								<div className="col-md-3">
+								<div className="col-sm-12 col-lg-3">
 									<Counter items={userData.keyData} />
 								</div>
 							</div>

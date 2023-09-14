@@ -6,16 +6,16 @@ export default function matchingId(first, last) {
         return string[0].toUpperCase() + string.slice(1).toLowerCase();
     }
 
-    const thisDataBaseIsVerySafe = [
+    const thisDataBaseIsAbsolutlyUnsafe = [
         { firstName: "Thomas", lastName: "Mockdata", id: 9 },
         { firstName: "Karl", lastName:"Dovineau", id:12},
-        { firstName: "Cecilia", lastName:"Ratonez", id:18},
+        { firstName: "Cecilia", lastName:"Ratorez", id:18},
 
     ];
     
 	first = capitalize(first);
 	last = capitalize(last);
-	for (const user of thisDataBaseIsVerySafe) {
+	for (const user of thisDataBaseIsAbsolutlyUnsafe) {
 		if (user.firstName === first && user.lastName === last) {
 			return user.id;
 		}

@@ -32,7 +32,7 @@ function Login() {
 			className="background container-fluid row flex"
 			style={{ height: "100vh" }}
 		>
-			<div className="col-4 card my-auto mx-auto text-center">
+			<div className="col-lg-4 col-sm-10 card my-auto mx-auto text-center">
 				<Logo />
 				<form onSubmit={handleSubmit} autoComplete="off">
 					<div>

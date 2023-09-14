@@ -36,3 +36,15 @@ export async function FetchAPI(id, path, group) {
 	}
 }
 
+
+export function addDayOfWeek(array) {
+	const weekday = ["L", "M", "M", "J", "V", "S", "D"];
+	const newArray = array.map((item, index) => {
+		const newItem = { ...item };
+		if (item.day >= 1 && item.day <= 7) {
+			newItem.dayOfWeek = weekday[item.day - 1];
+			return newItem;
+		}
+	});
+	return newArray;
+}

@@ -1,0 +1,22 @@
+.container-not-yet {
+	background-color: #ff9696;
+	text-align: center;
+    width:100vw;
+}
+.not-yet {
+	filter: invert(2%) hue-rotate(180deg) brightness(120%) contrast(200%);
+}
+
+.under-construction, .filler {
+    background-color: #ff9696;
+	max-width: 1800px;
+	margin: auto;
+}
+
+.under-construction div h1 {
+	color: #ff3838;
+	font-weight: 600;
+}
+.filler {
+	height: 40dvh;
+}

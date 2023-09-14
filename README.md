@@ -43,11 +43,11 @@ Clone the repository of SportSee Back-End:
 
 Inside this repository, install dependencies: `yarn install`
 
-Launch on port 3000: `yarn start`
+Launch on port 3000: `yarn start` or `npm start`
 
 Back-End is now running on port 3000 `http://localhost:3000`. API calls ends here.
 
-Open another window and clone the repository of SportSee Front-End:
+Open another window and clone this repository of SportSee Front-End:
 
 - [![git-clone](https://img.shields.io/badge/Git%20clone-Project%20SportSee-red?style&logo=github)](https://github.com/TangiLC/P12-SportSee.git)
 
@@ -58,6 +58,8 @@ While waiting for installation, perform a set of twenty push-ups : `push-ups`
 Launch on any port (3001) while 3000 is running : `npm start`
 
 Front-End is now rendered at URL `http://localhost:3001`
+
+The datas available in the back-end are for user "Cecilia Ratorez"
 
 If you don't want to run the back-end, mocked datas are available for users "Thomas Mockdata" and "Karl Dovineau"
 

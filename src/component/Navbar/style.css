@@ -1,6 +1,7 @@
-
 .sportsee {
-	height: 80px;
+	height: 8dvh;
+	min-height: 40px;
+	max-height: 70px;
 	width: auto;
 }
 .site-name {
@@ -24,6 +25,18 @@
 	align-self: center;
 }
 
-.nav-item{
-    padding-right:20px;
+.nav-item {
+	color: white;
+	padding-right: 20px;
+}
+
+.nav-item a,
+.nav-item a:visited {
+	color: white;
+	text-decoration: none;
+}
+.nav-item a:hover {
+	color: beige;
+	text-decoration: none;
+	font-weight: 500;
 }

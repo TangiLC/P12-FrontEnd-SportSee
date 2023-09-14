@@ -9,3 +9,11 @@ export const CustomTooltipActivity = ({ active, payload }) => {
   }
   return null
 }
+
+export const CustomTooltipSessions=({ active, payload }) =>{
+  if (active && payload) {
+    return (<><div className='custom-tooltip-sessions'>{`${payload[0].value} min`}</div></>)
+  }
+
+  return null
+}

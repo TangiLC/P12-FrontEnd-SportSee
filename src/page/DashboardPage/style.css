@@ -1,29 +1,130 @@
-body{
-    max-width:1600px;
-    margin:auto;
+body {
+	max-width: 1600px;
+	margin: auto;
 }
 
-.square{
-    width:25vw;
-    height:25vh;
+.square {
+	width: 25vw;
+	height: 25vh;
 }
 
-.content{
-    max-width:1600px;
-    margin:auto;
-    background-color:white;
+.content {
+	max-width: 1600px;
+	margin: auto;
+	background-color: white;
 }
 
-.dailyActivity{
-    height: 16rem;
-    background-color: #fbfbfb;
-    margin-left: 10px;
-    border: 1px solid black;
-    width: 97%;
+.dailyActivity {
+	height: 25dvh;
+	min-height: 150px;
+	max-height: 350px;
+	background-color: #fbfbfb;
+	margin: 0px 10px 40px 10px;
+	border: 1px solid black;
+	max-width: 1100px;
+	width:98%;
 }
+
+.user-figures{
+	justify-content: space-between;
+}
+
+.averageSession {
+	display: flex;
+	align-content: center;
+	position: relative;
+	width: 20.4dvw;
+	max-width: 360px;
+	height: 20.4dvw;
+	max-height: 360px;
+	background-color: #ff0000;
+	margin-left: 10px;
+	margin-top: 40px;
+	border-radius: 6px;
+}
+.recharts-responsive-container {
+	z-index: 99;
+}
+.averageSession-title {
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size:1.2dvw;
+	color: white;
+	width: 14dvw;
+	max-width: 300px;
+	padding: 20px;
+}
+
+.week-end-shadow {
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.2);
+	top: 0;
+	right: 0;
+	height: 20.4dvw;
+	max-height: 360px;
+	width: 5.9dvw;
+	max-width: 95px;
+	border-radius: 0px 6px 6px 0px;
+	z-index: 1;
+}
+
+.todayScore {
+	display: flex;
+	align-content: center;
+	position: relative;
+	width: 20.4dvw;
+	max-width: 360px;
+	height: 20.4dvw;
+	max-height: 360px;
+	background-color: #fbfbfb;
+	margin: 40px 10px 0px 10px;
+	border-radius: 6px;
+	
+}
+.todayScore-title {
+	background-color:white;
+	font-size:1.7dvw;
+	color:black;
+	position: absolute;
+	top: 15%;
+	left: 15%;
+	width: 14dvw;
+	max-width: 254px;
+	height:14dvw;
+	max-height: 254px;
+	text-align: center;
+	padding:20% 10% 0% 10%;
+	border-radius: 50%;
+	z-index:99;
+}
+.todayScore-title H2 {
+	font-size:3.2dvw;
+	font-weight: 600;
+	margin:0px;
+}
+@media (min-width: 1600px) {
+	.averageSession-title {
+		font-size:22px;
+	}
+	.todayScore-title {
+		font-size: 30px;
+	}
+	.todayScore-title H2 {
+		font-size: 50px;
+	}
+}
+
+@media (max-width: 992px) {
+	.structure {
+		flex-direction: column-reverse;
+
+	}
+}
+
 
 @media (max-width: 768px) and (orientation: portrait) {
-    .content {
-      display: none; 
-    }
-  }
+	.content {
+		display: none;
+	}
+}
