@@ -103,12 +103,10 @@ body {
   font-size: 1.7dvw;
   color: #282d30;
   position: absolute;
-  top: 18.5%;
-  left: 18.5%;
-  width: 12.2dvw;
-  max-width: 255px;
-  height: 12.2dvw;
-  max-height: 255px;
+  top: 17%;
+  left: 17%;
+  width: 66%;
+  height: 66%;
   text-align: center;
   padding: 12% 8% 0% 8%;
   border-radius: 50%;
@@ -137,11 +135,11 @@ body {
     flex-direction: column-reverse;
   }
   .todayScore-title {
-    top: 19.5%;
-    left: 19.5%;
-    width: 11.7dvw;
-    height: 11.7dvw;
     font-size: 1.5dvw;
+    top: 20%;
+    left: 20%;
+    width: 60%;
+    height: 60%;
   }
   .todayScore-title H2 {
     font-size: 3dvw;
