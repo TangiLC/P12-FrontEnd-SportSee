@@ -18,8 +18,8 @@ export default function TodayScore(props) {
 					data={data}
 					cx="50%"
 					cy="50%"
-					innerRadius="72%"
-					outerRadius="94%"
+					innerRadius="62%"
+					outerRadius="84%"
 					startAngle={88}
 					endAngle={600}
 					fill="transparent"

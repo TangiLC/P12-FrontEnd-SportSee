@@ -21,7 +21,7 @@ function Login() {
 		const id = matchingId(firstName, lastName);
 		if (id != null) {
 			setSecurity(id);
-			navigate(`/Dashboard/${id}`);
+			(navigate(`/Dashboard/${id}`));
 		} else {
 			setNoMatch("Vous n'êtes pas un utilisateur enregistré...");
 		}

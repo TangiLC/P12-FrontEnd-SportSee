@@ -113,8 +113,9 @@ function DashboardPage() {
 										</div>
 										<div className="col-md-4 performance"><Performance data={performance}/> </div>
 										<div className="col-md-4 todayScore">
+											<div className="todayScore-title">Score</div>
 											<TodayScore score={userData?.todayScore} />
-											<div className="todayScore-title" >
+											<div className="todayScore-goal" >
 												<h2>{userData?.todayScore*100}%</h2> de votre objectif
 											</div>
 										</div>

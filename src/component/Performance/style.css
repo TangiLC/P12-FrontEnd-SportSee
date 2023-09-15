@@ -1,5 +1,8 @@
 .recharts-polar-angle-axis-tick .recharts-text {
-	font-size: 0.9em;
+	font-size: 0.65em;
+    transform-origin: center;
+    transform: scale(1.03);
+    
     
 }
 
@@ -10,7 +13,7 @@
 
 @media (max-width: 992px) {
 	.recharts-polar-angle-axis-tick .recharts-text {
-		font-size: 0.6em;
-        
+		font-size: 0.55em;
+        transform: scale(.95) ;
 	}
 }

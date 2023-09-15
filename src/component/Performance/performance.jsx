@@ -27,6 +27,7 @@ export default function Performance(props) {
 					data={myArray}
 					startAngle="-150"
 					endAngle="210"
+					
 				>
 					<PolarGrid radialLines={false} />
 					<PolarAngleAxis
@@ -35,6 +36,8 @@ export default function Performance(props) {
 						strokeWidth="2"
 						tickLine={false}
 						axisLine={false}
+						
+						
 					/>
 					<PolarRadiusAxis
 						tick={false}
