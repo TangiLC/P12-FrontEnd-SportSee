@@ -15,7 +15,6 @@ export default function Performance(props) {
 	const dataKind = props.data.kind || {};
 	const dataValue = props.data.data || [];
 	const myArray = fusionArray(dataValue, dataKind);
-	console.log("ARRAY PERF", myArray);
 	return (
 		<>
 			<ResponsiveContainer width="100%" height="100%">

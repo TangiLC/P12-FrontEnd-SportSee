@@ -24,7 +24,7 @@
 }
 
 .counter-digit {
-  font-size: 1.8dvw;
+  font-size: 1.8em;
   font-weight: 600;
 }
 
@@ -32,6 +32,7 @@
   border-radius: 6px;
   width: 70px;
   height: 70px;
+  margin-left: 10px;
 }
 
 @media (max-width: 992px) {
@@ -44,6 +45,12 @@
   .counter-item div {
     margin: auto;
     text-align: center;
+  }
+  .counter-digit {
+    font-size: 1.4em;
+  }
+  .box {
+    margin: auto;
   }
 }
 /*# sourceMappingURL=style.css.map */

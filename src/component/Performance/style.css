@@ -1,8 +1,16 @@
-.recharts-text {
-    font-size:.9dvw;
+.recharts-polar-angle-axis-tick .recharts-text {
+	font-size: 0.9em;
+    
 }
 
-.recharts-polygon{
-    transform-origin: center;
-    transform: rotate(120deg);
+.recharts-polygon {
+	transform-origin: center;
+	transform: rotate(120deg);
+}
+
+@media (max-width: 992px) {
+	.recharts-polar-angle-axis-tick .recharts-text {
+		font-size: 0.6em;
+        
+	}
 }

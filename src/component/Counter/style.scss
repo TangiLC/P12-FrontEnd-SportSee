@@ -11,7 +11,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	height:50dvh;
+	height: 50dvh;
 	min-height: 420px;
 	max-height: 700px;
 	margin-bottom: 2vh;
@@ -25,7 +25,7 @@
 }
 
 .counter-digit {
-	font-size: 1.8dvw;
+	font-size: 1.8em;
 	font-weight: 600;
 }
 
@@ -33,6 +33,7 @@
 	border-radius: 6px;
 	width: 70px;
 	height: 70px;
+	margin-left: 10px;
 }
 
 @media (max-width: 992px) {
@@ -40,11 +41,17 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		min-height: 100px;
-		max-height:140px;
-		
+		max-height: 140px;
 	}
 	.counter-item div {
 		margin: auto;
 		text-align: center;
+	}
+	.counter-digit {
+		font-size: 1.4em;}
+
+
+	.box {
+		margin: auto;
 	}
 }
