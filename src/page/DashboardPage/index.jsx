@@ -2,7 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FetchAPI } from "../../utils/utils";
 
-import { UserContext } from "../../App";
+//import { UserContext } from "../../App";
+import {UserContext} from "../../provider";
 
 import HorizontalWarning from "../../component/HorizontalWarning";
 import Navbar from "../../component/Navbar";
@@ -22,7 +23,20 @@ import { menubar } from "../../utils/const";
 function DashboardPage() {
 	const navigate = useNavigate();
 	const user = useParams();
-	const { security } = useContext(UserContext);
+	const {
+		bonjourProps,
+		setBonjourProps,
+		counterProps,
+		setCounterProps,
+		sessionProps,
+		setSessionProps,
+		performProps,
+		setPerformProps,
+		todayScProps,
+		setTodayScProps,
+		security,
+		setSecurity,
+	} = useContext(UserContext);
 //this is to prevent user from typing any 'id' in address bar
 //the security number is the id provided by login. This is not
 //true security, encrypted token prevails: TO BE CODED PHASE 2

@@ -7,11 +7,24 @@ import matchingId from "../../component/loginSecurity";
 import Logo from "../../component/Logo";
 import "./style.css";
 
-import { UserContext } from "../../App";
+import { UserContext } from "../../provider";
 
 function Login() {
 	const navigate = useNavigate();
-	const { setSecurity } = useContext(UserContext);
+	const {
+		bonjourProps,
+		setBonjourProps,
+		counterProps,
+		setCounterProps,
+		sessionProps,
+		setSessionProps,
+		performProps,
+		setPerformProps,
+		todayScProps,
+		setTodayScProps,
+		security,
+		setSecurity,
+	} = useContext(UserContext);
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [noMatch, setNoMatch] = useState("");
@@ -21,7 +34,7 @@ function Login() {
 		const id = matchingId(firstName, lastName);
 		if (id != null) {
 			setSecurity(id);
-			(navigate(`/Dashboard/${id}`));
+			navigate(`/Dashboard/${id}`);
 		} else {
 			setNoMatch("Vous n'êtes pas un utilisateur enregistré...");
 		}
