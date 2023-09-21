@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FetchAPI } from "../../utils/utils";
 
-//import { UserContext } from "../../App";
-import {UserContext} from "../../provider";
+//import { SportSeeContext } from "../../App";
+import {useSportSee} from "../../provider";
 
 import HorizontalWarning from "../../component/HorizontalWarning";
 import Navbar from "../../component/Navbar";
@@ -24,31 +24,34 @@ function DashboardPage() {
 	const navigate = useNavigate();
 	const user = useParams();
 	const {
-		bonjourProps,
-		setBonjourProps,
-		counterProps,
-		setCounterProps,
-		sessionProps,
-		setSessionProps,
-		performProps,
-		setPerformProps,
-		todayScProps,
-		setTodayScProps,
-		security,
-		setSecurity,
-	} = useContext(UserContext);
+		bonjourProvid,
+		setBonjourProvid,
+		counterProvid,
+		setCounterProvid,
+		dailyProvid,
+		setDailyProvid,
+		sessionProvid,
+		setSessionProvid,
+		performProvid,
+		setPerformProvid,
+		todayScoreProvid,
+		setTodayScoreProvid,
+		userID,
+		setUserID,
+	} = useSportSee();
 //this is to prevent user from typing any 'id' in address bar
-//the security number is the id provided by login. This is not
-//true security, encrypted token prevails: TO BE CODED PHASE 2
-	Number(user.id) === Number(security) 
+//the userID number is the id provided by login. This is not
+//true userID, encrypted token prevails: TO BE CODED PHASE 2
+	Number(user.id) === Number(userID) 
 		? console.log("connexion safe") 
 		: console.log("null");
+	console.log(useSportSee())
 
-	const [userData, setUserData] = useState([]);
+	const [userData, setSportSeeData] = useState([]);
 	const [dailyActivities, setDailyActivities] = useState([]);
 	const [averageSessions, setAverageSessions] = useState([]);
 	const [performance, setPerformance] = useState([]);
-	const [userId, setUserId] = useState(user.id);
+	const [userId, setSportSeeId] = useState(user.id);
 	const { REACT_APP_API_URL } = process.env;
 
 	useEffect(() => {
@@ -63,7 +66,7 @@ function DashboardPage() {
 
 		if (userId < 15) {
 			//get from mock
-			fetchAPIData(setUserData, userId, `/mock/mock.json`, "main");
+			fetchAPIData(setSportSeeData, userId, `/mock/mock.json`, "main");
 			fetchAPIData(setDailyActivities, userId, `/mock/mock.json`, "activity");
 			fetchAPIData(
 				setAverageSessions,
@@ -74,7 +77,7 @@ function DashboardPage() {
 			fetchAPIData(setPerformance, userId, `/mock/mock.json`, "performance");
 		} else {
 			//get from API
-			fetchAPIData(setUserData, userId, `${REACT_APP_API_URL}/${userId}`);
+			fetchAPIData(setSportSeeData, userId, `${REACT_APP_API_URL}/${userId}`);
 			fetchAPIData(
 				setDailyActivities,
 				userId,
@@ -105,7 +108,7 @@ function DashboardPage() {
 							<div className="row">
 								<div className="col-md-12">
 									<Bonjour
-										firstName={userData?.userInfos?.firstName}
+										firstName={bonjourProvid}
 										yesterdayObjective={110}
 									/>
 								</div>
@@ -114,7 +117,7 @@ function DashboardPage() {
 								<div className="col-sm-12 col-lg-9">
 									<div className="row ">
 										<div className="col-md-12 dailyActivity">
-											<DailyActivity datas={dailyActivities} />
+											<DailyActivity datas={dailyProvid!==null?dailyProvid:[]} />
 										</div>
 									</div>
 									<div className="row user-figures">
@@ -128,9 +131,9 @@ function DashboardPage() {
 										<div className="col-md-4 performance"><Performance data={performance}/> </div>
 										<div className="col-md-4 todayScore">
 											<div className="todayScore-title">Score</div>
-											<TodayScore score={userData?.todayScore} />
+											<TodayScore score={todayScoreProvid!==null?todayScoreProvid:0} />
 											<div className="todayScore-goal" >
-												<h2>{userData?.todayScore*100}%</h2> de votre objectif
+												<h2>{todayScoreProvid!==null?todayScoreProvid*100:0}%</h2> de votre objectif
 											</div>
 										</div>
 									</div>

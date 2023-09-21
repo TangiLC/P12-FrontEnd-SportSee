@@ -3,28 +3,28 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import matchingId from "../../component/loginSecurity";
+import matchingId from "../../component/loginuserID";
 import Logo from "../../component/Logo";
 import "./style.css";
 
-import { UserContext } from "../../provider";
+import { SportSeeContext } from "../../provider";
 
 function Login() {
 	const navigate = useNavigate();
 	const {
-		bonjourProps,
-		setBonjourProps,
-		counterProps,
-		setCounterProps,
-		sessionProps,
-		setSessionProps,
-		performProps,
-		setPerformProps,
-		todayScProps,
-		setTodayScProps,
-		security,
-		setSecurity,
-	} = useContext(UserContext);
+		bonjourProvid,
+		setBonjourProvid,
+		counterProvid,
+		setCounterProvid,
+		sessionProvid,
+		setSessionProvid,
+		performProvid,
+		setPerformProvid,
+		todayScoreProvid,
+		setTodayScoreProvid,
+		userID,
+		setUserID,
+	} = useContext(SportSeeContext);
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [noMatch, setNoMatch] = useState("");
@@ -33,8 +33,9 @@ function Login() {
 		e.preventDefault();
 		const id = matchingId(firstName, lastName);
 		if (id != null) {
-			setSecurity(id);
-			navigate(`/Dashboard/${id}`);
+			setUserID(id);
+			//navigate(`/Dashboard/${id}`);
+			navigate(`/Process`);
 		} else {
 			setNoMatch("Vous n'êtes pas un utilisateur enregistré...");
 		}

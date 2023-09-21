@@ -1,4 +1,4 @@
-//This is a placeholder for a true secured login, there is no security in there !
+//This is a placeholder for a true secured login, there is no userID in there !
 
 export default function matchingId(first, last) {
 	const capitalize = (string) => {

@@ -1,7 +1,7 @@
 //React component using Recharts 'BarCharts' to display user's weekly weight and calories lost
 import "./style.css";
 import React from "react";
-import { addCount } from "../../utils/utils"; 
+import { addCount } from "../../utils/utils";
 
 import {
 	BarChart,
@@ -17,27 +17,26 @@ import {
 //Tooltip for customized label on hover
 const CustomTooltipActivity = ({ active, payload }) => {
 	if (active && payload && payload.length) {
-	  return (
-		<div className='custom-tooltip-activity'>
-		  <p> {`${payload[0].value}kg`}</p>
-		  <p> {`${payload[1].value}kCal`}</p>
-		</div>
-	  )
+		return (
+			<div className="custom-tooltip-activity">
+				<p> {`${payload[0].value}kg`}</p>
+				<p> {`${payload[1].value}kCal`}</p>
+			</div>
+		);
 	}
-	return null
-  }
-
+	return null;
+};
 
 export default function DailyActivity(props) {
-	const myArray=(props?.datas.sessions?.length>0?addCount(props.datas.sessions):[])
-	
+	//const myArray=(props?.datas.sessions?.length>0?addCount(props.datas.sessions):[])
+	const myArray = props.datas;
 
 	return (
-		<ResponsiveContainer width='96%' height='100%'>
+		<ResponsiveContainer width="96%" height="100%">
 			<BarChart
-			width='100%' height='100%'
+				width="100%"
+				height="100%"
 				data={myArray}
-
 				margin={{
 					top: 20,
 					right: -5,
@@ -55,7 +54,6 @@ export default function DailyActivity(props) {
 					tickLine={false}
 					stroke="grey"
 					domain={["dataMin - 4", "dataMax + 1"]}
-					
 				/>
 				<Tooltip content={<CustomTooltipActivity />} />
 				<Legend
@@ -76,7 +74,6 @@ export default function DailyActivity(props) {
 					fill="#e60000"
 					radius={[20, 20, 0, 0]}
 					barSize={12}
-					
 				/>
 				<Bar
 					name="Calories brûlées (kCal)"
@@ -85,7 +82,6 @@ export default function DailyActivity(props) {
 					fill="#282d30"
 					radius={[20, 20, 0, 0]}
 					barSize={12}
-					
 				/>
 			</BarChart>
 		</ResponsiveContainer>

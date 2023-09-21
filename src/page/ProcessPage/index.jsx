@@ -1,42 +1,41 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { FetchAPI } from "../../utils/utils";
+import {
+	FetchAPI,
+	addCount,
+	addDayOfWeek,
+	fusionArray,
+} from "../../utils/utils";
 
-import {UserContext} from "../../provider";
-
+import { useSportSee } from "../../provider";
 
 import { menubar } from "../../utils/const";
 
-
-function ProcessPage(){
-
-    const navigate = useNavigate();
+function ProcessPage() {
+	const navigate = useNavigate();
 	const user = useParams();
 	const {
-		bonjourProps,
-		setBonjourProps,
-		counterProps,
-		setCounterProps,
-		sessionProps,
-		setSessionProps,
-		performProps,
-		setPerformProps,
-		todayScProps,
-		setTodayScProps,
-		security,
-		setSecurity,
-	} = useContext(UserContext);
+		bonjourProvid,
+		setBonjourProvid,
+		counterProvid,
+		setCounterProvid,
+		dailyProvid,
+		setDailyProvid,
+		sessionProvid,
+		setSessionProvid,
+		performProvid,
+		setPerformProvid,
+		todayScoreProvid,
+		setTodayScoreProvid,
+		userID,
+		setUserID,
+	} = useSportSee();
 
-	Number(user.id) === Number(security) 
-		? console.log("connexion safe") 
-		: console.log("null");
-
-	const [userData, setUserData] = useState([]);
+	const [userData, setSportSeeData] = useState([]);
 	const [dailyActivities, setDailyActivities] = useState([]);
 	const [averageSessions, setAverageSessions] = useState([]);
 	const [performance, setPerformance] = useState([]);
-	const [userId, setUserId] = useState(user.id);
-    const [ready, setReady] = useState(false);
+	const [ready, setReady] = useState(false);
 	const { REACT_APP_API_URL } = process.env;
 
 	useEffect(() => {
@@ -49,43 +48,68 @@ function ProcessPage(){
 			}
 		};
 
-		if (userId < 15) {
+		if (userID < 15) {
 			//get from mock
-			fetchAPIData(setUserData, userId, `/mock/mock.json`, "main");
-			fetchAPIData(setDailyActivities, userId, `/mock/mock.json`, "activity");
+			fetchAPIData(setSportSeeData, userID, `/mock/mock.json`, "main");
+
+			fetchAPIData(setDailyActivities, userID, `/mock/mock.json`, "activity");
+			if (dailyActivities) {
+				console.log("DAILY ACTIVITIES : FETCHED");
+				setDailyProvid(addCount(dailyActivities))
+			}
+
 			fetchAPIData(
 				setAverageSessions,
-				userId,
+				userID,
 				`/mock/mock.json`,
 				"average-sessions"
 			);
-			fetchAPIData(setPerformance, userId, `/mock/mock.json`, "performance");
+			if (averageSessions) {
+				console.log("AVERAGE SESSIONS: FETCHED");
+			}
+
+			fetchAPIData(setPerformance, userID, `/mock/mock.json`, "performance");
+			if (performance) {
+				console.log("AVERAGE SESSIONS: FETCHED");
+			}
 		} else {
 			//get from API
-			fetchAPIData(setUserData, userId, `${REACT_APP_API_URL}/${userId}`);
+			fetchAPIData(setSportSeeData, userID, `${REACT_APP_API_URL}/${userID}`);
 			fetchAPIData(
 				setDailyActivities,
-				userId,
-				`${REACT_APP_API_URL}/${userId}/activity`
+				userID,
+				`${REACT_APP_API_URL}/${userID}/activity`
 			);
 			fetchAPIData(
 				setAverageSessions,
-				userId,
-				`${REACT_APP_API_URL}/${userId}/average-sessions`
+				userID,
+				`${REACT_APP_API_URL}/${userID}/average-sessions`
 			);
 			fetchAPIData(
 				setPerformance,
-				userId,
-				`${REACT_APP_API_URL}/${userId}/performance`
+				userID,
+				`${REACT_APP_API_URL}/${userID}/performance`
 			);
 		}
-	}, []);
+	}, [userData, dailyActivities, averageSessions, performance]);
 
-if (userData?.length>0){
-    if(userData?.score!==undefined){setTodayScProps(userData.score)}else{setTodayScProps(userData.todayScore)}
+	useEffect(() => {
+		if (userData) {
+				console.log("USER DATA : FETCHED", userData);
+				if (userData?.score !== undefined) {
+					setTodayScoreProvid(userData?.score);
+				} else {
+					setTodayScoreProvid(userData?.todayScore);
+				}
+				setBonjourProvid(userData?.userInfos?.firstName);
+			}
+	}, [userData]);
 
-}
-
-
+	useEffect(() => {
+		if (todayScoreProvid !== null && bonjourProvid !== null && dailyProvid !== null) {
+			navigate(`/Dashboard/${userID}`);
+			console.log(todayScoreProvid, bonjourProvid);
+		}
+	}, [todayScoreProvid, bonjourProvid, dailyProvid, userID]);
 }
 export default ProcessPage;

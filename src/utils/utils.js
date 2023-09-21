@@ -37,6 +37,7 @@ export function addCount(array) {
 		newItem.count = index + 1;
 		return newItem;
 	});
+	console.log('newArray',newArray)
 	return newArray;
 }
 
