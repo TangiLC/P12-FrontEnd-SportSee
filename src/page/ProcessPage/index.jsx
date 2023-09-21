@@ -31,7 +31,7 @@ function ProcessPage() {
 		setUserID,
 	} = useSportSee();
 
-	const [userData, setSportSeeData] = useState([]);
+	const [userData, setUserData] = useState([]);
 	const [dailyActivities, setDailyActivities] = useState([]);
 	const [averageSessions, setAverageSessions] = useState([]);
 	const [performance, setPerformance] = useState([]);
@@ -43,6 +43,7 @@ function ProcessPage() {
 			try {
 				const fetchedData = await FetchAPI(id, path, group);
 				setVar(fetchedData);
+				console.log(group,fetchedData)
 			} catch (error) {
 				console.log("erreur de fetch", error);
 			}
@@ -50,10 +51,10 @@ function ProcessPage() {
 
 		if (userID < 15) {
 			//get from mock
-			fetchAPIData(setSportSeeData, userID, `/mock/mock.json`, "main");
+			fetchAPIData(setUserData, userID, `/mock/mock.json`, "main");
 
 			fetchAPIData(setDailyActivities, userID, `/mock/mock.json`, "activity");
-			if (dailyActivities) {
+			if (dailyActivities!==undefined) {
 				console.log("DAILY ACTIVITIES : FETCHED");
 				setDailyProvid(addCount(dailyActivities))
 			}
@@ -74,7 +75,7 @@ function ProcessPage() {
 			}
 		} else {
 			//get from API
-			fetchAPIData(setSportSeeData, userID, `${REACT_APP_API_URL}/${userID}`);
+			fetchAPIData(setUserData, userID, `${REACT_APP_API_URL}/${userID}`);
 			fetchAPIData(
 				setDailyActivities,
 				userID,
@@ -94,7 +95,7 @@ function ProcessPage() {
 	}, [userData, dailyActivities, averageSessions, performance]);
 
 	useEffect(() => {
-		if (userData) {
+		if (userData!==undefined) {
 				console.log("USER DATA : FETCHED", userData);
 				if (userData?.score !== undefined) {
 					setTodayScoreProvid(userData?.score);
@@ -106,7 +107,7 @@ function ProcessPage() {
 	}, [userData]);
 
 	useEffect(() => {
-		if (todayScoreProvid !== null && bonjourProvid !== null && dailyProvid !== null) {
+		if (todayScoreProvid !== undefined && bonjourProvid !== undefined && dailyProvid !== undefined) {
 			navigate(`/Dashboard/${userID}`);
 			console.log(todayScoreProvid, bonjourProvid);
 		}

@@ -47,11 +47,11 @@ function DashboardPage() {
 		: console.log("null");
 	console.log(useSportSee())
 
-	const [userData, setSportSeeData] = useState([]);
+	const [userData, setUserData] = useState([]);
 	const [dailyActivities, setDailyActivities] = useState([]);
 	const [averageSessions, setAverageSessions] = useState([]);
 	const [performance, setPerformance] = useState([]);
-	const [userId, setSportSeeId] = useState(user.id);
+	const [userId, setUserId] = useState(user.id);
 	const { REACT_APP_API_URL } = process.env;
 
 	useEffect(() => {
@@ -66,7 +66,7 @@ function DashboardPage() {
 
 		if (userId < 15) {
 			//get from mock
-			fetchAPIData(setSportSeeData, userId, `/mock/mock.json`, "main");
+			fetchAPIData(setUserData, userId, `/mock/mock.json`, "main");
 			fetchAPIData(setDailyActivities, userId, `/mock/mock.json`, "activity");
 			fetchAPIData(
 				setAverageSessions,
@@ -77,7 +77,7 @@ function DashboardPage() {
 			fetchAPIData(setPerformance, userId, `/mock/mock.json`, "performance");
 		} else {
 			//get from API
-			fetchAPIData(setSportSeeData, userId, `${REACT_APP_API_URL}/${userId}`);
+			fetchAPIData(setUserData, userId, `${REACT_APP_API_URL}/${userId}`);
 			fetchAPIData(
 				setDailyActivities,
 				userId,

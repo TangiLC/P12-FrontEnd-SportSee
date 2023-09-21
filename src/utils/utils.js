@@ -7,7 +7,9 @@ export async function FetchAPI(id, path, group) {
 		const response = await axios.get(path);
 
 		let datas = {};
-		switch (group) { //fetching part of mocked data to simulate API call
+		switch (
+			group //fetching part of mocked data to simulate API call
+		) {
 			case "main":
 				datas = response.data.mock.USER_MAIN_DATA;
 				break;
@@ -24,7 +26,7 @@ export async function FetchAPI(id, path, group) {
 				return response.data.data;
 		}
 		const filteredData = datas.find((item) => item.userId === Number(id));
-		return filteredData;  //return datas for user only
+		return filteredData; //return datas for user only
 	} catch (error) {
 		console.error("Error fetching data:", error);
 	}
@@ -32,13 +34,15 @@ export async function FetchAPI(id, path, group) {
 
 //Normalizing function to add key "count" in the datas used in DailyActivity
 export function addCount(array) {
-	const newArray = array.map((item, index) => {
-		const newItem = { ...item };
-		newItem.count = index + 1;
-		return newItem;
-	});
-	console.log('newArray',newArray)
-	return newArray;
+	if (array.length > 0) {
+		const newArray = array.map((item, index) => {
+			const newItem = { ...item };
+			newItem.count = index + 1;
+			return newItem;
+		});
+		console.log("newArray", newArray);
+		return newArray;
+	} else return array;
 }
 
 //Normalizing function to add key "dayOfWeek" in datas used in AverageSessions
