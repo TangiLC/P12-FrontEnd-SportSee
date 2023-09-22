@@ -4,10 +4,10 @@ import "./style.css";
 import { normalizeCount } from "../../utils/const";
 
 function Counter(props) {
-	let countData = [];
-	if (props.items !== undefined) {
+	let countData = props.items;
+	/*if (props.items !== undefined) {
 		countData = normalizeCount(props.items);
-	}
+	}*/
 
 	return (
 		<div className="col-lg-11 col-sm-12 counter-group">

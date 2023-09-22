@@ -35,7 +35,7 @@ function Login() {
 		if (id != null) {
 			setUserID(id);
 			//navigate(`/Dashboard/${id}`);
-			navigate(`/Process`);
+			navigate(`/Process/${id}`);
 		} else {
 			setNoMatch("Vous n'êtes pas un utilisateur enregistré...");
 		}

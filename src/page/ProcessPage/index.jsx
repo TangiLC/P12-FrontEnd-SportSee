@@ -2,7 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
 	FetchAPI,
+	noTreatment,
 	addCount,
+	normalizeCounter,
 	addDayOfWeek,
 	fusionArray,
 } from "../../utils/utils";
@@ -28,89 +30,96 @@ function ProcessPage() {
 		todayScoreProvid,
 		setTodayScoreProvid,
 		userID,
-		setUserID,
 	} = useSportSee();
 
-	const [userData, setUserData] = useState([]);
+	/*const [userData, setUserData] = useState([]);
 	const [dailyActivities, setDailyActivities] = useState([]);
 	const [averageSessions, setAverageSessions] = useState([]);
 	const [performance, setPerformance] = useState([]);
-	const [ready, setReady] = useState(false);
+	const [ready, setReady] = useState(false);*/
 	const { REACT_APP_API_URL } = process.env;
 
 	useEffect(() => {
-		const fetchAPIData = async (setVar, id, path, group) => {
-			try {
-				const fetchedData = await FetchAPI(id, path, group);
-				setVar(fetchedData);
-				console.log(group,fetchedData)
-			} catch (error) {
-				console.log("erreur de fetch", error);
-			}
+		const getAPIData = (id, path, group) => {
+			
+				return FetchAPI(id, path, group);
+
+			
 		};
 
 		if (userID < 15) {
-			//get from mock
-			fetchAPIData(setUserData, userID, `/mock/mock.json`, "main");
+			//****************************get datas from mock for user Id <15
+			console.log("fetchData", getAPIData(user.id, `/mock/mock.json`, "main"));
 
-			fetchAPIData(setDailyActivities, userID, `/mock/mock.json`, "activity");
-			if (dailyActivities!==undefined) {
-				console.log("DAILY ACTIVITIES : FETCHED");
-				setDailyProvid(addCount(dailyActivities))
-			}
-
-			fetchAPIData(
-				setAverageSessions,
-				userID,
-				`/mock/mock.json`,
-				"average-sessions"
+			setTodayScoreProvid(
+				getAPIData(userID, `/mock/mock.json`, "main").todayScore === undefined
+					? getAPIData(userID, `/mock/mock.json`, "main").score
+					: getAPIData(userID, `/mock/mock.json`, "main").todayScore
 			);
-			if (averageSessions) {
-				console.log("AVERAGE SESSIONS: FETCHED");
-			}
+			console.log("todayScoreProvid", todayScoreProvid);
 
-			fetchAPIData(setPerformance, userID, `/mock/mock.json`, "performance");
-			if (performance) {
-				console.log("AVERAGE SESSIONS: FETCHED");
-			}
-		} else {
-			//get from API
-			fetchAPIData(setUserData, userID, `${REACT_APP_API_URL}/${userID}`);
-			fetchAPIData(
+			setCounterProvid(
+				normalizeCounter(
+					getAPIData(userID, `/mock/mock.json`, "main").keyData
+				)
+			);
+			console.log('counterProvid',counterProvid)
+
+			setBonjourProvid(
+				getAPIData(userID, `/mock/mock.json`, "main").userInfos.firstName
+			);
+			console.log("bonjourProvid", bonjourProvid);
+
+			setDailyProvid(
+				addCount(getAPIData(userID, `/mock/mock.json`, "activity"))
+			);
+			console.log("dailyProvid", dailyProvid);
+
+			setSessionProvid(
+				addDayOfWeek(
+					getAPIData(userID, `/mock/mock.json`, "average-sessions").datas
+						.sessions
+				)
+			);
+			console.log("sessionProvid", sessionProvid);
+
+			setPerformProvid(
+				fusionArray(
+					getAPIData(userID, `/mock/mock.json`, "performance").data.value,
+					getAPIData(userID, `/mock/mock.json`, "performance").data.kind
+				)
+			);
+			console.log("performProvid", performProvid);
+		} /*else {
+			//******************************get datas from API for user Id >= 15
+			getAPIData(setUserData, userID, `${REACT_APP_API_URL}/${userID}`);
+			getAPIData(
 				setDailyActivities,
 				userID,
 				`${REACT_APP_API_URL}/${userID}/activity`
 			);
-			fetchAPIData(
+			getAPIData(
 				setAverageSessions,
 				userID,
 				`${REACT_APP_API_URL}/${userID}/average-sessions`
 			);
-			fetchAPIData(
+			getAPIData(
 				setPerformance,
 				userID,
 				`${REACT_APP_API_URL}/${userID}/performance`
 			);
-		}
-	}, [userData, dailyActivities, averageSessions, performance]);
+		}*/
+	}, []);
 
 	useEffect(() => {
-		if (userData!==undefined) {
-				console.log("USER DATA : FETCHED", userData);
-				if (userData?.score !== undefined) {
-					setTodayScoreProvid(userData?.score);
-				} else {
-					setTodayScoreProvid(userData?.todayScore);
-				}
-				setBonjourProvid(userData?.userInfos?.firstName);
-			}
-	}, [userData]);
-
-	useEffect(() => {
-		if (todayScoreProvid !== undefined && bonjourProvid !== undefined && dailyProvid !== undefined) {
-			navigate(`/Dashboard/${userID}`);
-			console.log(todayScoreProvid, bonjourProvid);
+		if (
+			todayScoreProvid !== undefined &&
+			bonjourProvid !== undefined &&
+			dailyProvid !== undefined
+		) {
+			//navigate(`/Dashboard/${userID}`);
+			console.log("FETCHED", useSportSee);
 		}
-	}, [todayScoreProvid, bonjourProvid, dailyProvid, userID]);
+	}, []);
 }
 export default ProcessPage;

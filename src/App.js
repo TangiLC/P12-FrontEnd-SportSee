@@ -6,12 +6,9 @@ import DashboardPage from "./page/DashboardPage";
 import NotYet from "./page/NotYet";
 import Page404 from "./page/Page404";
 
-import {SportSeeProvider} from "./provider";
-
+import { SportSeeProvider } from "./provider";
 
 function App() {
-	
-	
 	return (
 		<SportSeeProvider>
 			<Routes>
@@ -19,7 +16,7 @@ function App() {
 				<Route path="/Home" element={<LoginPage />} />
 				<Route path="/Dashboard" element={<LoginPage />} />
 				<Route path="/Dashboard/:id" element={<DashboardPage />} />
-				<Route path="/Process" element={<ProcessPage />} />
+				<Route path="/Process/:id" element={<ProcessPage />} />
 				<Route path="/NotYet" element={<NotYet />} />
 
 				<Route path="/*" element={<Page404 />} />

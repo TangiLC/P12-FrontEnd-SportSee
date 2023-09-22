@@ -1,5 +1,10 @@
 //this file exports utility fonctions
 import axios from "axios";
+
+import calories from "../assets/calories.png"
+import proteins from "../assets/proteins.png"
+import lipids from "../assets/lipids.png"
+import carbohydrates from "../assets/carbohydrates.png"
 const { REACT_APP_API_URL } = process.env;
 
 export async function FetchAPI(id, path, group) {
@@ -26,11 +31,50 @@ export async function FetchAPI(id, path, group) {
 				return response.data.data;
 		}
 		const filteredData = datas.find((item) => item.userId === Number(id));
-		return filteredData; //return datas for user only
+		console.log('filteredData',filteredData)
+		return filteredData; //return datas for single user only
 	} catch (error) {
 		console.error("Error fetching data:", error);
 	}
 }
+
+// function to return data without treatment
+export const noTreatment =(data) =>{return data}
+
+
+//function to return normalized datas for the Counter component
+export const normalizeCounter = (data) => {
+	let array = [];
+	array.push({
+		name: "Calories",
+		icon: calories,
+		unit: "kCal",
+		count: Number(data.calorieCount).toLocaleString('en-US'),
+		color: "255,0,0",
+	});
+	array.push({
+		name: "Protéines",
+		icon: proteins,
+		unit: "g",
+		count: data.proteinCount,
+		color: "74,184,255",
+	});
+	array.push({
+		name: "Glucides",
+		icon: carbohydrates,
+		unit: "g",
+		count: data.carbohydrateCount,
+		color: "253,204,12",
+	});
+	array.push({
+		name: "Lipides",
+		icon: lipids,
+		unit: "g",
+		count: data.lipidCount,
+		color: "253,81,129",
+	});
+	return array;
+};
 
 //Normalizing function to add key "count" in the datas used in DailyActivity
 export function addCount(array) {

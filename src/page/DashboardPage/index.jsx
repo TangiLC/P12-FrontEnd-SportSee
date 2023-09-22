@@ -45,9 +45,11 @@ function DashboardPage() {
 	Number(user.id) === Number(userID) 
 		? console.log("connexion safe") 
 		: console.log("null");
+
+
 	console.log(useSportSee())
 
-	const [userData, setUserData] = useState([]);
+	//const [userData, setUserData] = useState([]);
 	const [dailyActivities, setDailyActivities] = useState([]);
 	const [averageSessions, setAverageSessions] = useState([]);
 	const [performance, setPerformance] = useState([]);
@@ -55,7 +57,7 @@ function DashboardPage() {
 	const { REACT_APP_API_URL } = process.env;
 
 	useEffect(() => {
-		const fetchAPIData = async (setVar, id, path, group) => {
+		const getAPIData = async (setVar, id, path, group) => {
 			try {
 				const fetchedData = await FetchAPI(id, path, group);
 				setVar(fetchedData);
@@ -66,29 +68,29 @@ function DashboardPage() {
 
 		if (userId < 15) {
 			//get from mock
-			fetchAPIData(setUserData, userId, `/mock/mock.json`, "main");
-			fetchAPIData(setDailyActivities, userId, `/mock/mock.json`, "activity");
-			fetchAPIData(
+			
+			getAPIData(setDailyActivities, userId, `/mock/mock.json`, "activity");
+			getAPIData(
 				setAverageSessions,
 				userId,
 				`/mock/mock.json`,
 				"average-sessions"
 			);
-			fetchAPIData(setPerformance, userId, `/mock/mock.json`, "performance");
+			getAPIData(setPerformance, userId, `/mock/mock.json`, "performance");
 		} else {
 			//get from API
-			fetchAPIData(setUserData, userId, `${REACT_APP_API_URL}/${userId}`);
-			fetchAPIData(
+			//getAPIData(setUserData, userId, `${REACT_APP_API_URL}/${userId}`);
+			getAPIData(
 				setDailyActivities,
 				userId,
 				`${REACT_APP_API_URL}/${userId}/activity`
 			);
-			fetchAPIData(
+			getAPIData(
 				setAverageSessions,
 				userId,
 				`${REACT_APP_API_URL}/${userId}/average-sessions`
 			);
-			fetchAPIData(
+			getAPIData(
 				setPerformance,
 				userId,
 				`${REACT_APP_API_URL}/${userId}/performance`
@@ -139,7 +141,7 @@ function DashboardPage() {
 									</div>
 								</div>
 								<div className="col-sm-12 col-lg-3">
-									<Counter items={userData.keyData} />
+									<Counter items={counterProvid} />
 								</div>
 							</div>
 						</div>
