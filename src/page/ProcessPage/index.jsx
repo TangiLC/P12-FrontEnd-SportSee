@@ -15,6 +15,14 @@ function ProcessPage() {
 	const navigate = useNavigate();
 	const user = useParams();
 	const {
+		userData,
+		setUserData,
+		dailyActivities,
+		setDailyActivities,
+		averageSessions,
+		setAverageSessions,
+		performance,
+		setPerformance,
 		bonjourProvid,
 		setBonjourProvid,
 		counterProvid,
@@ -28,20 +36,18 @@ function ProcessPage() {
 		todayScoreProvid,
 		setTodayScoreProvid,
 		userID,
+		setUserID,
 	} = useContext(SportSeeContext);
-	console.log("userID", userID);
-	const [userData, setUserData] = useState([]);
-	const [dailyActivities, setDailyActivities] = useState([]);
-	const [averageSessions, setAverageSessions] = useState([]);
-	const [performance, setPerformance] = useState([]);
+	console.log("context", SportSeeContext);
+
 	const [ready, setReady] = useState(false);
 	const { REACT_APP_API_URL } = process.env;
 
-	const getAPIData = async (setVar, id, path, group) => {
+	const getAPIData = async (id, path, group) => {
 		try {
 			const fetchedData = await FetchAPI(id, path, group);
-			console.log('fetched',fetchedData)
-			setVar(fetchedData);
+			console.log("fetched", fetchedData);
+			return fetchedData;
 		} catch (error) {
 			console.log("erreur de fetch", error);
 		}
@@ -50,36 +56,46 @@ function ProcessPage() {
 	useEffect(() => {
 		if (userID < 15) {
 			//****************************get datas from mock for user Id <15
-			getAPIData(setUserData, userID, `/mock/mock.json`, "main");
-			getAPIData(setDailyActivities, userID, `/mock/mock.json`, "activity");
-			getAPIData(setPerformance, userID, `/mock/mock.json`, "performance");
-			getAPIData(
-				setAverageSessions,
-				userID,
-				`/mock/mock.json`,
-				"average-sessions"
+			setUserData(getAPIData(userID, `/mock/mock.json`, "main"));
+			setDailyActivities(getAPIData(userID, `/mock/mock.json`, "activity"));
+			setPerformance(getAPIData(userID, `/mock/mock.json`, "performance"));
+			setAverageSessions(
+				getAPIData(userID, `/mock/mock.json`, "average-sessions")
 			);
-			console.log('got from Mock :',userData,dailyActivities,performance,averageSessions)
+			console.log(
+				"got from Mock :",
+				userData,
+				dailyActivities,
+				performance,
+				averageSessions
+			);
 		} else {
-			getAPIData(setUserData, userID, `${REACT_APP_API_URL}/${userID}`);
-			getAPIData(
-				setAverageSessions,
-				userID,
-				`${REACT_APP_API_URL}/${userID}/average-sessions`
+			setUserData(getAPIData(userID, `${REACT_APP_API_URL}/${userID}`));
+			setAverageSessions(
+				getAPIData(userID, `${REACT_APP_API_URL}/${userID}/average-sessions`)
 			);
-			getAPIData(
-				setPerformance,
-				userID,
-				`${REACT_APP_API_URL}/${userID}/performance`
+			setPerformance(
+				getAPIData(userID, `${REACT_APP_API_URL}/${userID}/performance`)
 			);
-			getAPIData(
-				setDailyActivities,
-				userID,
-				`${REACT_APP_API_URL}/${userID}/activity`
+			setDailyActivities(
+				getAPIData(userID, `${REACT_APP_API_URL}/${userID}/activity`)
 			);
-			console.log('got from API :',userData,dailyActivities,performance,averageSessions)
+			console.log(
+				"got from API :",
+				userData,
+				dailyActivities,
+				performance,
+				averageSessions
+			);
 		}
-	}, [REACT_APP_API_URL, userID]);
+	}, [
+		REACT_APP_API_URL,
+		averageSessions,
+		dailyActivities,
+		performance,
+		userData,
+		userID,
+	]);
 
 	useEffect(() => {
 		if (userData && userData.length > 0) {
@@ -111,13 +127,39 @@ function ProcessPage() {
 			);
 			console.log("performProvid", performProvid);
 		}
-	}, [userData,dailyActivities,averageSessions,performance]);
+	}, [
+		userData,
+		dailyActivities,
+		averageSessions,
+		performance,
+		setTodayScoreProvid,
+		todayScoreProvid,
+		setCounterProvid,
+		counterProvid,
+		setBonjourProvid,
+		bonjourProvid,
+		setDailyProvid,
+		dailyProvid,
+		setSessionProvid,
+		sessionProvid,
+		setPerformProvid,
+		performProvid,
+	]);
 
 	useEffect(() => {
 		if (
-			todayScoreProvid !== undefined &&
-			bonjourProvid !== undefined &&
-			dailyProvid !== undefined
+			bonjourProvid &&
+			bonjourProvid.length > 0 &&
+			counterProvid &&
+			counterProvid.length > 0 &&
+			dailyProvid &&
+			dailyProvid.length > 0 &&
+			sessionProvid &&
+			sessionProvid.length > 0 &&
+			performProvid &&
+			performProvid.length > 0 &&
+			todayScoreProvid &&
+			todayScoreProvid.length > 0
 		) {
 			navigate(`/Dashboard/${userID}`);
 		}

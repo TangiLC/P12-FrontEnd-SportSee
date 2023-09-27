@@ -2,6 +2,10 @@ import React, { useState } from "react";
 export const SportSeeContext = React.createContext();
 
 const SportSeeProvider = ({ children }) => {
+	const [userData, setUserData] = useState([]);
+	const [dailyActivities, setDailyActivities] = useState([]);
+	const [averageSessions, setAverageSessions] = useState([]);
+	const [performance, setPerformance] = useState([]);
 	const [bonjourProvid, setBonjourProvid] = useState("");
 	const [counterProvid, setCounterProvid] = useState([]);
 	const [dailyProvid, setDailyProvid] = useState([]);
@@ -13,6 +17,14 @@ const SportSeeProvider = ({ children }) => {
 	return (
 		<SportSeeContext.Provider
 			value={{
+				userData,
+				setUserData,
+				dailyActivities,
+				setDailyActivities,
+				averageSessions,
+				setAverageSessions,
+				performance,
+				setPerformance,
 				bonjourProvid,
 				setBonjourProvid,
 				counterProvid,
