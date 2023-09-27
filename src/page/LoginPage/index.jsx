@@ -12,16 +12,6 @@ import { SportSeeContext } from "../../provider";
 function Login() {
 	const navigate = useNavigate();
 	const {
-		bonjourProvid,
-		setBonjourProvid,
-		counterProvid,
-		setCounterProvid,
-		sessionProvid,
-		setSessionProvid,
-		performProvid,
-		setPerformProvid,
-		todayScoreProvid,
-		setTodayScoreProvid,
 		userID,
 		setUserID,
 	} = useContext(SportSeeContext);

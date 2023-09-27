@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { FetchAPI } from "../../utils/utils";
 
 //import { SportSeeContext } from "../../App";
-import {useSportSee} from "../../provider";
+import {SportSeeContext} from "../../provider";
 
 import HorizontalWarning from "../../component/HorizontalWarning";
 import Navbar from "../../component/Navbar";
@@ -25,31 +25,23 @@ function DashboardPage() {
 	const user = useParams();
 	const {
 		bonjourProvid,
-		setBonjourProvid,
 		counterProvid,
-		setCounterProvid,
 		dailyProvid,
-		setDailyProvid,
 		sessionProvid,
-		setSessionProvid,
 		performProvid,
-		setPerformProvid,
 		todayScoreProvid,
-		setTodayScoreProvid,
 		userID,
-		setUserID,
-	} = useSportSee();
-//this is to prevent user from typing any 'id' in address bar
-//the userID number is the id provided by login. This is not
-//true userID, encrypted token prevails: TO BE CODED PHASE 2
+	} = useContext(SportSeeContext);
+//this is a shortened security check to ensure user did not type
+//any id, should rather use encrypted token : TO BE CODED PHASE 2
 	Number(user.id) === Number(userID) 
 		? console.log("connexion safe") 
-		: console.log("null");
+		: navigate('/')
 
 
-	console.log(useSportSee())
+	console.log('context',SportSeeContext)
 
-	//const [userData, setUserData] = useState([]);
+	/*const [userData, setUserData] = useState([]);
 	const [dailyActivities, setDailyActivities] = useState([]);
 	const [averageSessions, setAverageSessions] = useState([]);
 	const [performance, setPerformance] = useState([]);
@@ -96,7 +88,7 @@ function DashboardPage() {
 				`${REACT_APP_API_URL}/${userId}/performance`
 			);
 		}
-	}, []);
+	}, []);*/
 
 	return (
 		<>
@@ -124,13 +116,13 @@ function DashboardPage() {
 									</div>
 									<div className="row user-figures">
 										<div className="col-md-4 averageSession">
-											<AverageSessions datas={averageSessions} />
+											<AverageSessions datas={sessionProvid!==null?sessionProvid:[]} />
 											<div className="averageSession-title">
 												Durée moyenne des sessions
 											</div>
 											<div className="week-end-shadow"></div>
 										</div>
-										<div className="col-md-4 performance"><Performance data={performance}/> </div>
+										<div className="col-md-4 performance"><Performance data={performProvid!==null?performProvid:[]}/> </div>
 										<div className="col-md-4 todayScore">
 											<div className="todayScore-title">Score</div>
 											<TodayScore score={todayScoreProvid!==null?todayScoreProvid:0} />
@@ -141,7 +133,7 @@ function DashboardPage() {
 									</div>
 								</div>
 								<div className="col-sm-12 col-lg-3">
-									<Counter items={counterProvid} />
+									<Counter items={counterProvid!==null?counterProvid:[]} />
 								</div>
 							</div>
 						</div>
