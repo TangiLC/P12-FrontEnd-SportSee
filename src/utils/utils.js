@@ -31,7 +31,6 @@ export async function FetchAPI(id, path, group) {
 				return response.data.data;
 		}
 		const filteredData = datas.find((item) => item.userId === Number(id));
-		console.log('filteredData',filteredData)
 		return filteredData; //return datas for single user only
 	} catch (error) {
 		console.error("Error fetching data:", error);

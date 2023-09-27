@@ -9,14 +9,13 @@ import {
 	fusionArray,
 } from "../../utils/utils";
 
-import { useSportSee } from "../../provider";
+import  {useSportSee}  from "../../provider";
 
-import { menubar } from "../../utils/const";
 
 function ProcessPage() {
 	const navigate = useNavigate();
 	const user = useParams();
-	const {
+const {
 		bonjourProvid,
 		setBonjourProvid,
 		counterProvid,
@@ -30,66 +29,68 @@ function ProcessPage() {
 		todayScoreProvid,
 		setTodayScoreProvid,
 		userID,
-	} = useSportSee();
-
-	/*const [userData, setUserData] = useState([]);
+	} = useSportSee;
+	console.log('userID',useSportSee.userID)
+	const [userData, setUserData] = useState([]);
 	const [dailyActivities, setDailyActivities] = useState([]);
 	const [averageSessions, setAverageSessions] = useState([]);
 	const [performance, setPerformance] = useState([]);
-	const [ready, setReady] = useState(false);*/
+	const [ready, setReady] = useState(false);
 	const { REACT_APP_API_URL } = process.env;
 
+	const getAPIData = async (setVar, id, path, group) => {
+		try {
+			const fetchedData = await FetchAPI(id, path, group);
+			setVar(fetchedData);
+		} catch (error) {
+			console.log("erreur de fetch", error);
+		}
+	};
+
 	useEffect(() => {
-		const getAPIData = (id, path, group) => {
-			
-				return FetchAPI(id, path, group);
-
-			
-		};
-
 		if (userID < 15) {
 			//****************************get datas from mock for user Id <15
-			console.log("fetchData", getAPIData(user.id, `/mock/mock.json`, "main"));
+			getAPIData(setUserData, userID, `/mock/mock.json`, "main");
+			if (userData && userData.length > 0) {
+				setTodayScoreProvid(
+					userData.todayScore === undefined
+						? userData.score
+						: userData.todayScore
+				);
+				console.log("todayScoreProvid", todayScoreProvid);
 
-			setTodayScoreProvid(
-				getAPIData(userID, `/mock/mock.json`, "main").todayScore === undefined
-					? getAPIData(userID, `/mock/mock.json`, "main").score
-					: getAPIData(userID, `/mock/mock.json`, "main").todayScore
-			);
-			console.log("todayScoreProvid", todayScoreProvid);
+				setCounterProvid(normalizeCounter(userData.keyData));
+				console.log("counterProvid", counterProvid);
 
-			setCounterProvid(
-				normalizeCounter(
-					getAPIData(userID, `/mock/mock.json`, "main").keyData
-				)
-			);
-			console.log('counterProvid',counterProvid)
+				setBonjourProvid(userData.userInfos.firstName);
+				console.log("bonjourProvid", bonjourProvid);
+			}
 
-			setBonjourProvid(
-				getAPIData(userID, `/mock/mock.json`, "main").userInfos.firstName
-			);
-			console.log("bonjourProvid", bonjourProvid);
+			getAPIData(setDailyActivities, userID, `/mock/mock.json`, "activity");
 
-			setDailyProvid(
-				addCount(getAPIData(userID, `/mock/mock.json`, "activity"))
-			);
-			console.log("dailyProvid", dailyProvid);
+			if (dailyActivities && dailyActivities.length > 0) {
+				setDailyProvid(addCount(dailyActivities));
+				console.log("dailyProvid", dailyProvid);
+			}
 
-			setSessionProvid(
-				addDayOfWeek(
-					getAPIData(userID, `/mock/mock.json`, "average-sessions").datas
-						.sessions
-				)
+			getAPIData(
+				setAverageSessions,
+				userID,
+				`/mock/mock.json`,
+				"average-sessions"
 			);
-			console.log("sessionProvid", sessionProvid);
+			if (averageSessions && averageSessions.length > 0) {
+				setSessionProvid(addDayOfWeek(averageSessions.datas.sessions));
+				console.log("sessionProvid", sessionProvid);
+			}
 
-			setPerformProvid(
-				fusionArray(
-					getAPIData(userID, `/mock/mock.json`, "performance").data.value,
-					getAPIData(userID, `/mock/mock.json`, "performance").data.kind
-				)
-			);
-			console.log("performProvid", performProvid);
+			getAPIData(setPerformance, userID, `/mock/mock.json`, "performance");
+			if (performance && performance.length > 0) {
+				setPerformProvid(
+					fusionArray(performance.data.value, performance.data.kind)
+				);
+				console.log("performProvid", performProvid);
+			}
 		} /*else {
 			//******************************get datas from API for user Id >= 15
 			getAPIData(setUserData, userID, `${REACT_APP_API_URL}/${userID}`);
