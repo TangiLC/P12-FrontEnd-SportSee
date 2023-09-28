@@ -1,35 +1,20 @@
 import { useState, useEffect, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import {
+import { useNavigate} from "react-router-dom";
+/*import {
 	getUserData,
 	noTreatment,
 	addCount,
 	normalizeCounter,
 	addDayOfWeek,
 	fusionArray,
-} from "../../utils/utils";
+} from "../../utils/utils";*/
+import { getUserData } from "../../utils/utils";
 
 import { SportSeeContext } from "../../provider";
 
 async function ProcessPage() {
 	const navigate = useNavigate();
-	const user = useParams();
-	const {
-		bonjourProvid,
-		setBonjourProvid,
-		counterProvid,
-		setCounterProvid,
-		dailyProvid,
-		setDailyProvid,
-		sessionProvid,
-		setSessionProvid,
-		performProvid,
-		setPerformProvid,
-		todayScoreProvid,
-		setTodayScoreProvid,
-		userID,
-	} = useContext(SportSeeContext);
-
+	const { userID } = useContext(SportSeeContext);
 	const [fetchedData, setFetchedData] = useState(null);
 	const [userData, setUserData] = useState(null);
 	const [dailyActivities, setDailyActivities] = useState(null);
@@ -48,16 +33,21 @@ async function ProcessPage() {
 		} else {
 			setLoadingState("Success");
 			setFetchedData(response);
-			setUserData(fetchedData.user); console.log('user',userData)
-			setDailyActivities(fetchedData.activity); console.log('acitivity',dailyActivities)
-			setAverageSessions(fetchedData.averageSessions);console.log('sessions',averageSessions)
-			setPerformance(fetchedData.performance);console.log('perf',performance)
+			setUserData(fetchedData.user);
+			console.log("user", userData);
+			setDailyActivities(fetchedData.activity);
+			console.log("acitivity", dailyActivities);
+			setAverageSessions(fetchedData.averageSessions);
+			console.log("sessions", averageSessions);
+			setPerformance(fetchedData.performance);
+			console.log("perf", performance);
 		}
 	};
 
 	useEffect(() => {
 		getUserData(userID, `${REACT_APP_API_URL}/`)
-			.then((response) => responseHandle(response))
+			.then(console.log('got data'),
+				(response) => responseHandle(response))
 			.catch((error) => errorHandle(error));
 	}, []);
 
