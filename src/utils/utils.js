@@ -5,79 +5,47 @@ import calories from "../assets/calories.png";
 import proteins from "../assets/proteins.png";
 import lipids from "../assets/lipids.png";
 import carbohydrates from "../assets/carbohydrates.png";
-import {mockedData} from "./mock/mock";
-const { REACT_APP_API_URL } = process.env;
+
+import mockedData from "./mock/mocked";
 
 export const getUserData = async (userId, url) => {
 	try {
-		const user = await axios.get(url + userId).then((res) => res.data.data);
+		const user = await axios
+			.get(url + userId)
+			.then((response) => response.data.data);
 		const activity = await axios
 			.get(url + userId + "/activity")
-			.then((res) => res.data.data);
-		const averageSessions = await axios
+			.then((response) => response.data.data);
+		const sessions = await axios
 			.get(url + userId + "/average-sessions")
-			.then((res) => res.data.data);
-		const performance = await axios
+			.then((response) => response.data.data);
+		const perform = await axios
 			.get(url + userId + "/performance")
-			.then((res) => res.data.data);
-
-		return { user, activity, averageSessions, performance };
+			.then((response) => response.data.data);
+		console.log('data fetched from api:',user, activity, sessions, perform);
+		return { user, activity, sessions, perform };
 	} catch (error) {
-		console.log("ERROR WHILE FETCHING API : ", error);
+		console.log("ERROR WHILE FETCHING API : ...fetching Mock");
 		return getMockedData(userId);
 	}
 };
 
 const getMockedData = (id) => {
-	const userId = parseInt(id);
-
-	const user = mockedData.USER_MAIN_DATA.find((user) => user.id === userId);
-	const activity = mockedData.USER_ACTIVITY.find(
-		(userActivity) => userActivity.userId === userId
+	const user = mockedData.USER_MAIN_DATA.filter(
+		(user) => user.userId === Number(id)
 	);
-	const averageSessions = mockedData.USER_AVERAGE_SESSIONS.find(
-		(averageSessions) => averageSessions.userId === userId
+	const activity = mockedData.USER_ACTIVITY.filter(
+		(userActivity) => userActivity.userId === Number(id)
 	);
-	const performance = mockedData.USER_PERFORMANCE.find(
-		(userPerformance) => userPerformance.userId === userId
+	const sessions = mockedData.USER_AVERAGE_SESSIONS.filter(
+		(averageSessions) => averageSessions.userId === Number(id)
 	);
-	return { user, activity, averageSessions, performance };
+	const perform = mockedData.USER_PERFORMANCE.filter(
+		(userPerformance) => userPerformance.userId === Number(id)
+	);
+	console.log('data fetched from mock:',user, activity, sessions, perform);
+	return { user, activity, sessions, perform };
 };
-
-/*export async function fetchAPI(id, path, group) {
-	try {
-		const response = await axios.get(path);
-
-		let fetchedData = {};
-		switch (
-			group //fetching part of mocked data to simulate API call
-		) {
-			case "main":
-				fetchedData = response.data.mock.USER_MAIN_DATA;
-				break;
-			case "activity":
-				fetchedData = response.data.mock.USER_ACTIVITY;
-				break;
-			case "average-sessions":
-				fetchedData = response.data.mock.USER_AVERAGE_SESSIONS;
-				break;
-			case "performance":
-				fetchedData = response.data.mock.USER_PERFORMANCE;
-				break;
-			case "api"://fetching data from genuine API call
-				fetchedData= response.data.data;
-				break;
-			default: 
-				fetchedData= response.data.data;
-				break;
-		}
-		const filteredData = fetchedData.find((item) => item.userId === Number(id));
-
-		return filteredData; //return data for single user only
-	} catch (error) {
-		console.error("Error fetching data:", error);
-	}
-}*/
 
 // function to return data without treatment
 export const noTreatment = (data) => {
@@ -139,7 +107,7 @@ export function addDayOfWeek(array) {
 		if (item.day >= 1 && item.day <= 7) {
 			newItem.dayOfWeek = weekday[item.day - 1];
 			return newItem;
-		}
+		} else return newItem;
 	});
 	return newArray;
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import LoginPage from "./page/LoginPage";
-import ProcessPage from "./page/ProcessPage";
 import DashboardPage from "./page/DashboardPage";
 import NotYet from "./page/NotYet";
 import Page404 from "./page/Page404";
@@ -16,7 +15,6 @@ function App() {
 				<Route path="/Home" element={<LoginPage />} />
 				<Route path="/Dashboard" element={<LoginPage />} />
 				<Route path="/Dashboard/:id" element={<DashboardPage />} />
-				<Route path="/Process/:id" element={<ProcessPage />} />
 				<Route path="/NotYet" element={<NotYet />} />
 
 				<Route path="/*" element={<Page404 />} />

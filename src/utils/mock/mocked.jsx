@@ -6,7 +6,7 @@ const USER_MAIN_DATA = [
 			lastName: "Mockdata",
 			age: 33,
 		},
-		todayScore: 0.22,
+		Score: 0.22,
 		keyData: {
 			calorieCount: 2040,
 			proteinCount: 175,
@@ -382,3 +382,12 @@ const USER_PERFORMANCE = [
 		],
 	},
 ];
+
+const mockedData = {
+	USER_MAIN_DATA,
+	USER_ACTIVITY,
+	USER_AVERAGE_SESSIONS,
+	USER_PERFORMANCE,
+};
+
+export default mockedData;

@@ -1,35 +1,99 @@
 //Login page to get user id
 //A more secured version is to be CODED ON PHASE 2
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import matchingId from "../../component/loginSecurity";
 import Logo from "../../component/Logo";
 import "./style.css";
-
+import {
+	getUserData,
+	addCount,
+	normalizeCounter,
+	addDayOfWeek,
+	fusionArray,
+} from "../../utils/utils";
 import { SportSeeContext } from "../../provider";
+const { REACT_APP_API_URL } = process.env;
 
 function Login() {
 	const navigate = useNavigate();
 	const {
 		userID,
 		setUserID,
+		sportData,
+		setSportData,
+		todayScore,
+		setTodayScore,
+		counter,
+		setCounter,
+		firstName,
+		setFirstName,
+		dailyActivity,
+		setDailyActivity,
+		averageSessions,
+		setAverageSessions,
+		performance,
+		setPerformance,
 	} = useContext(SportSeeContext);
-	const [firstName, setFirstName] = useState("");
-	const [lastName, setLastName] = useState("");
-	const [noMatch, setNoMatch] = useState("");
+	const [userFirstName, setUserFirstName] = useState("");
+	const [userLastName, setUserLastName] = useState("");
+	const [loginInfo, setLoginInfo] = useState("");
+
+	const getData = (id) => {
+		getUserData(id, `${REACT_APP_API_URL}/`)
+			.then((response) => {
+				setSportData(response);
+				setLoginInfo("Récupération des données en cours...");
+				console.log(sportData);
+			})
+			.catch((error) => console.log("error : ", error));
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const id = matchingId(firstName, lastName);
+		const id = matchingId(userFirstName, userLastName);
 		if (id != null) {
 			setUserID(id);
-			//navigate(`/Dashboard/${id}`);
-			navigate(`/Process/${id}`);
+			getData(userID);
 		} else {
-			setNoMatch("Vous n'êtes pas un utilisateur enregistré...");
+			setLoginInfo("Vous n'êtes pas un utilisateur enregistré...");
 		}
 	};
+
+	const displayInfo = (txt) => {
+		setTimeout(() => {
+			setLoginInfo(txt);
+		}, 500);
+	};
+
+	useEffect(() => {
+		if (sportData.user?.userId !== undefined) {
+			setTodayScore(
+				sportData.user.todayScore === undefined
+					? sportData.user.score
+					: sportData.user.todayScore
+			);
+			setCounter(normalizeCounter(sportData.user.keyData));
+			setFirstName(sportData.user.userInfos.firstName);
+			displayInfo("Récupération du score du jour...");
+		}
+		if (sportData.activity?.userId !== undefined) {
+			setDailyActivity(addCount(sportData.activity));
+			displayInfo("Récupération de l'activité quotidienne...");
+		}
+		if (sportData.sessions?.userId !== undefined) {
+			setAverageSessions(addDayOfWeek(sportData.sessions.datas.sessions));
+			displayInfo("Récupération des sessions hebdomadaires...");
+		}
+		if (sportData.perform?.userId !== undefined) {
+			setPerformance(
+				fusionArray(sportData.perform.data.value, sportData.perform.data.kind)
+			);
+			displayInfo("Récupération des perfomances moyennes...");
+		}
+		// eslint-disable-next-line
+	}, [sportData]);
 
 	return (
 		<div
@@ -46,10 +110,10 @@ function Login() {
 							className="capitalize mt-1"
 							type="text"
 							id="firstName"
-							value={firstName}
+							value={userFirstName}
 							onChange={(e) => {
-								setFirstName(e.target.value);
-								setNoMatch("");
+								setUserFirstName(e.target.value);
+								setLoginInfo("");
 							}}
 							required
 						/>
@@ -61,10 +125,10 @@ function Login() {
 							className="capitalize mt-1"
 							type="text"
 							id="lastName"
-							value={lastName}
+							value={userLastName}
 							onChange={(e) => {
-								setLastName(e.target.value);
-								setNoMatch("");
+								setUserLastName(e.target.value);
+								setLoginInfo("");
 							}}
 							required
 						/>
@@ -73,7 +137,7 @@ function Login() {
 						Connexion
 					</button>
 				</form>
-				<div className="loginMessage">{noMatch}</div>
+				<div className="loginMessage">{loginInfo}</div>
 			</div>
 		</div>
 	);
