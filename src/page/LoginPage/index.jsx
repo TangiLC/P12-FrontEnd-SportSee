@@ -8,6 +8,7 @@ import Logo from "../../component/Logo";
 import "./style.css";
 import {
 	getUserData,
+	normalizeScore,
 	addCount,
 	normalizeCounter,
 	addDayOfWeek,
@@ -55,45 +56,57 @@ function Login() {
 		const id = matchingId(userFirstName, userLastName);
 		if (id != null) {
 			setUserID(id);
-			getData(userID);
+			getData(id);
 		} else {
 			setLoginInfo("Vous n'êtes pas un utilisateur enregistré...");
 		}
 	};
 
 	const displayInfo = (txt) => {
-		setTimeout(() => {
+		const timeOut = setTimeout(() => {
 			setLoginInfo(txt);
-		}, 500);
+		}, 800);
+		return () => clearTimeout;
 	};
 
 	useEffect(() => {
+		if (
+			firstName !== null &&
+			dailyActivity !== null &&
+			averageSessions !== null &&
+			performance !== null
+		) {
+			displayInfo("Succès du traitement des données...");
+			navigate(`/dashboard/${userID}`)
+		}
+	}, [firstName, dailyActivity, averageSessions, performance]);
+
+	useEffect(() => {
 		if (sportData.user?.userId !== undefined) {
-			setTodayScore(
-				sportData.user.todayScore === undefined
-					? sportData.user.score
-					: sportData.user.todayScore
-			);
+			setTodayScore(normalizeScore(sportData.user));
 			setCounter(normalizeCounter(sportData.user.keyData));
 			setFirstName(sportData.user.userInfos.firstName);
-			displayInfo("Récupération du score du jour...");
 		}
 		if (sportData.activity?.userId !== undefined) {
-			setDailyActivity(addCount(sportData.activity));
-			displayInfo("Récupération de l'activité quotidienne...");
+			setDailyActivity(addCount(sportData.activity.sessions));
 		}
 		if (sportData.sessions?.userId !== undefined) {
-			setAverageSessions(addDayOfWeek(sportData.sessions.datas.sessions));
-			displayInfo("Récupération des sessions hebdomadaires...");
+			setAverageSessions(addDayOfWeek(sportData.sessions.sessions));
 		}
 		if (sportData.perform?.userId !== undefined) {
 			setPerformance(
-				fusionArray(sportData.perform.data.value, sportData.perform.data.kind)
+				fusionArray(sportData.perform.data, sportData.perform.kind)
 			);
-			displayInfo("Récupération des perfomances moyennes...");
 		}
-		
-	}, [setAverageSessions, setCounter, setDailyActivity, setFirstName, setPerformance, setTodayScore, sportData]);
+	}, [
+		setAverageSessions,
+		setCounter,
+		setDailyActivity,
+		setFirstName,
+		setPerformance,
+		setTodayScore,
+		sportData,
+	]);
 
 	return (
 		<div

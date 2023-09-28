@@ -6,7 +6,7 @@ import proteins from "../assets/proteins.png";
 import lipids from "../assets/lipids.png";
 import carbohydrates from "../assets/carbohydrates.png";
 
-import mockedData from "./mock/mocked";
+import { mockedData } from "./mock/mocked";
 
 export const getUserData = async (userId, url) => {
 	try {
@@ -30,22 +30,41 @@ export const getUserData = async (userId, url) => {
 	}
 };
 
-const getMockedData = (id) => {
-	const user = mockedData.USER_MAIN_DATA.find((item) => item.userId === Number(id));
-	const activity = mockedData.USER_ACTIVITY.find((item) => item.userId === Number(id));
-	const sessions = mockedData.USER_AVERAGE_SESSIONS.find(
-		(item) => item.userId === Number(id)
-	);
-	const perform = mockedData.USER_PERFORMANCE.find(
-		(item) => item.userId === Number(id)
-	);
-	console.log("data fetched from mock:", user, activity, sessions, perform);
-	return { user, activity, sessions, perform };
+export const getMockedData = (id) => {
+	if (mockedData) {
+		console.log("mocked id", mockedData, id);
+		const user = mockedData.USER_MAIN_DATA.find(
+			(item) => item.userId === Number(id)
+		);
+		const activity = mockedData.USER_ACTIVITY.find(
+			(item) => item.userId === Number(id)
+		);
+		const sessions = mockedData.USER_AVERAGE_SESSIONS.find(
+			(item) => item.userId === Number(id)
+		);
+		const perform = mockedData.USER_PERFORMANCE.find(
+			(item) => item.userId === Number(id)
+		);
+		if (user && activity && sessions && perform) {
+			console.log("data fetched from mock:", user, activity, sessions, perform);
+		}
+		return { user, activity, sessions, perform };
+	}
 };
 
 // function to return data without treatment
 export const noTreatment = (data) => {
 	return data;
+};
+
+export const normalizeScore = (data) => {
+	if (data.todayScore !== undefined) {
+		return data.todayScore;
+	} else if (data.Score !== undefined) {
+		return data.Score;
+	} else {
+		return null;
+	}
 };
 
 //function to return normalized datas for the Counter component
@@ -103,7 +122,7 @@ export function addDayOfWeek(array) {
 		if (item.day >= 1 && item.day <= 7) {
 			newItem.dayOfWeek = weekday[item.day - 1];
 			return newItem;
-		} else return newItem;
+		} else return item;
 	});
 	return newArray;
 }

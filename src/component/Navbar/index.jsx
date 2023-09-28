@@ -12,10 +12,10 @@ function Navbar() {
 					<img src={sportsee} className="sportsee" alt="logo" />
 					<h2>SportSee</h2>
 				</div>
-                <div className="nav-item"><Link to="/NotYet" >Accueil</Link></div>
-                <div className="nav-item"><Link to="/NotYet" >Profil</Link></div>
-                <div className="nav-item"><Link to="/NotYet" >Réglage</Link></div>
-                <div className="nav-item"><Link to="/NotYet" >Communauté</Link></div>
+                <div className="nav-item"><Link to="/notyet" >Accueil</Link></div>
+                <div className="nav-item"><Link to="/notyet" >Profil</Link></div>
+                <div className="nav-item"><Link to="/notyet" >Réglage</Link></div>
+                <div className="nav-item"><Link to="/notyet" >Communauté</Link></div>
 			</div>
 		</div>
 	);
