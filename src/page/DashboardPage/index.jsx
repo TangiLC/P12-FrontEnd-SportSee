@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { FetchAPI } from "../../utils/utils";
 
-//import { SportSeeContext } from "../../App";
-import {SportSeeContext} from "../../provider";
+import { SportSeeContext } from "../../provider";
 
 import HorizontalWarning from "../../component/HorizontalWarning";
 import Navbar from "../../component/Navbar";
@@ -24,71 +22,35 @@ function DashboardPage() {
 	const navigate = useNavigate();
 	const user = useParams();
 	const {
-		bonjourProvid,
-		counterProvid,
-		dailyProvid,
-		sessionProvid,
-		performProvid,
-		todayScoreProvid,
 		userID,
+		sportData,
+		todayScore,
+		counter,
+		firstName,
+		dailyActivity,
+		averageSessions,
+		performance,
 	} = useContext(SportSeeContext);
-//this is a shortened security check to ensure user did not type
-//any id, should rather use encrypted token : TO BE CODED PHASE 2
-	Number(user.id) === Number(userID) 
-		? console.log("connexion safe") 
-		: navigate('/')
 
-
-	console.log('context',SportSeeContext)
-
-	/*const [userData, setUserData] = useState([]);
-	const [dailyActivities, setDailyActivities] = useState([]);
-	const [averageSessions, setAverageSessions] = useState([]);
-	const [performance, setPerformance] = useState([]);
-	const [userId, setUserId] = useState(user.id);
-	const { REACT_APP_API_URL } = process.env;
-
+	console.log(
+		userID,
+		sportData,
+		todayScore,
+		counter,
+		firstName,
+		dailyActivity,
+		averageSessions,
+		performance
+	);
+	//this is a shortened security check to ensure user did not type
+	//any id, should rather use encrypted token : TO BE CODED PHASE 2
 	useEffect(() => {
-		const getAPIData = async (setVar, id, path, group) => {
-			try {
-				const fetchedData = await FetchAPI(id, path, group);
-				setVar(fetchedData);
-			} catch (error) {
-				console.log("erreur de fetch", error);
-			}
-		};
-
-		if (userId < 15) {
-			//get from mock
-			
-			getAPIData(setDailyActivities, userId, `/mock/mock.json`, "activity");
-			getAPIData(
-				setAverageSessions,
-				userId,
-				`/mock/mock.json`,
-				"average-sessions"
-			);
-			getAPIData(setPerformance, userId, `/mock/mock.json`, "performance");
-		} else {
-			//get from API
-			//getAPIData(setUserData, userId, `${REACT_APP_API_URL}/${userId}`);
-			getAPIData(
-				setDailyActivities,
-				userId,
-				`${REACT_APP_API_URL}/${userId}/activity`
-			);
-			getAPIData(
-				setAverageSessions,
-				userId,
-				`${REACT_APP_API_URL}/${userId}/average-sessions`
-			);
-			getAPIData(
-				setPerformance,
-				userId,
-				`${REACT_APP_API_URL}/${userId}/performance`
-			);
+		if (user.name !== firstName) {
+			navigate("/");
 		}
-	}, []);*/
+	}, [user.name, firstName, navigate]);
+
+	console.log("context", SportSeeContext);
 
 	return (
 		<>
@@ -101,39 +63,47 @@ function DashboardPage() {
 						<div className="col">
 							<div className="row">
 								<div className="col-md-12">
-									<Bonjour
-										firstName={bonjourProvid}
-										yesterdayObjective={110}
-									/>
+									<Bonjour firstName={firstName} yesterdayObjective={110} />
 								</div>
 							</div>
 							<div className="row structure">
 								<div className="col-sm-12 col-lg-9">
 									<div className="row ">
 										<div className="col-md-12 dailyActivity">
-											<DailyActivity datas={dailyProvid!==null?dailyProvid:[]} />
+											<DailyActivity
+												data={dailyActivity !== null ? dailyActivity : []}
+											/>
 										</div>
 									</div>
 									<div className="row user-figures">
 										<div className="col-md-4 averageSession">
-											<AverageSessions datas={sessionProvid!==null?sessionProvid:[]} />
+											<AverageSessions
+												data={averageSessions !== null ? averageSessions : []}
+											/>
 											<div className="averageSession-title">
 												Durée moyenne des sessions
 											</div>
 											<div className="week-end-shadow"></div>
 										</div>
-										<div className="col-md-4 performance"><Performance data={performProvid!==null?performProvid:[]}/> </div>
+										<div className="col-md-4 performance">
+											<Performance
+												data={performance !== null ? performance : []}
+											/>{" "}
+										</div>
 										<div className="col-md-4 todayScore">
 											<div className="todayScore-title">Score</div>
-											<TodayScore score={todayScoreProvid!==null?todayScoreProvid:0} />
-											<div className="todayScore-goal" >
-												<h2>{todayScoreProvid!==null?todayScoreProvid*100:0}%</h2> de votre objectif
+											<TodayScore
+												score={todayScore !== null ? todayScore : 0}
+											/>
+											<div className="todayScore-goal">
+												<h2>{todayScore !== null ? todayScore * 100 : 0}%</h2>{" "}
+												de votre objectif
 											</div>
 										</div>
 									</div>
 								</div>
 								<div className="col-sm-12 col-lg-3">
-									<Counter items={counterProvid!==null?counterProvid:[]} />
+									<Counter items={counter !== null ? counter : []} />
 								</div>
 							</div>
 						</div>

@@ -77,7 +77,7 @@ function Login() {
 			performance !== null
 		) {
 			displayInfo("Succès du traitement des données...");
-			navigate(`/dashboard/${userID}`)
+			navigate(`/dashboard/${firstName}`)
 		}
 	}, [firstName, dailyActivity, averageSessions, performance]);
 
