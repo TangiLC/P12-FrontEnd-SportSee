@@ -1,7 +1,6 @@
 //React component using Recharts 'RadarCharts' to display user's performances
 import "./style.css";
 import React from "react";
-import { fusionArray } from "../../utils/utils";
 import {
 	Radar,
 	RadarChart,
@@ -12,9 +11,14 @@ import {
 } from "recharts";
 
 export default function Performance(props) {
-	const dataKind = props.data.kind || {};
-	const dataValue = props.data.data || [];
-	const myArray = fusionArray(dataValue, dataKind);
+	const myArray =
+		props.data.length > 0
+			? props.data
+			: [
+					{ kind: "no data", value: 33 },
+					{ kind: "no data", value: 22 },
+					{ kind: "no data", value: 44 },
+			  ];
 	return (
 		<>
 			<ResponsiveContainer width="100%" height="100%">
@@ -27,7 +31,6 @@ export default function Performance(props) {
 					data={myArray}
 					startAngle="-150"
 					endAngle="210"
-					
 				>
 					<PolarGrid radialLines={false} />
 					<PolarAngleAxis
@@ -36,23 +39,14 @@ export default function Performance(props) {
 						strokeWidth="2"
 						tickLine={false}
 						axisLine={false}
-						
-						
 					/>
-					<PolarRadiusAxis
-						tick={false}
-						axisLine={false}
-						tickCount={6}
-						
-						
-					/>
+					<PolarRadiusAxis tick={false} axisLine={false} tickCount={6} />
 					<Radar
 						name="Performance"
 						dataKey="value"
 						stroke="none"
 						fill="#e60000"
 						fillOpacity={0.6}
-						
 					/>
 				</RadarChart>
 			</ResponsiveContainer>

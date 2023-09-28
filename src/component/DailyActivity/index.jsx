@@ -28,8 +28,7 @@ const CustomTooltipActivity = ({ active, payload }) => {
 };
 
 export default function DailyActivity(props) {
-	//const myArray=(props?.datas.sessions?.length>0?addCount(props.datas.sessions):[])
-	const myArray = props.datas;
+	const myArray = props.data;
 
 	return (
 		<ResponsiveContainer width="96%" height="100%">

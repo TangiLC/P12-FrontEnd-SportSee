@@ -1,45 +1,71 @@
 //this file exports utility fonctions
 import axios from "axios";
 
-import calories from "../assets/calories.png"
-import proteins from "../assets/proteins.png"
-import lipids from "../assets/lipids.png"
-import carbohydrates from "../assets/carbohydrates.png"
-const { REACT_APP_API_URL } = process.env;
+import calories from "../assets/calories.png";
+import proteins from "../assets/proteins.png";
+import lipids from "../assets/lipids.png";
+import carbohydrates from "../assets/carbohydrates.png";
 
-export async function FetchAPI(id, path, group) {
+import { mockedData } from "./mock/mocked";
+
+export const getUserData = async (userId, url) => {
 	try {
-		const response = await axios.get(path);
-
-		let datas = {};
-		switch (
-			group //fetching part of mocked data to simulate API call
-		) {
-			case "main":
-				datas = response.data.mock.USER_MAIN_DATA;
-				break;
-			case "activity":
-				datas = response.data.mock.USER_ACTIVITY;
-				break;
-			case "average-sessions":
-				datas = response.data.mock.USER_AVERAGE_SESSIONS;
-				break;
-			case "performance":
-				datas = response.data.mock.USER_PERFORMANCE;
-				break;
-			default: //fetching data from genuine API call
-				return response.data.data;
-		}
-		const filteredData = datas.find((item) => item.userId === Number(id));
-		return filteredData; //return datas for single user only
+		const user = await axios
+			.get(url + userId)
+			.then((response) => response.data.data);
+		const activity = await axios
+			.get(url + userId + "/activity")
+			.then((response) => response.data.data);
+		const sessions = await axios
+			.get(url + userId + "/average-sessions")
+			.then((response) => response.data.data);
+		const perform = await axios
+			.get(url + userId + "/performance")
+			.then((response) => response.data.data);
+		console.log("data fetched from api:", user, activity, sessions, perform);
+		return { user, activity, sessions, perform };
 	} catch (error) {
-		console.error("Error fetching data:", error);
+		console.log("ERROR WHILE FETCHING API : ...fetching Mock");
+		return getMockedData(userId);
 	}
-}
+};
+
+export const getMockedData = (id) => {
+	if (mockedData) {
+		console.log("mocked id", mockedData, id);
+		const user = mockedData.USER_MAIN_DATA.find(
+			(item) => item.userId === Number(id)
+		);
+		const activity = mockedData.USER_ACTIVITY.find(
+			(item) => item.userId === Number(id)
+		);
+		const sessions = mockedData.USER_AVERAGE_SESSIONS.find(
+			(item) => item.userId === Number(id)
+		);
+		const perform = mockedData.USER_PERFORMANCE.find(
+			(item) => item.userId === Number(id)
+		);
+		if (user && activity && sessions && perform) {
+			console.log("data fetched from mock:", user, activity, sessions, perform);
+		}
+		return { user, activity, sessions, perform };
+	}
+};
 
 // function to return data without treatment
-export const noTreatment =(data) =>{return data}
+export const noTreatment = (data) => {
+	return data;
+};
 
+export const normalizeScore = (data) => {
+	if (data.todayScore !== undefined) {
+		return data.todayScore;
+	} else if (data.Score !== undefined) {
+		return data.Score;
+	} else {
+		return null;
+	}
+};
 
 //function to return normalized datas for the Counter component
 export const normalizeCounter = (data) => {
@@ -48,7 +74,7 @@ export const normalizeCounter = (data) => {
 		name: "Calories",
 		icon: calories,
 		unit: "kCal",
-		count: Number(data.calorieCount).toLocaleString('en-US'),
+		count: Number(data.calorieCount).toLocaleString("en-US"),
 		color: "255,0,0",
 	});
 	array.push({
@@ -96,7 +122,7 @@ export function addDayOfWeek(array) {
 		if (item.day >= 1 && item.day <= 7) {
 			newItem.dayOfWeek = weekday[item.day - 1];
 			return newItem;
-		}
+		} else return item;
 	});
 	return newArray;
 }
