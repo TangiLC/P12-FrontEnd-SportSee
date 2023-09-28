@@ -14,8 +14,6 @@ import Performance from "../../component/Performance/performance";
 import TodayScore from "../../component/TodayScore";
 import "./style.css";
 
-//This object is the list of icons to be displayed in MenuBar.
-//TO BE CODED PHASE 2 : store the list using Redux, change in page Settings
 import { menubar } from "../../utils/const";
 
 function DashboardPage() {
@@ -23,7 +21,6 @@ function DashboardPage() {
 	const user = useParams();
 	const {
 		userID,
-		sportData,
 		todayScore,
 		counter,
 		firstName,
@@ -32,23 +29,14 @@ function DashboardPage() {
 		performance,
 	} = useContext(SportSeeContext);
 
-	console.log(
-		userID,
-		sportData,
-		todayScore,
-		counter,
-		firstName,
-		dailyActivity,
-		averageSessions,
-		performance
-	);
+	
 	//this is a shortened security check to ensure user did not type
 	//any id, should rather use encrypted token : TO BE CODED PHASE 2
 	useEffect(() => {
-		if (user.name !== firstName) {
+		if (user.name !== (`${firstName}${userID}`)) {
 			navigate("/");
 		}
-	}, [user.name, firstName, navigate]);
+	}, [user.name, firstName, navigate, userID]);
 
 	console.log("context", SportSeeContext);
 

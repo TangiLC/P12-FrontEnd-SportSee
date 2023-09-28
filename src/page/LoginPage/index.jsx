@@ -77,9 +77,9 @@ function Login() {
 			performance !== null
 		) {
 			displayInfo("Succès du traitement des données...");
-			navigate(`/dashboard/${firstName}`)
+			navigate(`/dashboard/${firstName}${userID}`)
 		}
-	}, [firstName, dailyActivity, averageSessions, performance]);
+	}, [firstName, dailyActivity, averageSessions, performance, navigate, userID]);
 
 	useEffect(() => {
 		if (sportData.user?.userId !== undefined) {

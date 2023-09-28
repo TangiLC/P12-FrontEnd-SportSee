@@ -1,7 +1,6 @@
 //React component using Recharts 'BarCharts' to display user's weekly weight and calories lost
-import "./style.css";
 import React from "react";
-import { addCount } from "../../utils/utils";
+import "./style.css";
 
 import {
 	BarChart,
