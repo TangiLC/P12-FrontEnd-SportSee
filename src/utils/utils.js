@@ -31,13 +31,13 @@ export const getUserData = async (userId, url) => {
 };
 
 const getMockedData = (id) => {
-	const user = mockedData.USER_MAIN_DATA.find((item) => item.userId === id);
-	const activity = mockedData.USER_ACTIVITY.find((item) => item.userId === id);
+	const user = mockedData.USER_MAIN_DATA.find((item) => item.userId === Number(id));
+	const activity = mockedData.USER_ACTIVITY.find((item) => item.userId === Number(id));
 	const sessions = mockedData.USER_AVERAGE_SESSIONS.find(
-		(item) => item.userId === id
+		(item) => item.userId === Number(id)
 	);
 	const perform = mockedData.USER_PERFORMANCE.find(
-		(item) => item.userId === id
+		(item) => item.userId === Number(id)
 	);
 	console.log("data fetched from mock:", user, activity, sessions, perform);
 	return { user, activity, sessions, perform };
