@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-	FetchAPI,
+	getUserData,
 	noTreatment,
 	addCount,
 	normalizeCounter,
@@ -11,18 +11,10 @@ import {
 
 import { SportSeeContext } from "../../provider";
 
-function ProcessPage() {
+async function ProcessPage() {
 	const navigate = useNavigate();
 	const user = useParams();
 	const {
-		userData,
-		setUserData,
-		dailyActivities,
-		setDailyActivities,
-		averageSessions,
-		setAverageSessions,
-		performance,
-		setPerformance,
 		bonjourProvid,
 		setBonjourProvid,
 		counterProvid,
@@ -36,69 +28,43 @@ function ProcessPage() {
 		todayScoreProvid,
 		setTodayScoreProvid,
 		userID,
-		setUserID,
 	} = useContext(SportSeeContext);
-	console.log("context", SportSeeContext);
 
-	const [ready, setReady] = useState(false);
+	const [fetchedData, setFetchedData] = useState(null);
+	const [userData, setUserData] = useState(null);
+	const [dailyActivities, setDailyActivities] = useState(null);
+	const [averageSessions, setAverageSessions] = useState(null);
+	const [performance, setPerformance] = useState(null);
+	const [loadingState, setLoadingState] = useState("loading");
 	const { REACT_APP_API_URL } = process.env;
 
-	const getAPIData = async (id, path, group) => {
-		try {
-			const fetchedData = await FetchAPI(id, path, group);
-			console.log("fetched", fetchedData);
-			return fetchedData;
-		} catch (error) {
-			console.log("erreur de fetch", error);
+	const errorHandle = (error) => {
+		console.log("Error : ", error);
+		setLoadingState("NotFound");
+	};
+	const responseHandle = (response) => {
+		if (response.user === undefined) {
+			return errorHandle("User was not found");
+		} else {
+			setLoadingState("Success");
+			setFetchedData(response);
+			setUserData(fetchedData.user); console.log('user',userData)
+			setDailyActivities(fetchedData.activity); console.log('acitivity',dailyActivities)
+			setAverageSessions(fetchedData.averageSessions);console.log('sessions',averageSessions)
+			setPerformance(fetchedData.performance);console.log('perf',performance)
 		}
 	};
 
 	useEffect(() => {
-		if (userID < 15) {
-			//****************************get datas from mock for user Id <15
-			setUserData(getAPIData(userID, `/mock/mock.json`, "main"));
-			setDailyActivities(getAPIData(userID, `/mock/mock.json`, "activity"));
-			setPerformance(getAPIData(userID, `/mock/mock.json`, "performance"));
-			setAverageSessions(
-				getAPIData(userID, `/mock/mock.json`, "average-sessions")
-			);
-			console.log(
-				"got from Mock :",
-				userData,
-				dailyActivities,
-				performance,
-				averageSessions
-			);
-		} else {
-			setUserData(getAPIData(userID, `${REACT_APP_API_URL}/${userID}`));
-			setAverageSessions(
-				getAPIData(userID, `${REACT_APP_API_URL}/${userID}/average-sessions`)
-			);
-			setPerformance(
-				getAPIData(userID, `${REACT_APP_API_URL}/${userID}/performance`)
-			);
-			setDailyActivities(
-				getAPIData(userID, `${REACT_APP_API_URL}/${userID}/activity`)
-			);
-			console.log(
-				"got from API :",
-				userData,
-				dailyActivities,
-				performance,
-				averageSessions
-			);
-		}
-	}, [
-		REACT_APP_API_URL,
-		averageSessions,
-		dailyActivities,
-		performance,
-		userData,
-		userID,
-	]);
+		getUserData(userID, `${REACT_APP_API_URL}/`)
+			.then((response) => responseHandle(response))
+			.catch((error) => errorHandle(error));
+	}, []);
 
-	useEffect(() => {
-		if (userData && userData.length > 0) {
+	//fetch data then normalize Score, Counter and Bonjour
+
+	/*if (userData){console.log('userData',userData)}
+		if (userData?.length > 0) {
 			setTodayScoreProvid(
 				userData.todayScore === undefined ? userData.score : userData.todayScore
 			);
@@ -106,50 +72,60 @@ function ProcessPage() {
 
 			setCounterProvid(normalizeCounter(userData.keyData));
 			console.log("counterProvid", counterProvid);
-
 			setBonjourProvid(userData.userInfos.firstName);
 			console.log("bonjourProvid", bonjourProvid);
-		}
+		}*/
 
-		if (dailyActivities && dailyActivities.length > 0) {
+	/*fetch data then normalize Daily Activities
+	useEffect(() => {
+		const getPath = isMocked
+			? `/mock/mock.json`
+			: `${REACT_APP_API_URL}/${userID}/activity`;
+		const getGroup = isMocked ? "activity" : "api";
+
+		FetchAPI(userID, getPath, getGroup, setDailyActivities);
+
+		if (dailyActivities?.length > 0) {
 			setDailyProvid(addCount(dailyActivities));
 			console.log("dailyProvid", dailyProvid);
 		}
+	}, [dailyActivities]);
 
-		if (averageSessions && averageSessions.length > 0) {
+	//fetch data then normalize Sessions
+	useEffect(() => {
+		const getPath = isMocked
+			? `/mock/mock.json`
+			: `${REACT_APP_API_URL}/${userID}/average-sessions`;
+		const getGroup = isMocked ? "average-sessions" : "api";
+		FetchAPI(userID, getPath, getGroup, setAverageSessions);
+
+		if (averageSessions?.length > 0) {
 			setSessionProvid(addDayOfWeek(averageSessions.datas.sessions));
 			console.log("sessionProvid", sessionProvid);
 		}
+	}, [averageSessions]);
+	//fetch data then normalize Performance
+	useEffect(() => {
+		const getPath = isMocked
+			? `/mock/mock.json`
+			: `${REACT_APP_API_URL}/${userID}/performance`;
+		const getGroup = isMocked ? "performance" : "api";
 
-		if (performance && performance.length > 0) {
+		FetchAPI(userID, getPath, getGroup, setPerformance);
+
+		if (performance?.length > 0) {
 			setPerformProvid(
 				fusionArray(performance.data.value, performance.data.kind)
 			);
 			console.log("performProvid", performProvid);
 		}
-	}, [
-		userData,
-		dailyActivities,
-		averageSessions,
-		performance,
-		setTodayScoreProvid,
-		todayScoreProvid,
-		setCounterProvid,
-		counterProvid,
-		setBonjourProvid,
-		bonjourProvid,
-		setDailyProvid,
-		dailyProvid,
-		setSessionProvid,
-		sessionProvid,
-		setPerformProvid,
-		performProvid,
-	]);
+	}, [performance]);
 
+	
 	useEffect(() => {
 		if (
 			bonjourProvid &&
-			bonjourProvid.length > 0 &&
+			bonjourProvid.length > 0 /*&&
 			counterProvid &&
 			counterProvid.length > 0 &&
 			dailyProvid &&
@@ -161,8 +137,9 @@ function ProcessPage() {
 			todayScoreProvid &&
 			todayScoreProvid.length > 0
 		) {
-			navigate(`/Dashboard/${userID}`);
+			console.log("*************READY*******");
+			//navigate(`/Dashboard/${userID}`);
 		}
-	}, []);
+	}, []);*/
 }
 export default ProcessPage;

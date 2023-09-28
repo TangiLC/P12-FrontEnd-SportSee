@@ -1,45 +1,88 @@
 //this file exports utility fonctions
 import axios from "axios";
 
-import calories from "../assets/calories.png"
-import proteins from "../assets/proteins.png"
-import lipids from "../assets/lipids.png"
-import carbohydrates from "../assets/carbohydrates.png"
+import calories from "../assets/calories.png";
+import proteins from "../assets/proteins.png";
+import lipids from "../assets/lipids.png";
+import carbohydrates from "../assets/carbohydrates.png";
+import {mockedData} from "./mock/mock";
 const { REACT_APP_API_URL } = process.env;
 
-export async function FetchAPI(id, path, group) {
+export const getUserData = async (userId, url) => {
+	try {
+		const user = await axios.get(url + userId).then((res) => res.data.data);
+		const activity = await axios
+			.get(url + userId + "/activity")
+			.then((res) => res.data.data);
+		const averageSessions = await axios
+			.get(url + userId + "/average-sessions")
+			.then((res) => res.data.data);
+		const performance = await axios
+			.get(url + userId + "/performance")
+			.then((res) => res.data.data);
+
+		return { user, activity, averageSessions, performance };
+	} catch (error) {
+		console.log("ERROR WHILE FETCHING API : ", error);
+		return getMockedData(userId);
+	}
+};
+
+const getMockedData = (id) => {
+	const userId = parseInt(id);
+
+	const user = mockedData.USER_MAIN_DATA.find((user) => user.id === userId);
+	const activity = mockedData.USER_ACTIVITY.find(
+		(userActivity) => userActivity.userId === userId
+	);
+	const averageSessions = mockedData.USER_AVERAGE_SESSIONS.find(
+		(averageSessions) => averageSessions.userId === userId
+	);
+	const performance = mockedData.USER_PERFORMANCE.find(
+		(userPerformance) => userPerformance.userId === userId
+	);
+	return { user, activity, averageSessions, performance };
+};
+
+/*export async function fetchAPI(id, path, group) {
 	try {
 		const response = await axios.get(path);
 
-		let datas = {};
+		let fetchedData = {};
 		switch (
 			group //fetching part of mocked data to simulate API call
 		) {
 			case "main":
-				datas = response.data.mock.USER_MAIN_DATA;
+				fetchedData = response.data.mock.USER_MAIN_DATA;
 				break;
 			case "activity":
-				datas = response.data.mock.USER_ACTIVITY;
+				fetchedData = response.data.mock.USER_ACTIVITY;
 				break;
 			case "average-sessions":
-				datas = response.data.mock.USER_AVERAGE_SESSIONS;
+				fetchedData = response.data.mock.USER_AVERAGE_SESSIONS;
 				break;
 			case "performance":
-				datas = response.data.mock.USER_PERFORMANCE;
+				fetchedData = response.data.mock.USER_PERFORMANCE;
 				break;
-			default: //fetching data from genuine API call
-				return response.data.data;
+			case "api"://fetching data from genuine API call
+				fetchedData= response.data.data;
+				break;
+			default: 
+				fetchedData= response.data.data;
+				break;
 		}
-		const filteredData = datas.find((item) => item.userId === Number(id));
-		return filteredData; //return datas for single user only
+		const filteredData = fetchedData.find((item) => item.userId === Number(id));
+
+		return filteredData; //return data for single user only
 	} catch (error) {
 		console.error("Error fetching data:", error);
 	}
-}
+}*/
 
 // function to return data without treatment
-export const noTreatment =(data) =>{return data}
-
+export const noTreatment = (data) => {
+	return data;
+};
 
 //function to return normalized datas for the Counter component
 export const normalizeCounter = (data) => {
@@ -48,7 +91,7 @@ export const normalizeCounter = (data) => {
 		name: "Calories",
 		icon: calories,
 		unit: "kCal",
-		count: Number(data.calorieCount).toLocaleString('en-US'),
+		count: Number(data.calorieCount).toLocaleString("en-US"),
 		color: "255,0,0",
 	});
 	array.push({
