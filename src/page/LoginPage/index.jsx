@@ -92,8 +92,8 @@ function Login() {
 			);
 			displayInfo("Récupération des perfomances moyennes...");
 		}
-		// eslint-disable-next-line
-	}, [sportData]);
+		
+	}, [setAverageSessions, setCounter, setDailyActivity, setFirstName, setPerformance, setTodayScore, sportData]);
 
 	return (
 		<div

@@ -22,7 +22,7 @@ export const getUserData = async (userId, url) => {
 		const perform = await axios
 			.get(url + userId + "/performance")
 			.then((response) => response.data.data);
-		console.log('data fetched from api:',user, activity, sessions, perform);
+		console.log("data fetched from api:", user, activity, sessions, perform);
 		return { user, activity, sessions, perform };
 	} catch (error) {
 		console.log("ERROR WHILE FETCHING API : ...fetching Mock");
@@ -31,19 +31,15 @@ export const getUserData = async (userId, url) => {
 };
 
 const getMockedData = (id) => {
-	const user = mockedData.USER_MAIN_DATA.filter(
-		(user) => user.userId === Number(id)
+	const user = mockedData.USER_MAIN_DATA.find((item) => item.userId === id);
+	const activity = mockedData.USER_ACTIVITY.find((item) => item.userId === id);
+	const sessions = mockedData.USER_AVERAGE_SESSIONS.find(
+		(item) => item.userId === id
 	);
-	const activity = mockedData.USER_ACTIVITY.filter(
-		(userActivity) => userActivity.userId === Number(id)
+	const perform = mockedData.USER_PERFORMANCE.find(
+		(item) => item.userId === id
 	);
-	const sessions = mockedData.USER_AVERAGE_SESSIONS.filter(
-		(averageSessions) => averageSessions.userId === Number(id)
-	);
-	const perform = mockedData.USER_PERFORMANCE.filter(
-		(userPerformance) => userPerformance.userId === Number(id)
-	);
-	console.log('data fetched from mock:',user, activity, sessions, perform);
+	console.log("data fetched from mock:", user, activity, sessions, perform);
 	return { user, activity, sessions, perform };
 };
 
