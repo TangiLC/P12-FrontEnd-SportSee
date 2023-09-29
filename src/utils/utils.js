@@ -124,6 +124,11 @@ export function addDayOfWeek(array) {
 			return newItem;
 		} else return item;
 	});
+	/*newArray.push({
+		dayOfWeek: "",
+		sessionLength: newArray[newArray.length - 1].sessionLength,
+	});
+	newArray.unshift({ dayOfWeek: "", sessionLength: newArray[0].sessionLength });*/
 	return newArray;
 }
 

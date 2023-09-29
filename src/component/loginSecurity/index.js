@@ -1,11 +1,11 @@
-//This is a placeholder for a true secured login, there is no userID in there !
+//This is a placeholder for a true secured login, for dev use only !
 
 export default function matchingId(first, last) {
 	const capitalize = (string) => {
 		return string[0].toUpperCase() + string.slice(1).toLowerCase();
 	};
 
-	const thisDataBaseIsAbsolutlyUnsafe = [
+	const absolutelyUnsafeDataBase = [
 		{ firstName: "Thomas", lastName: "Mockdata", id: 9 },
 		{ firstName: "Karl", lastName: "Dovineau", id: 12 },
 		{ firstName: "Cecilia", lastName: "Ratorez", id: 18 },
@@ -13,7 +13,7 @@ export default function matchingId(first, last) {
 
 	first = capitalize(first);
 	last = capitalize(last);
-	for (const user of thisDataBaseIsAbsolutlyUnsafe) {
+	for (const user of absolutelyUnsafeDataBase) {
 		if (user.firstName === first && user.lastName === last) {
 			return user.id;
 		}

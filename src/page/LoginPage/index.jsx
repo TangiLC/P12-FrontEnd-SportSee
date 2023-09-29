@@ -70,6 +70,7 @@ function Login() {
 	};
 
 	useEffect(() => {
+		console.log('success?',firstName, dailyActivity, averageSessions, performance)
 		if (
 			firstName !== null &&
 			dailyActivity !== null &&
@@ -83,6 +84,11 @@ function Login() {
 
 	useEffect(() => {
 		if (sportData.user?.userId !== undefined) {
+			setTodayScore(normalizeScore(sportData.user));
+			setCounter(normalizeCounter(sportData.user.keyData));
+			setFirstName(sportData.user.userInfos.firstName);
+		}
+		if (sportData.user?.id !== undefined) {
 			setTodayScore(normalizeScore(sportData.user));
 			setCounter(normalizeCounter(sportData.user.keyData));
 			setFirstName(sportData.user.userInfos.firstName);

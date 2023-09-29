@@ -69,7 +69,7 @@ export default function DailyActivity(props) {
 					name="Poids (kg)"
 					yAxisId="right"
 					dataKey="kilogram"
-					fill="#e60000"
+					fill="#282d30"
 					radius={[20, 20, 0, 0]}
 					barSize={12}
 				/>
@@ -77,7 +77,7 @@ export default function DailyActivity(props) {
 					name="Calories brûlées (kCal)"
 					yAxisId="left"
 					dataKey="calories"
-					fill="#282d30"
+					fill="#e60000"
 					radius={[20, 20, 0, 0]}
 					barSize={12}
 				/>

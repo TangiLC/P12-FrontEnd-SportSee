@@ -30,8 +30,7 @@ function DashboardPage() {
 	} = useContext(SportSeeContext);
 
 	
-	//this is a shortened security check to ensure user did not type
-	//any id, should rather use encrypted token : TO BE CODED PHASE 2
+	//this is a small security check to ensure user does not type random name
 	useEffect(() => {
 		if (user.name !== (`${firstName}${userID}`)) {
 			navigate("/");
@@ -71,7 +70,6 @@ function DashboardPage() {
 											<div className="averageSession-title">
 												Durée moyenne des sessions
 											</div>
-											<div className="week-end-shadow"></div>
 										</div>
 										<div className="col-md-4 performance">
 											<Performance
