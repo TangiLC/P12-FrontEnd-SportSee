@@ -1,6 +1,6 @@
 //React component getting firstName and dailyObjective as props and returning subsequent greetings
 //yesterdayObjective is not yet in user's database, TO BE CODED PHASE 2
-import "./style.css";
+import "../../sass/main.css";
 
 const mark = (nb) => {
 	if (nb > 105) {

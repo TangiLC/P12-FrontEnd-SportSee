@@ -1,6 +1,6 @@
 //Recharts element 'LineChart' to display line for average-sessions time /day of week
 
-import "./style.css";
+import "../../sass/main.css";
 import React from "react";
 
 import {

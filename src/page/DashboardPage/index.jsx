@@ -12,7 +12,7 @@ import DailyActivity from "../../component/DailyActivity";
 import AverageSessions from "../../component/AverageSessions";
 import Performance from "../../component/Performance/performance";
 import TodayScore from "../../component/TodayScore";
-import "./style.css";
+import "../../sass/main.css";
 
 import { menubar } from "../../utils/const";
 

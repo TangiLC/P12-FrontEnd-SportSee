@@ -1,5 +1,5 @@
 //React component using Recharts 'Piechart' to display user's daily objective achievement (%)
-import "./style.css";
+import "../../sass/main.css";
 import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 

@@ -1,5 +1,5 @@
 //React component to display the sites's logo and name
-import "./style.css";
+import "../../sass/main.css";
 import sportSee from "../../assets/sportsee.png";
 
 export default function Logo() {

@@ -1,13 +1,10 @@
 //React bootstrap component getting Calories,proteins,carbohydrates and lipids from props and
 //displaying data according to model 
-import "./style.css";
-import { normalizeCount } from "../../utils/const";
+import "../../sass/main.css";
+
 
 function Counter(props) {
 	let countData = props.items;
-	/*if (props.items !== undefined) {
-		countData = normalizeCount(props.items);
-	}*/
 
 	return (
 		<div className="col-lg-11 col-sm-12 counter-group">

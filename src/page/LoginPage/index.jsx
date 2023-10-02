@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import matchingId from "../../component/loginSecurity";
 import Logo from "../../component/Logo";
-import "./style.css";
+import "../../sass/main.css";
 import {
 	getUserData,
 	normalizeScore,

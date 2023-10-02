@@ -2,7 +2,7 @@
 //TO BE CODED PHASE 2 : the links are dead should lead to some pages
 import {Link} from "react-router-dom"
 import sportsee from "../../assets/sportsee.png";
-import "../../sass/style.css";
+import "../../sass/main.css";
 
 function Navbar() {
 	return (

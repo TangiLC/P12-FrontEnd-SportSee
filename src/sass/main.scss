@@ -1,5 +1,21 @@
-@import "./partials/variables";
-@import "./partials/navbar";
+@use "./variables";
+
+@import "./partials/component/bonjour";
+@import "./partials/component/counter";
+@import "./partials/component/daily";
+@import "./partials/component/logo";
+@import "./partials/component/menubar";
+@import "./partials/component/navbar";
+@import "./partials/component/performance";
+@import "./partials/component/sessions";
+@import "./partials/component/todayScore";
+@import "./partials/component/warning";
+
+@import "./partials/pages/login";
+@import "./partials/pages/dashboard";
+
+
+
 
 body {
     margin: 0;

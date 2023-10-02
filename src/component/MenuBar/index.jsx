@@ -3,7 +3,7 @@
 //TO BE CODED PHASE 2: the 'horizontalMode' could be stored in Redux to be available on all pages
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./style.css";
+import "../../sass/main.css";
 
 function MenuBar(props) {
 	const [horizontalMode, setHorizontalMode] = useState(true);

@@ -1,5 +1,5 @@
 //React component using Recharts 'RadarCharts' to display user's performances
-import "./style.css";
+import "../../sass/main.css";
 import React from "react";
 import {
 	Radar,

@@ -1,6 +1,6 @@
 //This site is better to be viewed on wide screen or landscape mode.
 import React from "react";
-import "./style.css";
+import "../../sass/main.css";
 import rotate from '../../assets/rotate-screen.png'
 
 const HorizontalWarning = () => {
