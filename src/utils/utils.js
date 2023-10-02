@@ -23,7 +23,8 @@ export const getUserData = async (userId, url) => {
 			.get(url + userId + "/performance")
 			.then((response) => response.data.data);
 		console.log("data fetched from api:", user, activity, sessions, perform);
-		return { user, activity, sessions, perform };
+		const isApiData= 'true';
+		return { user, activity, sessions, perform,isApiData };
 	} catch (error) {
 		console.log("ERROR WHILE FETCHING API : ...fetching Mock");
 		return getMockedData(userId);
@@ -45,10 +46,11 @@ export const getMockedData = (id) => {
 		const perform = mockedData.USER_PERFORMANCE.find(
 			(item) => item.userId === Number(id)
 		);
+		const isApiData = 'false'
 		if (user && activity && sessions && perform) {
-			console.log("data fetched from mock:", user, activity, sessions, perform);
+			console.log("data fetched from mock:", user, activity, sessions, perform,isApiData);
 		}
-		return { user, activity, sessions, perform };
+		return { user, activity, sessions, perform, isApiData };
 	}
 };
 

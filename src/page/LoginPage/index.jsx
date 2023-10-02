@@ -39,13 +39,17 @@ function Login() {
 	} = useContext(SportSeeContext);
 	const [userFirstName, setUserFirstName] = useState("");
 	const [userLastName, setUserLastName] = useState("");
-	const [loginInfo, setLoginInfo] = useState("");
+	const [dataInfo, setDataInfo] = useState("");
+	const [displayInfo, setDisplayInfo] = useState("");
+	const [messageIndex, setMessageIndex] = useState(0);
 
 	const getData = (id) => {
 		getUserData(id, `${REACT_APP_API_URL}/`)
 			.then((response) => {
 				setSportData(response);
-				setLoginInfo("Récupération des données en cours...");
+				sportData.isApiData
+					? setDataInfo("Récupération des données de l'API en cours...")
+					: setDataInfo("Récupération des données mockées en cours...");
 				console.log(sportData);
 			})
 			.catch((error) => console.log("error : ", error));
@@ -58,29 +62,49 @@ function Login() {
 			setUserID(id);
 			getData(id);
 		} else {
-			setLoginInfo("Vous n'êtes pas un utilisateur enregistré...");
+			setDataInfo("Vous n'êtes pas un utilisateur enregistré...");
 		}
 	};
 
-	const displayInfo = (txt) => {
-		const timeOut = setTimeout(() => {
-			setLoginInfo(txt);
-		}, 800);
-		return () => clearTimeout;
-	};
-
 	useEffect(() => {
-		console.log('success?',firstName, dailyActivity, averageSessions, performance)
+		const messages = [
+			"Mise à jour des données quotidiennes...",
+			"Traitement des données de sessions...",
+			"Calcul des données nutritionnelles...",
+			"Récupération des performances...",
+			"Détermination de l'objectif quotidien...",
+			"Préparation de l'affichage...",
+			""
+		];
+
 		if (
 			firstName !== null &&
 			dailyActivity !== null &&
 			averageSessions !== null &&
 			performance !== null
 		) {
-			displayInfo("Succès du traitement des données...");
-			navigate(`/dashboard/${firstName}${userID}`)
+			const timer = setTimeout(() => {
+				if (messageIndex < messages.length) {
+					setDisplayInfo(messages[messageIndex]);
+					setMessageIndex(messageIndex + 1);
+				}
+			}, 800);
+			if (messageIndex === messages.length) {
+				navigate(`/dashboard/${firstName}${userID}`);
+			}
+			return () => {
+				clearTimeout(timer);
+			};
 		}
-	}, [firstName, dailyActivity, averageSessions, performance, navigate, userID]);
+	}, [
+		messageIndex,
+		firstName,
+		dailyActivity,
+		averageSessions,
+		performance,
+		navigate,
+		userID,
+	]);
 
 	useEffect(() => {
 		if (sportData.user?.userId !== undefined) {
@@ -132,7 +156,7 @@ function Login() {
 							value={userFirstName}
 							onChange={(e) => {
 								setUserFirstName(e.target.value);
-								setLoginInfo("");
+								setDataInfo("");
 							}}
 							required
 						/>
@@ -147,7 +171,7 @@ function Login() {
 							value={userLastName}
 							onChange={(e) => {
 								setUserLastName(e.target.value);
-								setLoginInfo("");
+								setDataInfo("");
 							}}
 							required
 						/>
@@ -156,8 +180,10 @@ function Login() {
 						Connexion
 					</button>
 				</form>
-				<div className="loginMessage">{loginInfo}</div>
+				<div className="dataInfo">{dataInfo}</div>
+				<div className="displayInfo">{displayInfo}</div>
 			</div>
+			
 		</div>
 	);
 }

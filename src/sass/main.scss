@@ -1,0 +1,16 @@
+@import "./partials/variables";
+@import "./partials/navbar";
+
+body {
+    margin: 0;
+    font-family: 'Roboto';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    max-width:1800px;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
