@@ -1,13 +1,13 @@
 export const mockedData = {
 	USER_MAIN_DATA: [
 		{
-			userId: 9,
+			id: 9,
 			userInfos: {
 				firstName: "Thomas",
 				lastName: "Mockdata",
 				age: 33,
 			},
-			Score: 0.22,
+			score: 0.22,
 			keyData: {
 				calorieCount: 2040,
 				proteinCount: 175,
@@ -16,7 +16,7 @@ export const mockedData = {
 			},
 		},
 		{
-			userId: 12,
+			id: 12,
 			userInfos: {
 				firstName: "Karl",
 				lastName: "Dovineau",
@@ -31,13 +31,13 @@ export const mockedData = {
 			},
 		},
 		{
-			userId: 18,
+			id: 18,
 			userInfos: {
 				firstName: "Cecilia",
 				lastName: "Ratorez",
 				age: 34,
 			},
-			todayScore: 0.3,
+			Score: 0.3,
 			keyData: {
 				calorieCount: 2500,
 				proteinCount: 90,

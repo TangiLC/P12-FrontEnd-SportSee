@@ -2,7 +2,6 @@
 //A more secured version is to be CODED ON PHASE 2
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import matchingId from "../../component/loginSecurity";
 import Logo from "../../component/Logo";
 import "../../sass/main.css";
@@ -54,11 +53,13 @@ function Login() {
 			})
 			.catch((error) => console.log("error : ", error));
 	};
+	
+	
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const id = matchingId(userFirstName, userLastName);
-		if (id != null) {
+		if (id !== null) {
 			setUserID(id);
 			getData(id);
 		} else {
@@ -74,7 +75,7 @@ function Login() {
 			"Récupération des performances...",
 			"Détermination de l'objectif quotidien...",
 			"Préparation de l'affichage...",
-			""
+			"",
 		];
 
 		if (
@@ -107,11 +108,6 @@ function Login() {
 	]);
 
 	useEffect(() => {
-		if (sportData.user?.userId !== undefined) {
-			setTodayScore(normalizeScore(sportData.user));
-			setCounter(normalizeCounter(sportData.user.keyData));
-			setFirstName(sportData.user.userInfos.firstName);
-		}
 		if (sportData.user?.id !== undefined) {
 			setTodayScore(normalizeScore(sportData.user));
 			setCounter(normalizeCounter(sportData.user.keyData));
@@ -128,6 +124,7 @@ function Login() {
 				fusionArray(sportData.perform.data, sportData.perform.kind)
 			);
 		}
+		console.log()
 	}, [
 		setAverageSessions,
 		setCounter,
@@ -183,7 +180,6 @@ function Login() {
 				<div className="dataInfo">{dataInfo}</div>
 				<div className="displayInfo">{displayInfo}</div>
 			</div>
-			
 		</div>
 	);
 }

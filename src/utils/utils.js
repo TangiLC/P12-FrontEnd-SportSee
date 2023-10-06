@@ -23,8 +23,8 @@ export const getUserData = async (userId, url) => {
 			.get(url + userId + "/performance")
 			.then((response) => response.data.data);
 		console.log("data fetched from api:", user, activity, sessions, perform);
-		const isApiData= 'true';
-		return { user, activity, sessions, perform,isApiData };
+		//const isApiData= 'true';
+		return { user, activity, sessions, perform, isApiData: true };
 	} catch (error) {
 		console.log("ERROR WHILE FETCHING API : ...fetching Mock");
 		return getMockedData(userId);
@@ -46,11 +46,11 @@ export const getMockedData = (id) => {
 		const perform = mockedData.USER_PERFORMANCE.find(
 			(item) => item.userId === Number(id)
 		);
-		const isApiData = 'false'
+		//const isApiData = 'false'
 		if (user && activity && sessions && perform) {
-			console.log("data fetched from mock:", user, activity, sessions, perform,isApiData);
+			console.log("data fetched from mock:", user, activity, sessions, perform);
 		}
-		return { user, activity, sessions, perform, isApiData };
+		return { user, activity, sessions, perform, isApiData: false };
 	}
 };
 
@@ -60,13 +60,9 @@ export const noTreatment = (data) => {
 };
 
 export const normalizeScore = (data) => {
-	if (data.todayScore !== undefined) {
-		return data.todayScore;
-	} else if (data.Score !== undefined) {
-		return data.Score;
-	} else {
-		return null;
-	}
+	return [data.todayScore, data.score, data.Score, 0].find(
+		(score) => score !== undefined
+	);
 };
 
 //function to return normalized datas for the Counter component

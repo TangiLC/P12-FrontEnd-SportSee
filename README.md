@@ -41,7 +41,7 @@ Clone the repository of SportSee Back-End:
 
 - [![git-clone](https://img.shields.io/badge/Git%20clone-BackEnd%20SportSee-pink?style&logo=github)](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard)
 
-Inside this repository, install dependencies: `yarn install`
+Inside this repository, install dependencies: `yarn install` or `npm install`
 
 Launch on port 3000: `yarn start` or `npm start`
 
@@ -59,8 +59,8 @@ Launch on any port (3001) while 3000 is running : `npm start`
 
 Front-End is now rendered at URL `http://localhost:3001`
 
-The datas available in the back-end are for user "Cecilia Ratorez"
+The datas available in the back-end are for users "Cecilia Ratorez", "Thomas Mockdata" and "Karl Dovineau"
 
-If you don't want to run the back-end, mocked datas are available for users "Thomas Mockdata" and "Karl Dovineau"
+If you the back-end is not running , mocked datas will be used for these users.
 
 
