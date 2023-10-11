@@ -63,6 +63,7 @@ export const noTreatment = (data) => {
 	return data;
 };
 
+// function to get score with unstandardized key
 export const normalizeScore = (data) => {
 	return [data.todayScore, data.score, data.Score, 0].find(
 		(score) => score !== undefined
@@ -106,9 +107,9 @@ export const normalizeCounter = (data) => {
 //Normalizing function to add key "count" in the datas used in DailyActivity
 export function addCount(array) {
 	if (array.length > 0) {
-		const newArray = array.map((item, index) => {
+		const newArray = array.map((item) => {
 			const newItem = { ...item };
-			newItem.count = index + 1;
+			newItem.count = newItem.day.substring(8,10);
 			return newItem;
 		});
 		return newArray;

@@ -175,11 +175,11 @@ export const mockedData = {
 			sessions: [
 				{
 					day: 1,
-					sessionLength: 22,
+					sessionLength: 25,
 				},
 				{
 					day: 2,
-					sessionLength: 33,
+					sessionLength: 35,
 				},
 				{
 					day: 3,
@@ -187,7 +187,7 @@ export const mockedData = {
 				},
 				{
 					day: 4,
-					sessionLength: 28,
+					sessionLength: 33,
 				},
 				{
 					day: 5,
@@ -283,7 +283,7 @@ export const mockedData = {
 			},
 			data: [
 				{
-					value: 70,
+					value: 80,
 					kind: 1,
 				},
 				{
@@ -295,7 +295,7 @@ export const mockedData = {
 					kind: 3,
 				},
 				{
-					value: 70,
+					value: 95,
 					kind: 4,
 				},
 				{
