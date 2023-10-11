@@ -9,7 +9,9 @@ import carbohydrates from "../assets/carbohydrates.png";
 import { mockedData } from "./mock/mocked";
 
 export const getUserData = async (userId, url) => {
+	
 	try {
+		
 		const user = await axios
 			.get(url + userId)
 			.then((response) => response.data.data);
@@ -23,8 +25,8 @@ export const getUserData = async (userId, url) => {
 			.get(url + userId + "/performance")
 			.then((response) => response.data.data);
 		console.log("data fetched from api:", user, activity, sessions, perform);
-		//const isApiData= 'true';
-		return { user, activity, sessions, perform, isApiData: true };
+		const isAPIData = true
+		return { user, activity, sessions, perform, isAPIData };
 	} catch (error) {
 		console.log("ERROR WHILE FETCHING API : ...fetching Mock");
 		return getMockedData(userId);
@@ -32,10 +34,11 @@ export const getUserData = async (userId, url) => {
 };
 
 export const getMockedData = (id) => {
+	
 	if (mockedData) {
 		console.log("mocked id", mockedData, id);
 		const user = mockedData.USER_MAIN_DATA.find(
-			(item) => item.userId === Number(id)
+			(item) => item.id === Number(id)
 		);
 		const activity = mockedData.USER_ACTIVITY.find(
 			(item) => item.userId === Number(id)
@@ -46,11 +49,12 @@ export const getMockedData = (id) => {
 		const perform = mockedData.USER_PERFORMANCE.find(
 			(item) => item.userId === Number(id)
 		);
-		//const isApiData = 'false'
+		
 		if (user && activity && sessions && perform) {
 			console.log("data fetched from mock:", user, activity, sessions, perform);
 		}
-		return { user, activity, sessions, perform, isApiData: false };
+		const isAPIData = false
+		return { user, activity, sessions, perform, isAPIData };
 	}
 };
 
@@ -107,7 +111,6 @@ export function addCount(array) {
 			newItem.count = index + 1;
 			return newItem;
 		});
-		console.log("newArray", newArray);
 		return newArray;
 	} else return array;
 }
@@ -122,11 +125,6 @@ export function addDayOfWeek(array) {
 			return newItem;
 		} else return item;
 	});
-	/*newArray.push({
-		dayOfWeek: "",
-		sessionLength: newArray[newArray.length - 1].sessionLength,
-	});
-	newArray.unshift({ dayOfWeek: "", sessionLength: newArray[0].sessionLength });*/
 	return newArray;
 }
 

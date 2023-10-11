@@ -17,42 +17,44 @@ function MenuBar(props) {
 				horizontalMode ? "horizontal row" : "vertical col-1"
 			}`}
 		>
-			<div className={`item ${horizontalMode ? "col" : "row"}`}>
+			<div className={`item ${horizontalMode ? "col-2" : "row"}`}>
 				<div className="toggle-box" onClick={toggleMode}>
 					<img
 						className={`list-icon ${horizontalMode ? "" : "rotate90"}`}
 						src={props.toggle}
-						alt="toggle"
+						alt="basculer"
 						title="basculer"
 					/>
 				</div>
 			</div>
-			<div className={`item ${horizontalMode ? "col" : "row"}`}></div>
+			<div className={` ${horizontalMode ? "col-7" : "row"}`}>
+				<div className="row">
 
-			{props.items.map((item, index) => (
-				<div
-					className={`item ${horizontalMode ? "col" : "row"}`}
-					key={`icon-${index}`}
-				>
-					<div className="icon-box">
-						<Link to="/notyet">
-							<img className="list-icon" src={item.icon} alt={item.text} />
-						</Link>
-					</div>
-					<span
-						className={`${horizontalMode ? "list-text" : "invisible-text"}`}
+				{props.items.map((item, index) => (
+					<div
+						className={`item ${horizontalMode ? "col" : "row"}`}
+						key={`icon-${index}`}
 					>
-						{item.text}
-					</span>
-				</div>
-			))}
-			<div className={`item ${horizontalMode ? "col" : "row"}`}></div>
+						<div className="icon-box">
+							<Link to="/notyet">
+								<img className="list-icon" src={item.icon} alt={item.text} />
+							</Link>
+						</div>
+						<span
+							className={`${horizontalMode ? "list-text" : "invisible-text"}`}
+						>
+							{item.text}
+						</span>
+					</div>
+				))}</div>
+			</div>
+			<div className={`item ${horizontalMode ? "col-1" : "row"}`}></div>
 			<span
 				className={`${
 					horizontalMode ? "col copyright-horizontal" : "row copyright-vertical"
 				}`}
 			>
-				Copyright© SportSee 2020
+				Copyright© SportSee&nbsp;2020
 			</span>
 		</div>
 	);

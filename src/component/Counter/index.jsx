@@ -12,7 +12,7 @@ function Counter(props) {
 				? null
 				: countData.map((item, index) => {
 						return (
-							<div className="col-lg-12 col-sm-3 counter-item" key={index}>
+							<div className="col-lg-12 col counter-item" key={index}>
 								<div className="row">
 									<div
 										className="col-4 box"

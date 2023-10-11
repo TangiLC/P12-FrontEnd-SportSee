@@ -56,12 +56,13 @@ export default function DailyActivity(props) {
 				<Legend
 					iconType="circle"
 					iconSize={8}
-					height={25}
+					height={30}
 					verticalAlign="top"
 					align="right"
+					padding="20px 0px 0px 0px"
 					wrapperStyle={{ marginTop: "-20px" }}
 					formatter={(value, entry, index) => (
-						<span className="text-color">{value}</span>
+						<span className="text-color daily-legend">{value}</span>
 					)}
 				/>
 				<Bar

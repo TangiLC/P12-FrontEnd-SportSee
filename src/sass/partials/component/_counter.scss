@@ -18,8 +18,8 @@
 }
 
 .counter-item {
-	padding: 20px 0px 20px 15px;
-	margin-bottom: 1rem;
+	padding: 30px 0px 30px 20px;
+	margin-bottom: 1.2rem;
 	border-radius: 6px;
 	background-color: variables.$bg-grey;
 }
@@ -42,6 +42,11 @@
 		flex-wrap: wrap;
 		min-height: 100px;
 		max-height: 140px;
+		width:100%;
+	}
+	.counter-item {
+		padding: 10px 0px 10px 0px;
+		margin: 3px;
 	}
 	.counter-item div {
 		margin: auto;

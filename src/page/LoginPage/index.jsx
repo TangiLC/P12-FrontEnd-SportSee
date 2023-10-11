@@ -14,6 +14,7 @@ import {
 	fusionArray,
 } from "../../utils/utils";
 import { SportSeeContext } from "../../provider";
+import PropagateLoader from "react-spinners/PropagateLoader";
 const { REACT_APP_API_URL } = process.env;
 
 function Login() {
@@ -41,22 +42,19 @@ function Login() {
 	const [dataInfo, setDataInfo] = useState("");
 	const [displayInfo, setDisplayInfo] = useState("");
 	const [messageIndex, setMessageIndex] = useState(0);
+	const [isWaiting, setIsWaiting] = useState(false);
 
 	const getData = (id) => {
 		getUserData(id, `${REACT_APP_API_URL}/`)
 			.then((response) => {
 				setSportData(response);
-				sportData.isApiData
-					? setDataInfo("Récupération des données de l'API en cours...")
-					: setDataInfo("Récupération des données mockées en cours...");
-				console.log(sportData);
+				setIsWaiting(false);
 			})
 			.catch((error) => console.log("error : ", error));
 	};
-	
-	
 
 	const handleSubmit = (e) => {
+		setIsWaiting(true);
 		e.preventDefault();
 		const id = matchingId(userFirstName, userLastName);
 		if (id !== null) {
@@ -108,6 +106,13 @@ function Login() {
 	]);
 
 	useEffect(() => {
+		if (sportData.isAPIData !== undefined) {
+			sportData.isAPIData
+				? setDataInfo("Récupération des données de l'API en cours...")
+				: setDataInfo("Récupération des données mockées en cours...");
+		} else {
+			setDataInfo("");
+		}
 		if (sportData.user?.id !== undefined) {
 			setTodayScore(normalizeScore(sportData.user));
 			setCounter(normalizeCounter(sportData.user.keyData));
@@ -124,7 +129,7 @@ function Login() {
 				fusionArray(sportData.perform.data, sportData.perform.kind)
 			);
 		}
-		console.log()
+		console.log();
 	}, [
 		setAverageSessions,
 		setCounter,
@@ -173,12 +178,24 @@ function Login() {
 							required
 						/>
 					</div>
-					<button className="btn btn-danger mt-2 mb-1" type="submit">
-						Connexion
-					</button>
+					{!isWaiting ? (
+						<button className="btn btn-danger mt-2 mb-1" type="submit">
+							Connexion
+						</button>
+					) : (
+						<button className="btn mt-2 mb-1">
+							<PropagateLoader
+								size={18}
+								color="#e60000"
+								loading={true}
+								speedMultiplier={0.7}
+							/>
+						</button>
+					)}
 				</form>
 				<div className="dataInfo">{dataInfo}</div>
 				<div className="displayInfo">{displayInfo}</div>
+				<div></div>
 			</div>
 		</div>
 	);

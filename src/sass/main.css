@@ -30,8 +30,8 @@
 }
 
 .counter-item {
-  padding: 20px 0px 20px 15px;
-  margin-bottom: 1rem;
+  padding: 30px 0px 30px 20px;
+  margin-bottom: 1.2rem;
   border-radius: 6px;
   background-color: #f9f9f9;
 }
@@ -54,6 +54,11 @@
     flex-wrap: wrap;
     min-height: 100px;
     max-height: 140px;
+    width: 100%;
+  }
+  .counter-item {
+    padding: 10px 0px 10px 0px;
+    margin: 3px;
   }
   .counter-item div {
     margin: auto;
@@ -79,6 +84,10 @@
   color: #ffffff;
   padding: 5px;
   margin-left: auto;
+}
+
+.daily-legend {
+  font-size: 0.8rem;
 }
 
 .sportsee {
@@ -146,12 +155,12 @@
   height: 70px;
   background-color: #ffffff;
   border-radius: 10%;
-  margin: 2px;
+  margin: 10px;
 }
 
 .row .icon-box {
   padding: 0px;
-  margin-left: 10px;
+  margin-left: 20px;
 }
 
 .row .toggle-box {
@@ -163,8 +172,7 @@
 .list-icon {
   width: 88%;
   height: 88%;
-  padding: 4px 2px 4px 4px;
-  box-sizing: unset;
+  padding: 5px 5px 5px 10px;
 }
 
 .list-text {
@@ -179,20 +187,21 @@
 }
 
 .copyright-vertical {
-  writing-mode: sideways-lr;
-  margin-bottom: 1rem;
-  margin-left: 10px;
-}
-
-.copyright-horizontal {
+  font-size: 0.8rem;
+  transform: rotate(-90deg);
+  margin: 20px 0px 40px 10px;
   white-space: nowrap;
 }
 
-@media (max-width: 860px) {
-  .copyright-horizontal {
-    white-space: normal;
-  }
+/*.copyright-horizontal {
+	white-space: nowrap;
 }
+
+@media (max-width: 1400px) {
+	.copyright-horizontal {
+		white-space: normal;
+	}
+}*/
 .sportsee {
   height: 8dvh;
   min-height: 40px;
@@ -275,7 +284,6 @@
 
 .recharts-cartesian-axis-ticks {
   transform-origin: right bottom;
-  transform: scale(0.95, 1);
 }
 
 .orientation-alert {
@@ -317,11 +325,11 @@ body {
 }
 
 .dailyActivity {
-  height: 25dvh;
+  height: 28dvh;
   min-height: 200px;
   max-height: 400px;
   background-color: #f9f9f9;
-  margin: 0px auto 2dvh auto;
+  margin: 30px auto 2dvh auto;
   max-width: 1100px;
   width: 98%;
 }
@@ -402,7 +410,7 @@ body {
 .todayScore-title {
   position: absolute;
   z-index: 99;
-  padding: 5px;
+  padding: 20px;
   font-weight: 600;
 }
 

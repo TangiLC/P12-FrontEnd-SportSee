@@ -1,16 +1,32 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 export const SportSeeContext = React.createContext();
 
 const SportSeeProvider = ({ children }) => {
 	const [userID, setUserID] = useState(null);
 	const [sportData, setSportData] = useState({});
-
 	const [todayScore, setTodayScore] = useState(null);
 	const [counter, setCounter] = useState(null);
 	const [firstName, setFirstName] = useState(null);
 	const [dailyActivity, setDailyActivity] = useState(null);
 	const [averageSessions, setAverageSessions] = useState(null);
 	const [performance, setPerformance] = useState(null);
+
+	useEffect(() => {  //reset on back navigate
+		const handlePopstate = () => {
+			setUserID(null);
+			setSportData({});
+			setTodayScore(null);
+			setCounter(null);
+			setFirstName(null);
+			setDailyActivity(null);
+			setAverageSessions(null);
+			setPerformance(null);
+		};
+		window.addEventListener('popstate', handlePopstate);
+		return () => {
+		  window.removeEventListener('popstate', handlePopstate);
+		};
+	  }, []);
 
 	return (
 		<SportSeeContext.Provider

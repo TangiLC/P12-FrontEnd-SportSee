@@ -57,6 +57,7 @@ function DashboardPage() {
 								<div className="col-sm-12 col-lg-9">
 									<div className="row ">
 										<div className="col-md-12 dailyActivity">
+										<div className="todayScore-title">Activité quotidienne</div>
 											<DailyActivity
 												data={dailyActivity !== null ? dailyActivity : []}
 											/>
