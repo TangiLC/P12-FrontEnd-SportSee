@@ -39,8 +39,9 @@ function Login() {
 			className="background container-fluid row flex"
 			style={{ height: "100vh" }}
 		>
-			<div className="col-lg-4 col-sm-10 card my-auto mx-auto text-center">
-				<Logo />
+			<div className="col-lg-4 col-sm-10 card my-auto mx-auto text-center border-dark">
+				<div className="row"><Logo /></div>
+				<div className="row">
 				<form onSubmit={handleSubmit} autoComplete="off">
 					<div>
 						<label htmlFor="firstName">Prénom:&nbsp;</label>
@@ -86,7 +87,7 @@ function Login() {
 							/>
 						</button>
 					)}
-				</form>
+				</form></div>
 				{dataInfo}
 			</div>
 		</div>

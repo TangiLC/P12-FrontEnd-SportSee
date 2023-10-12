@@ -9,7 +9,7 @@ function Navbar() {
 		<div className="row g-0 container-flex bg-black">
 			<div className="col navigate">
 				<div className="site-name">
-					<img src={sportsee} className="sportsee" alt="logo" />
+					<img src={sportsee} className="sport" alt="logo" height="50px"/>
 					<h2>SportSee</h2>
 				</div>
                 <div className="nav-item"><Link to="/notyet" >Accueil</Link></div>
