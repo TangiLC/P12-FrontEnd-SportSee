@@ -12,8 +12,8 @@ function Counter(props) {
 				? null
 				: countData.map((item, index) => {
 						return (
-							<div className="col-lg-12 col counter-item" key={index}>
-								<div className="row">
+							<div className="col counter-item" key={index}>
+								<div className="row justify-content-center">
 									<div
 										className="col-4 box"
 										style={{ backgroundColor: `rgba(${item.color},.3)` }}
@@ -24,7 +24,7 @@ function Counter(props) {
 											alt={item.name}
 										/>
 									</div>
-									<div className="col-8">
+									<div className="col-7">
 										<div className="row">
 											<div className="col counter-digit">
 												{item.count}
