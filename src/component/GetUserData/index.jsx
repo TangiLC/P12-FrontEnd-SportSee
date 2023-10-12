@@ -41,6 +41,7 @@ export function GetUserData(props) {
 		setAverageSessions(null);
 		setPerformance(null);
 		setDataInfo("Récupération des données en cours");
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {

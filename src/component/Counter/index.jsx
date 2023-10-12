@@ -15,7 +15,7 @@ function Counter(props) {
 							<div className="col counter-item" key={index}>
 								<div className="row justify-content-center">
 									<div
-										className="col-4 box"
+										className="col-4 box mx-auto"
 										style={{ backgroundColor: `rgba(${item.color},.3)` }}
 									>
 										<img

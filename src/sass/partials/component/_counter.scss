@@ -1,9 +1,10 @@
 
 .count-icon {
-	width: 50px;
-	height: auto;
-	margin: auto;
-	padding: 8px 2px 5px 2px;
+	
+	height: 88%;
+	min-height:20px;
+	width: auto;
+	margin-left:-15%;
 	background-color: transparent;
 }
 
@@ -32,9 +33,11 @@
 
 .box {
 	border-radius: 6px;
-	width: 70px;
-	height: 70px;
-	margin-left: 10px;
+	width: 4rem;
+	height: 4rem;
+	min-height:30px;
+	min-width: 30px;
+	
 }
 
 @media (max-width: 992px) {
