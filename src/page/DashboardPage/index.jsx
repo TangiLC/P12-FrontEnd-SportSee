@@ -1,9 +1,10 @@
-import React, { useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { SportSeeContext } from "../../provider";
 
 import HorizontalWarning from "../../component/HorizontalWarning";
+import { GetUserData } from "../../component/GetUserData";
 import Navbar from "../../component/Navbar";
 import MenuBar from "../../component/MenuBar";
 import Bonjour from "../../component/Bonjour";
@@ -17,6 +18,12 @@ import "../../sass/main.css";
 import { menubar } from "../../utils/const";
 
 function DashboardPage() {
+	const [isLoading, setIsLoading] = useState(true);
+
+	const toggleIsLoading = () => {
+		setIsLoading(false);
+	};
+
 	const navigate = useNavigate();
 	const user = useParams();
 	const {
@@ -29,15 +36,12 @@ function DashboardPage() {
 		performance,
 	} = useContext(SportSeeContext);
 
-	
-	//this is a small security check to ensure user does not type random name
+	//this is a small security check to ensure user does not type random id
 	useEffect(() => {
-		if (user.name !== (`${firstName}${userID}`)) {
+		if (user.hexID !== `${(userID * 999979).toString(16)}`) {
 			navigate("/");
 		}
-	}, [user.name, firstName, navigate, userID]);
-
-	console.log("context", SportSeeContext);
+	}, [user, navigate, userID]);
 
 	return (
 		<>
@@ -49,15 +53,20 @@ function DashboardPage() {
 						<MenuBar toggle={menubar.toggle} items={menubar.items} />
 						<div className="col">
 							<div className="row">
-								<div className="col-md-12">
+								<div className="col-md-11">
 									<Bonjour firstName={firstName} yesterdayObjective={110} />
+								</div>
+								<div className="col-md-1">
+									{isLoading?<GetUserData toggleIsLoading={toggleIsLoading} />:null}
 								</div>
 							</div>
 							<div className="row structure">
 								<div className="col-sm-12 col-lg-9">
 									<div className="row ">
 										<div className="col-md-12 dailyActivity">
-										<div className="todayScore-title">Activité quotidienne</div>
+											<div className="todayScore-title">
+												Activité quotidienne
+											</div>
 											<DailyActivity
 												data={dailyActivity !== null ? dailyActivity : []}
 											/>

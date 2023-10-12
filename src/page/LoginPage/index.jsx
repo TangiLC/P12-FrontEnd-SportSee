@@ -1,144 +1,33 @@
 //Login page to get user id
 //A more secured version is to be CODED ON PHASE 2
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import matchingId from "../../component/loginSecurity";
 import Logo from "../../component/Logo";
 import "../../sass/main.css";
-import {
-	getUserData,
-	normalizeScore,
-	addCount,
-	normalizeCounter,
-	addDayOfWeek,
-	fusionArray,
-} from "../../utils/utils";
 import { SportSeeContext } from "../../provider";
-import PropagateLoader from "react-spinners/PropagateLoader";
-const { REACT_APP_API_URL } = process.env;
 
 function Login() {
 	const navigate = useNavigate();
-	const {
-		userID,
-		setUserID,
-		sportData,
-		setSportData,
-		todayScore,
-		setTodayScore,
-		counter,
-		setCounter,
-		firstName,
-		setFirstName,
-		dailyActivity,
-		setDailyActivity,
-		averageSessions,
-		setAverageSessions,
-		performance,
-		setPerformance,
-	} = useContext(SportSeeContext);
+	const { setUserID, userID } = useContext(SportSeeContext);
 	const [userFirstName, setUserFirstName] = useState("");
 	const [userLastName, setUserLastName] = useState("");
 	const [dataInfo, setDataInfo] = useState("");
-	const [displayInfo, setDisplayInfo] = useState("");
-	const [messageIndex, setMessageIndex] = useState(0);
-	const [isWaiting, setIsWaiting] = useState(false);
 
-	const getData = (id) => {
-		getUserData(id, `${REACT_APP_API_URL}/`)
-			.then((response) => {
-				setSportData(response);
-				setIsWaiting(false);
-			})
-			.catch((error) => console.log("error : ", error));
-	};
-
-	const handleSubmit = (e) => {
-		setIsWaiting(true);
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const id = matchingId(userFirstName, userLastName);
+
 		if (id !== null) {
 			setUserID(id);
-			getData(id);
+			if (userID !== null) {
+				navigate(`/dashboard/${(userID * 999979).toString(16)}`);
+				setDataInfo("connexion en cours");
+			}
 		} else {
 			setDataInfo("Vous n'êtes pas un utilisateur enregistré...");
 		}
 	};
-
-	useEffect(() => {
-		const messages = [
-			"Mise à jour des données quotidiennes...",
-			"Traitement des données de sessions...",
-			"Calcul des données nutritionnelles...",
-			"Récupération des performances...",
-			"Détermination de l'objectif quotidien...",
-			"Préparation de l'affichage...",
-			"",
-		];
-
-		if (
-			firstName !== null &&
-			dailyActivity !== null &&
-			averageSessions !== null &&
-			performance !== null
-		) {
-			const timer = setTimeout(() => {
-				if (messageIndex < messages.length) {
-					setDisplayInfo(messages[messageIndex]);
-					setMessageIndex(messageIndex + 1);
-				}
-			}, 800);
-			if (messageIndex === messages.length) {
-				navigate(`/dashboard/${firstName}${userID}`);
-			}
-			return () => {
-				clearTimeout(timer);
-			};
-		}
-	}, [
-		messageIndex,
-		firstName,
-		dailyActivity,
-		averageSessions,
-		performance,
-		navigate,
-		userID,
-	]);
-
-	useEffect(() => {
-		if (sportData.isAPIData !== undefined) {
-			sportData.isAPIData
-				? setDataInfo("Récupération des données de l'API en cours...")
-				: setDataInfo("Récupération des données mockées en cours...");
-		} else {
-			setDataInfo("");
-		}
-		if (sportData.user?.id !== undefined) {
-			setTodayScore(normalizeScore(sportData.user));
-			setCounter(normalizeCounter(sportData.user.keyData));
-			setFirstName(sportData.user.userInfos.firstName);
-		}
-		if (sportData.activity?.userId !== undefined) {
-			setDailyActivity(addCount(sportData.activity.sessions));
-		}
-		if (sportData.sessions?.userId !== undefined) {
-			setAverageSessions(addDayOfWeek(sportData.sessions.sessions));
-		}
-		if (sportData.perform?.userId !== undefined) {
-			setPerformance(
-				fusionArray(sportData.perform.data, sportData.perform.kind)
-			);
-		}
-		console.log();
-	}, [
-		setAverageSessions,
-		setCounter,
-		setDailyActivity,
-		setFirstName,
-		setPerformance,
-		setTodayScore,
-		sportData,
-	]);
 
 	return (
 		<div
@@ -178,24 +67,12 @@ function Login() {
 							required
 						/>
 					</div>
-					{!isWaiting ? (
-						<button className="btn btn-danger mt-2 mb-1" type="submit">
-							Connexion
-						</button>
-					) : (
-						<button className="btn mt-2 mb-1">
-							<PropagateLoader
-								size={18}
-								color="#e60000"
-								loading={true}
-								speedMultiplier={0.7}
-							/>
-						</button>
-					)}
+
+					<button className="btn btn-danger mt-2 mb-1" type="submit">
+						Connexion
+					</button>
 				</form>
-				<div className="dataInfo">{dataInfo}</div>
-				<div className="displayInfo">{displayInfo}</div>
-				<div></div>
+				{dataInfo}
 			</div>
 		</div>
 	);

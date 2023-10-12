@@ -14,7 +14,7 @@ function App() {
 				<Route path="/" element={<LoginPage />} />
 				<Route path="/home" element={<LoginPage />} />
 				<Route path="/dashboard" element={<LoginPage />} />
-				<Route path="/dashboard/:name" element={<DashboardPage />} />
+				<Route path="/dashboard/:hexID" element={<DashboardPage />} />
 				<Route path="/notyet" element={<NotYet />} />
 
 				<Route path="/*" element={<Page404 />} />
