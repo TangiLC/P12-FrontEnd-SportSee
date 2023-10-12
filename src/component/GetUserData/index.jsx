@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "../../sass/main.css";
 import {
 	getUserData,
@@ -14,7 +13,6 @@ import PropagateLoader from "react-spinners/PropagateLoader";
 const { REACT_APP_API_URL } = process.env;
 
 export function GetUserData(props) {
-	const [isLoading, setIsLoading] = useState(true);
 	const {
 		userID,
 		sportData,
@@ -32,6 +30,7 @@ export function GetUserData(props) {
 	} = useContext(SportSeeContext);
 
 	const [dataInfo, setDataInfo] = useState("");
+
 
 	useEffect(() => {
 		setSportData({});
@@ -62,8 +61,7 @@ export function GetUserData(props) {
 			averageSessions !== null &&
 			performance !== null
 		) {
-			setDataInfo("");
-			setIsLoading(false)
+			props.toggleIsLoading();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [firstName, dailyActivity, averageSessions, performance]);
@@ -92,6 +90,7 @@ export function GetUserData(props) {
 				fusionArray(sportData.perform.data, sportData.perform.kind)
 			);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [
 		setAverageSessions,
 		setCounter,
@@ -101,10 +100,26 @@ export function GetUserData(props) {
 		setTodayScore,
 		sportData,
 	]);
+
+
 	return (
 		<>
-			{isLoading?<PropagateLoader />:null}
-			{dataInfo}
+			<div
+				className="background container-fluid row flex"
+				style={{ height: "100vh" }}
+			>
+				<div className="col-lg-4 col-sm-10 card my-auto mx-auto py-3 text-center">
+					<h5>{dataInfo}</h5>
+					<p>
+						<PropagateLoader
+							size={18}
+							color="#e60000"
+							loading={true}
+							speedMultiplier={0.7}
+						/>
+					</p>
+				</div>
+			</div>
 		</>
 	);
 }
