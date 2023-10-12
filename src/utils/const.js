@@ -9,9 +9,9 @@ import barbell96 from "../assets/barbell96.png";
 export const menubar = {};
 menubar.toggle = toggle;
 menubar.items = [
-	{ icon: yoga96, text: "Relaxation" },
-	{ icon: swiming96, text: "Natation" },
-	{ icon: cycling96, text: "Cyclisme" },
-	{ icon: barbell96, text: "Altérophilie" },
+	{ icon: yoga96, text: "Relaxation", path:"/notyet" },
+	{ icon: swiming96, text: "Natation", path:"/notyet" },
+	{ icon: cycling96, text: "Cyclisme", path:"/notyet" },
+	{ icon: barbell96, text: "Altérophilie", path:"/notyet" },
 ];
 

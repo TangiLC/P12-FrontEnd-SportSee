@@ -36,7 +36,7 @@ function MenuBar(props) {
 						key={`icon-${index}`}
 					>
 						<div className="icon-box">
-							<Link to="/notyet">
+							<Link to={item.path}>
 								<img className="list-icon" src={item.icon} alt={item.text} />
 							</Link>
 						</div>
