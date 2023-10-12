@@ -1,9 +1,7 @@
 .recharts-polar-angle-axis-tick .recharts-text {
-	font-size: 0.65em;
-    transform-origin: center;
-    transform: scale(1.03);
-    
-    
+	font-size: 0.65rem;
+	transform-origin: center;
+	transform: scale(1.03);
 }
 
 .recharts-polygon {
@@ -13,7 +11,7 @@
 
 @media (max-width: 992px) {
 	.recharts-polar-angle-axis-tick .recharts-text {
-		font-size: 0.55em;
-        transform: scale(.95) ;
+		font-size: 0.55rem;
+		transform: scale(0.95);
 	}
 }

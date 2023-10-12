@@ -9,9 +9,7 @@ import carbohydrates from "../assets/carbohydrates.png";
 import { mockedData } from "./mock/mocked";
 
 export const getUserData = async (userId, url) => {
-	
 	try {
-		
 		const user = await axios
 			.get(url + userId)
 			.then((response) => response.data.data);
@@ -25,7 +23,7 @@ export const getUserData = async (userId, url) => {
 			.get(url + userId + "/performance")
 			.then((response) => response.data.data);
 		console.log("data fetched from api:", user, activity, sessions, perform);
-		const isAPIData = true
+		const isAPIData = true;
 		return { user, activity, sessions, perform, isAPIData };
 	} catch (error) {
 		console.log("ERROR WHILE FETCHING API : ...fetching Mock");
@@ -34,7 +32,6 @@ export const getUserData = async (userId, url) => {
 };
 
 export const getMockedData = (id) => {
-	
 	if (mockedData) {
 		console.log("mocked id", mockedData, id);
 		const user = mockedData.USER_MAIN_DATA.find(
@@ -49,11 +46,11 @@ export const getMockedData = (id) => {
 		const perform = mockedData.USER_PERFORMANCE.find(
 			(item) => item.userId === Number(id)
 		);
-		
+
 		if (user && activity && sessions && perform) {
 			console.log("data fetched from mock:", user, activity, sessions, perform);
 		}
-		const isAPIData = false
+		const isAPIData = false;
 		return { user, activity, sessions, perform, isAPIData };
 	}
 };
@@ -70,14 +67,14 @@ export const normalizeScore = (data) => {
 	);
 };
 
-//function to return normalized datas for the Counter component
+//function to return normalized data for the Counter component
 export const normalizeCounter = (data) => {
 	let array = [];
 	array.push({
 		name: "Calories",
 		icon: calories,
 		unit: "kCal",
-		count: Number(data.calorieCount).toLocaleString("en-US"),
+		count: Number(data.calorieCount),
 		color: "255,0,0",
 	});
 	array.push({
@@ -104,19 +101,19 @@ export const normalizeCounter = (data) => {
 	return array;
 };
 
-//Normalizing function to add key "count" in the datas used in DailyActivity
+//Normalizing function to add key "count" in the data used in DailyActivity
 export function addCount(array) {
 	if (array.length > 0) {
 		const newArray = array.map((item) => {
 			const newItem = { ...item };
-			newItem.count = newItem.day.substring(8,10);
+			newItem.count = newItem.day.substring(8, 10);
 			return newItem;
 		});
 		return newArray;
 	} else return array;
 }
 
-//Normalizing function to add key "dayOfWeek" in datas used in AverageSessions
+//Normalizing function to add key "dayOfWeek" in data used in AverageSessions
 export function addDayOfWeek(array) {
 	const weekday = ["L", "M", "M", "J", "V", "S", "D"];
 	const newArray = array.map((item, index) => {
@@ -139,7 +136,6 @@ export function fusionArray(tab1, tab2) {
 		speed: "Vitesse",
 		intensity: "Intensité",
 	};
-
 	const newArray = tab1.map((item) => {
 		const str = tab2[item.kind.toString()] || "null";
 		return { kind: traduct[str] || "null", value: item.value };

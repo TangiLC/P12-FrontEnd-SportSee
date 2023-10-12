@@ -18,7 +18,9 @@ const CustomTooltipSessions = ({ active, payload }) => {
 	if (active && payload) {
 		return (
 			<>
-				<div className="custom-tooltip-sessions">{`${payload[0].value} min`}</div>
+				<div className="custom-tooltip-sessions">
+					{`${payload[0].value} min`}
+				</div>
 			</>
 		);
 	}
@@ -71,7 +73,6 @@ export default function AverageSessions(props) {
 					tickLine={false}
 					axisLine={false}
 					stroke="white"
-					
 				/>
 				<YAxis
 					type="number"

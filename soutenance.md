@@ -1,1 +1,0 @@
-writingmode:sideway-lr

@@ -31,7 +31,6 @@ export function GetUserData(props) {
 
 	const [dataInfo, setDataInfo] = useState("");
 
-
 	useEffect(() => {
 		setSportData({});
 		setTodayScore(null);
@@ -41,7 +40,7 @@ export function GetUserData(props) {
 		setAverageSessions(null);
 		setPerformance(null);
 		setDataInfo("Récupération des données en cours");
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
@@ -101,7 +100,6 @@ export function GetUserData(props) {
 		setTodayScore,
 		sportData,
 	]);
-
 
 	return (
 		<>

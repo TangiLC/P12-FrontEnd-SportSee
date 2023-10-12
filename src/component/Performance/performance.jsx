@@ -18,6 +18,8 @@ export default function Performance(props) {
 					{ kind: "no data", value: 33 },
 					{ kind: "no data", value: 22 },
 					{ kind: "no data", value: 44 },
+					{ kind: "no data", value: 33 },
+					{ kind: "no data", value: 22 },
 			  ];
 	return (
 		<>

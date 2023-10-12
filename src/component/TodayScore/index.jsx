@@ -6,9 +6,10 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 const COLORS = ["#E60000", "transparent"];
 
 export default function TodayScore(props) {
+	const score = props.score;
 	const data = [
-		{ name: "achieved", value: props.score },
-		{ name: "unAchieved", value: 1 - props.score },
+		{ name: "achieved", value: score },
+		{ name: "unAchieved", value: 1 - score },
 	];
 	return (
 		<ResponsiveContainer width="100%" height="100%">
