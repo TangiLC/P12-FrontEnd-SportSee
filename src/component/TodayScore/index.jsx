@@ -22,7 +22,7 @@ export default function TodayScore(props) {
 					innerRadius="65%"
 					outerRadius="75%"
 					startAngle={88}
-					endAngle={600}
+					endAngle={448}
 					fill="transparent"
 					paddingAngle={5}
 					dataKey="value"

@@ -59,8 +59,8 @@ Launch on any port (3001) while 3000 is running : `npm start`
 
 Front-End is now rendered at URL `http://localhost:3001`
 
-The datas available in the back-end are for users "Cecilia Ratorez", "Thomas Mockdata" and "Karl Dovineau"
+The data available in the back-end are for users "Cecilia Ratorez", "Thomas Mockdata" and "Karl Dovineau"
 
-If you the back-end is not running , mocked datas will be used for these users.
+If the back-end is not running , mocked data will be used for these users.
 
 

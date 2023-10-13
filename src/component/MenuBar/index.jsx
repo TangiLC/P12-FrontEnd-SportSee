@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import "../../sass/main.css";
 
 function MenuBar(props) {
-	const [horizontalMode, setHorizontalMode] = useState(true);
+	const [horizontalMode, setHorizontalMode] = useState(false);
 	const toggleMode = () => {
 		setHorizontalMode(!horizontalMode);
 	};
