@@ -49,7 +49,7 @@ Back-End is now running on port 3000 `http://localhost:3000`. API calls ends her
 
 Open another window and clone this repository of SportSee Front-End:
 
-- [![git-clone](https://img.shields.io/badge/Git%20clone-Project%20SportSee-red?style&logo=github)](https://github.com/TangiLC/P12-SportSee.git)
+- [![git-clone](https://img.shields.io/badge/Git%20clone-Project%20SportSee-red?style&logo=github)](https://github.com/TangiLC/P12-FrontEnd-SportSee)
 
 Inside this repository, install dependencies: `npm install`
 
