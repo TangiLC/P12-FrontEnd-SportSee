@@ -45,6 +45,21 @@ export const mockedData = {
 				lipidCount: 120,
 			},
 		},
+		{
+			id: 99,
+			userInfos: {
+				firstName: "Cheikh",
+				lastName: "Mbacke",
+				age: 33,
+			},
+			score: 0.66,
+			keyData: {
+				calorieCount: 2040,
+				proteinCount: 175,
+				carbohydrateCount: 310,
+				lipidCount: 55,
+			},
+		},
 	],
 
 	USER_ACTIVITY: [
@@ -168,6 +183,46 @@ export const mockedData = {
 				},
 			],
 		},
+		{
+			userId: 99,
+			sessions: [
+				{
+					day: "2020-07-01",
+					kilogram: 85,
+					calories: 240,
+				},
+				{
+					day: "2020-07-02",
+					kilogram: 85,
+					calories: 310,
+				},
+				{
+					day: "2020-07-03",
+					kilogram: 84,
+					calories: 290,
+				},
+				{
+					day: "2020-07-04",
+					kilogram: 84,
+					calories: 290,
+				},
+				{
+					day: "2020-07-05",
+					kilogram: 84,
+					calories: 180,
+				},
+				{
+					day: "2020-07-06",
+					kilogram: 85,
+					calories: 162,
+				},
+				{
+					day: "2020-07-07",
+					kilogram: 84,
+					calories: 395,
+				},
+			],
+		},
 	],
 	USER_AVERAGE_SESSIONS: [
 		{
@@ -266,6 +321,39 @@ export const mockedData = {
 				{
 					day: 7,
 					sessionLength: 50,
+				},
+			],
+		},
+		{
+			userId: 99,
+			sessions: [
+				{
+					day: 1,
+					sessionLength: 25,
+				},
+				{
+					day: 2,
+					sessionLength: 35,
+				},
+				{
+					day: 3,
+					sessionLength: 44,
+				},
+				{
+					day: 4,
+					sessionLength: 33,
+				},
+				{
+					day: 5,
+					sessionLength: 36,
+				},
+				{
+					day: 6,
+					sessionLength: 50,
+				},
+				{
+					day: 7,
+					sessionLength: 45,
 				},
 			],
 		},
@@ -374,6 +462,43 @@ export const mockedData = {
 				},
 				{
 					value: 220,
+					kind: 5,
+				},
+				{
+					value: 110,
+					kind: 6,
+				},
+			],
+		},
+		{
+			userId: 99,
+			kind: {
+				1: "cardio",
+				2: "energy",
+				3: "endurance",
+				4: "strength",
+				5: "speed",
+				6: "intensity",
+			},
+			data: [
+				{
+					value: 80,
+					kind: 1,
+				},
+				{
+					value: 100,
+					kind: 2,
+				},
+				{
+					value: 120,
+					kind: 3,
+				},
+				{
+					value: 95,
+					kind: 4,
+				},
+				{
+					value: 140,
 					kind: 5,
 				},
 				{

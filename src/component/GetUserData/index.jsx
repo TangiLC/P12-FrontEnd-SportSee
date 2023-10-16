@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import "../../sass/main.css";
 import {
-	getUserData,
 	normalizeScore,
 	addCount,
 	normalizeCounter,
 	addDayOfWeek,
-	fusionArray,
-} from "../../utils/utils";
+	fusionArrayPerf,
+} from "../../utils/utils_normalize";
+import { getUserData } from "../../utils/utils_api_call";
 import { SportSeeContext } from "../../provider";
 import PropagateLoader from "react-spinners/PropagateLoader";
 const { REACT_APP_API_URL } = process.env;
@@ -87,7 +87,7 @@ export function GetUserData(props) {
 		}
 		if (sportData.perform?.userId !== undefined) {
 			setPerformance(
-				fusionArray(sportData.perform.data, sportData.perform.kind)
+				fusionArrayPerf(sportData.perform.data, sportData.perform.kind)
 			);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
