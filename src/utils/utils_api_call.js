@@ -29,6 +29,7 @@ export const getUserData = async (userId, url) => {
 		return { user, activity, sessions, perform, isAPIData };
 	} catch (error) {
 		console.log("ERROR WHILE FETCHING API : ...fetching Mock");
+		
 		return getMockedData(userId);
 	}
 };
