@@ -7,20 +7,22 @@ import lipids from "../assets/lipids.png";
 import carbohydrates from "../assets/carbohydrates.png";
 
 import { mockedData } from "./mock/mocked";
+const { REACT_APP_API_URL } = process.env;
 
 export const getUserData = async (userId, url) => {
+	console.log(url)
 	try {
 		const user = await axios
-			.get(url + userId)
+			.get(`${REACT_APP_API_URL}/${userId}`)
 			.then((response) => response.data.data);
 		const activity = await axios
-			.get(url + userId + "/activity")
+			.get(`${REACT_APP_API_URL}/${userId}/activity`)
 			.then((response) => response.data.data);
 		const sessions = await axios
-			.get(url + userId + "/average-sessions")
+			.get(`${REACT_APP_API_URL}/${userId}/average-sessions`)
 			.then((response) => response.data.data);
 		const perform = await axios
-			.get(url + userId + "/performance")
+			.get(`${REACT_APP_API_URL}/${userId}/performance`)
 			.then((response) => response.data.data);
 		console.log("data fetched from api:", user, activity, sessions, perform);
 		const isAPIData = true;

@@ -45,7 +45,7 @@ export function GetUserData(props) {
 
 	useEffect(() => {
 		const getData = (id) => {
-			getUserData(id, `${REACT_APP_API_URL}/`)
+			getUserData(id, `${REACT_APP_API_URL}`)
 				.then((response) => {
 					setSportData(response);
 				})
