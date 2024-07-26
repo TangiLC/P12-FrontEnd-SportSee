@@ -14,7 +14,7 @@ function Login() {
 	const [userFirstName, setUserFirstName] = useState("");
 	const [userLastName, setUserLastName] = useState("");
 	const [isWaiting, setIsWaiting] = useState(false);
-	const [dataInfo, setDataInfo] = useState("");
+	const [dataInfo, setDataInfo] = useState("(mode test : Cecilia Ratorez/Karl Dovineau)");
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -53,7 +53,7 @@ function Login() {
 							value={userFirstName}
 							onChange={(e) => {
 								setUserFirstName(e.target.value);
-								setDataInfo("");
+								//setDataInfo("");
 							}}
 							required
 						/>
@@ -68,7 +68,7 @@ function Login() {
 							value={userLastName}
 							onChange={(e) => {
 								setUserLastName(e.target.value);
-								setDataInfo("");
+								//setDataInfo("");
 							}}
 							required
 						/>
