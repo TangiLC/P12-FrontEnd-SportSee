@@ -1,11 +1,6 @@
 //this file exports utility fonctions
 import axios from "axios";
 
-import calories from "../assets/calories.png";
-import proteins from "../assets/proteins.png";
-import lipids from "../assets/lipids.png";
-import carbohydrates from "../assets/carbohydrates.png";
-
 import { mockedData } from "./mock/mocked";
 const { REACT_APP_API_URL } = process.env;
 
